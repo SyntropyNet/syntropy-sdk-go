@@ -23,7 +23,7 @@ validate:
 	@$(OPENAPI) validate -i /input/openapi.yaml
 
 generate:
-	@$(OPENAPI) generate -i /input/openapi.yaml -g go -o /output -p enumClassPrefix=true
+	@$(OPENAPI) generate -i /input/openapi.yaml -g go -o /output -p enumClassPrefix=true --package-name syntropy
 	gofmt -w syntropy
 
 update: download generate

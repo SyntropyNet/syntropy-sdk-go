@@ -1,4 +1,4 @@
-package openapi
+package syntropy
 
 //type AnyOfstringfloat []interface{}
 //type AnyOfobjectobjectobjectobjectobject interface{}
