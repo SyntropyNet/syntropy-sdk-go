@@ -1,3 +1,3 @@
-module gitlab.com/syntropynet/syntropy-api-client-go
+module github.com/SyntropyNet/syntropy-sdk-go
 
 go 1.13
