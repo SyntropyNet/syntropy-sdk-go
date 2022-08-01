@@ -1,0 +1,1488 @@
+openapi: 3.0.3
+info:
+  title: Syntropy network API
+  contact:
+    email: support@syntropynet.com
+    name: Syntropy Support
+  version: 1.0.0
+servers:
+  - url: https://api.syntropystack.com
+components:
+  examples: {}
+  headers: {}
+  parameters: {}
+  requestBodies: {}
+  responses:
+    "400":
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/V1ErrorResponse"
+          example:
+            errors:
+              - code: API_KEY_IS_REQUIRED
+                message: "'api_key' is required"
+                type: VALIDATION_ERROR
+                field: api_key
+    "500":
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/V1ErrorResponse"
+  schemas:
+    V1NetworkAgentsGetResponse:
+      properties:
+        data:
+          required:
+            - data
+          items:
+            $ref: "#/components/schemas/V1Agent"
+          type: array
+      required:
+        - data
+      type: object
+      additionalProperties: false
+    V1SkipNumber:
+      type: integer
+      format: int32
+      minimum: 0
+      maximum: 2147483647
+      default: 0
+      description: Skip number of items.
+    V1TakeNumber:
+      type: integer
+      format: int32
+      minimum: 1
+      maximum: 1000
+      default: 20
+      description: Limit returned values count.
+    WhereString:
+      type: string
+    V1NetworkAgentsCreateResponse:
+      required:
+        - data
+      properties:
+        data:
+          required:
+            - data
+          $ref: "#/components/schemas/V1AgentCreateItem"
+      type: object
+      additionalProperties: false
+    V1NetworkAgentsCreateRequest:
+      properties:
+        agent_tags:
+          items:
+            example: network_1
+            type: string
+          type: array
+        agent_token:
+          type: string
+          example: my_agent_token
+        agent_name:
+          type: string
+          example: aws_1
+        agent_provider_id:
+          $ref: "#/components/schemas/IdNumber"
+      required:
+        - agent_token
+        - agent_name
+      type: object
+      additionalProperties: false
+    IdNumber:
+      type: integer
+      format: int32
+      example: 1
+      minimum: 1
+      maximum: 2147483647
+    V1NetworkAgentsUpdateRequest:
+      properties:
+        agent_tags:
+          items:
+            example: network_1
+            type: string
+          type: array
+        agent_name:
+          type: string
+          example: aws_1
+        agent_provider_id:
+          $ref: "#/components/schemas/IdNumber"
+      type: object
+      additionalProperties: false
+    V1NetworkAgentsRemoveRequest:
+      properties:
+        agent_ids:
+          items:
+            $ref: "#/components/schemas/IdNumber"
+          type: array
+      required:
+        - agent_ids
+      type: object
+      additionalProperties: false
+    V1NetworkConnectionsGetResponse:
+      required:
+        - data
+      properties:
+        data:
+          required:
+            - data
+          items:
+            $ref: "#/components/schemas/V1Connection"
+          type: array
+      type: object
+      additionalProperties: false
+    V1NetworkConnectionsUpdateRequest:
+      properties:
+        changes:
+          items:
+            $ref: "#/components/schemas/V1ConnectionUpdateChange"
+          type: array
+      required:
+        - changes
+      type: object
+      additionalProperties: false
+    V1NetworkConnectionsRemoveRequest:
+      properties:
+        agent_connection_group_ids:
+          items:
+            $ref: "#/components/schemas/IdNumber"
+          type: array
+      required:
+        - agent_connection_group_ids
+      type: object
+      additionalProperties: false
+    V1NetworkConnectionsCreateResponse:
+      required:
+        - data
+      properties:
+        data:
+          required:
+            - data
+          items:
+            $ref: "#/components/schemas/V1ConnectionCreateItem"
+          type: array
+      type: object
+      additionalProperties: false
+    V1NetworkConnectionsCreateP2PRequest:
+      properties:
+        agent_pairs:
+          items:
+            properties:
+              agent_2_id:
+                $ref: "#/components/schemas/IdNumber"
+              agent_1_id:
+                $ref: "#/components/schemas/IdNumber"
+            required:
+              - agent_2_id
+              - agent_1_id
+            type: object
+          type: array
+        sdn_enabled:
+          type: boolean
+          example: false
+      required:
+        - agent_pairs
+      type: object
+      additionalProperties: false
+    V1NetworkConnectionsCreateMeshRequest:
+      properties:
+        agent_ids:
+          items:
+            properties:
+              agent_id:
+                $ref: "#/components/schemas/IdNumber"
+            required:
+              - agent_id
+            type: object
+          type: array
+        sdn_enabled:
+          type: boolean
+          example: false
+      required:
+        - agent_ids
+      type: object
+      additionalProperties: false
+    V1NetworkAuthAgentTokensGetResponse:
+      required:
+        - data
+      properties:
+        data:
+          required:
+            - data
+          items:
+            $ref: "#/components/schemas/V1AuthAgentToken"
+          type: array
+      type: object
+      additionalProperties: false
+    OrderString:
+      type: string
+      pattern: ^([a-zA-Z0-9_]+):(ASC|DESC)$
+    V1NetworkAuthAgentTokensCreateResponse:
+      required:
+        - data
+      properties:
+        data:
+          required:
+            - data
+          $ref: "#/components/schemas/V1AuthApiKeysCreateItem"
+      type: object
+      additionalProperties: false
+    V1NetworkAuthAgentTokensCreateRequest:
+      properties:
+        agent_token_name:
+          type: string
+          minLength: 1
+          maxLength: 255
+        agent_token_description:
+          type: string
+          maxLength: 255
+        agent_token_valid_until:
+          type: string
+          format: date-time
+        agent_token_allowed_tag_names:
+          items:
+            type: string
+          type: array
+      required:
+        - agent_token_name
+      type: object
+      additionalProperties: false
+    V1NetworkAuthAccessTokensGetResponse:
+      required:
+        - data
+      properties:
+        data:
+          required:
+            - data
+          items:
+            $ref: "#/components/schemas/V1AuthAccessToken"
+          type: array
+      additionalProperties: false
+      type: object
+    AccessTokenOrder:
+      type: string
+      pattern: ^(access_token_expiration|access_token_name):(ASC|DESC)$
+    V1NetworkAuthAccessTokensCreateResponse:
+      required:
+        - data
+      properties:
+        data:
+          required:
+            - data
+          $ref: "#/components/schemas/V1AuthAccessTokensCreateItem"
+      type: object
+      additionalProperties: false
+    V1NetworkAuthAccessTokensCreateRequest:
+      properties:
+        permissions:
+          items:
+            type: string
+          type: array
+        access_token_expiration:
+          type: string
+          format: date-time
+        access_token_name:
+          type: string
+          minLength: 1
+          maxLength: 255
+        access_token_description:
+          type: string
+          maxLength: 255
+      required:
+        - access_token_name
+        - permissions
+        - access_token_expiration
+      type: object
+      additionalProperties: false
+    V1NetworkAuthAccessTokensPermissionsGetResponse:
+      required:
+        - data
+      properties:
+        data:
+          required:
+            - data
+          items:
+            $ref: "#/components/schemas/V1AuthAccessTokenPermissions"
+          type: array
+      type: object
+      additionalProperties: false
+    V1ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              code:
+                type: string
+                example: SERVER_ERROR
+              message:
+                type: string
+                example: Internal Server Error
+              type:
+                type: string
+                example: SERVER_ERROR
+    V1Agent:
+      properties:
+        agent_id:
+          type: integer
+          format: int32
+        agent_public_ipv4:
+          type: string
+        agent_location_city:
+          type: string
+          nullable: true
+        agent_device_id:
+          type: string
+        agent_name:
+          type: string
+        agent_status:
+          $ref: "#/components/schemas/AgentStatus"
+        agent_version:
+          type: string
+        agent_locked_fields:
+          $ref: "#/components/schemas/AgentLockedFields"
+        agent_modified_at:
+          type: string
+          format: date-time
+        agent_is_virtual:
+          type: boolean
+        agent_type:
+          $ref: "#/components/schemas/AgentType"
+          nullable: true
+        agent_provider:
+          $ref: "#/components/schemas/AgentProviderNameAndId"
+          nullable: true
+        agent_tags:
+          items:
+            $ref: "#/components/schemas/AgentTag"
+          type: array
+        agent_services_subnets_enabled_count:
+          type: integer
+          format: int32
+        agent_services_subnets_count:
+          type: integer
+          format: int32
+        agent_location_country:
+          type: string
+          nullable: true
+        agent_is_online:
+          type: boolean
+      type: object
+      required:
+        - agent_id
+        - agent_public_ipv4
+        - agent_location_city
+        - agent_device_id
+        - agent_name
+        - agent_status
+        - agent_version
+        - agent_is_virtual
+        - agent_type
+        - agent_locked_fields
+        - agent_modified_at
+        - agent_tags
+        - agent_provider
+        - agent_services_subnets_count
+        - agent_services_subnets_enabled_count
+        - agent_location_country
+        - agent_is_online
+    V1AgentCreateItem:
+      properties:
+        agent_services_default_status:
+          type: boolean
+        api_key_id:
+          type: integer
+          format: int32
+        agent_public_ipv4:
+          type: string
+        agent_location_lat:
+          type: number
+          format: float
+          nullable: true
+        agent_location_lon:
+          type: number
+          format: float
+          nullable: true
+        agent_location_city:
+          type: string
+          nullable: true
+        agent_location_country:
+          type: string
+          nullable: true
+        agent_device_id:
+          type: string
+        agent_name:
+          type: string
+        agent_status:
+          $ref: "#/components/schemas/AgentStatus"
+        agent_version:
+          type: string
+          nullable: true
+        agent_provider_id:
+          type: integer
+          format: int32
+          nullable: true
+        agent_locked_fields:
+          $ref: "#/components/schemas/AgentLockedFields"
+        agent_modified_at:
+          type: string
+          format: date-time
+          nullable: true
+        agent_is_virtual:
+          type: boolean
+        agent_type:
+          $ref: "#/components/schemas/AgentType"
+          nullable: true
+        agent_internal_subnet:
+          type: string
+        agent_created_at:
+          type: string
+          format: date-time
+        agent_updated_at:
+          type: string
+          format: date-time
+        agent_id:
+          type: integer
+          format: int32
+      required:
+        - agent_services_default_status
+        - api_key_id
+        - agent_public_ipv4
+        - agent_location_lat
+        - agent_location_lon
+        - agent_location_city
+        - agent_location_country
+        - agent_device_id
+        - agent_name
+        - agent_status
+        - agent_version
+        - agent_locked_fields
+        - agent_modified_at
+        - agent_is_virtual
+        - agent_type
+        - agent_internal_subnet
+        - agent_created_at
+        - agent_updated_at
+        - agent_id
+      type: object
+    V1Connection:
+      properties:
+        agent_connection_subnets_enabled_count:
+          type: integer
+          format: int32
+        agent_connection_group_updated_at:
+          type: string
+          format: date-time
+        agent_connection_group_status_reason:
+          type: string
+        agent_connection_group_status:
+          $ref: "#/components/schemas/V1ConnectionStatus"
+        agent_connection_group_sdn_enabled:
+          type: boolean
+        agent_connection_group_id:
+          type: integer
+          format: int32
+        agent_connection_group_created_by:
+          $ref: "#/components/schemas/V1ConnectionCreatedBy"
+        agent_2:
+          $ref: "#/components/schemas/V1ConnectionAgent"
+        agent_1:
+          $ref: "#/components/schemas/V1ConnectionAgent"
+      required:
+        - agent_connection_subnets_enabled_count
+        - agent_connection_group_updated_at
+        - agent_connection_group_status
+        - agent_connection_group_sdn_enabled
+        - agent_connection_group_id
+        - agent_connection_group_created_by
+        - agent_2
+        - agent_1
+      type: object
+    V1ConnectionUpdateChange:
+      properties:
+        connection_group_id:
+          $ref: "#/components/schemas/IdNumber"
+        is_sdn_enabled:
+          type: boolean
+      required:
+        - connection_group_id
+        - is_sdn_enabled
+      type: object
+      additionalProperties: false
+    V1ConnectionCreateItem:
+      properties:
+        agent_1_id:
+          type: integer
+          format: int32
+        agent_2_id:
+          type: integer
+          format: int32
+        agent_connection_group_id:
+          type: integer
+          format: int32
+    V1AuthAgentToken:
+      properties:
+        agent_token_name:
+          type: string
+        agent_token_description:
+          type: string
+          nullable: true
+        agent_token_valid_until:
+          type: string
+          format: date-time
+        agent_token_status:
+          type: boolean
+        agent_token_id:
+          type: integer
+          format: int32
+        agent_token_created_at:
+          type: string
+          format: date-time
+        agent_token_updated_at:
+          type: string
+          format: date-time
+    V1AuthApiKeysCreateItem:
+      properties:
+        api_key_name:
+          type: string
+          minLength: 1
+          maxLength: 255
+        api_key_description:
+          type: string
+          maxLength: 255
+        api_key_valid_until:
+          type: string
+          format: date-time
+        api_key_allowed_tag_names:
+          items:
+            type: string
+          type: array
+        api_key_secret:
+          type: string
+        user_id:
+          type: integer
+          format: int32
+        api_key_id:
+          type: integer
+          format: int32
+        api_key_created_at:
+          type: string
+          format: date-time
+        api_key_updated_at:
+          type: string
+          format: date-time
+      required:
+        - api_key_name
+        - api_key_secret
+        - user_id
+        - api_key_id
+        - api_key_created_at
+        - api_key_updated_at
+      type: object
+      additionalProperties: false
+    V1AuthAccessToken:
+      properties:
+        access_token_name:
+          type: string
+        access_token_expiration:
+          type: string
+        access_token_description:
+          type: string
+        access_token_id:
+          type: string
+      required:
+        - access_token_expiration
+        - access_token_id
+      type: object
+      additionalProperties: false
+    V1AuthAccessTokensCreateItem:
+      properties:
+        access_token:
+          type: string
+      required:
+        - access_token
+      type: object
+      additionalProperties: false
+    V1AuthAccessTokenPermissions:
+      properties:
+        permission_id:
+          type: integer
+          format: int32
+        permission_name:
+          type: string
+        permission_description:
+          type: string
+      required:
+        - permission_id
+        - permission_name
+        - permission_description
+      type: object
+      additionalProperties: false
+    AgentStatus:
+      enum:
+        - OK
+        - WG_ERROR
+        - DUPLICATE_NAME_ERROR
+        - AGENT_TAG_WHITELIST_WARNING
+      nullable: true
+      type: string
+    AgentLockedFields:
+      properties:
+        agent_location_country:
+          type: boolean
+        agent_location_city:
+          type: boolean
+        agent_location_lat:
+          type: boolean
+        agent_location_lon:
+          type: boolean
+        agent_provider_name:
+          type: boolean
+        agent_tags:
+          items:
+            type: string
+          type: array
+        agent_name:
+          type: boolean
+      type: object
+      additionalProperties: false
+    AgentType:
+      enum:
+        - LINUX
+        - MACOS
+        - WINDOWS
+        - VIRTUAL
+      type: string
+    AgentProviderNameAndId:
+      properties:
+        agent_provider_name:
+          type: string
+        agent_provider_id:
+          type: integer
+          format: int32
+      required:
+        - agent_provider_name
+        - agent_provider_id
+      type: object
+    AgentTag:
+      properties:
+        agent_tag_name:
+          type: string
+        agent_tag_id:
+          type: integer
+          format: int32
+      required:
+        - agent_tag_name
+        - agent_tag_id
+      type: object
+    V1ConnectionStatus:
+      enum:
+        - PENDING
+        - WARNING
+        - ERROR
+        - CONNECTED
+        - NOT_AVAILABLE
+        - OFFLINE
+      type: string
+    V1ConnectionCreatedBy:
+      type: string
+      enum:
+        - API
+        - RULE
+    V1ConnectionAgent:
+      properties:
+        agent_is_online:
+          type: boolean
+        agent_status:
+          $ref: "#/components/schemas/AgentStatus"
+        agent_subnets_count:
+          type: integer
+          format: int32
+        agent_is_virtual:
+          type: boolean
+        agent_name:
+          type: string
+        agent_public_ipv4:
+          type: string
+        agent_id:
+          type: integer
+          format: int32
+        agent_provider_id:
+          type: integer
+          format: int32
+          nullable: true
+      required:
+        - agent_is_online
+        - agent_status
+        - agent_subnets_count
+        - agent_is_virtual
+        - agent_name
+        - agent_public_ipv4
+        - agent_id
+        - agent_provider_id
+      type: object
+  securitySchemes:
+    jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    accessToken:
+      type: apiKey
+      in: header
+      name: api-key
+paths:
+  /v1/network/agents:
+    get:
+      operationId: V1NetworkAgentsGet
+      responses:
+        "206":
+          description: Partial Content
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/V1NetworkAgentsGetResponse"
+              examples:
+                Example success:
+                  value:
+                    data:
+                      - agent_id: 1110
+                        agent_public_ipv4: 198.185.159.144
+                        agent_location_city: Vilnius
+                        agent_device_id: 2852:fTNiX0klwU01r0fe
+                        agent_name: default agent
+                        agent_status: OK
+                        agent_version: 3.2.0
+                        agent_locked_fields:
+                          agent_location_country: true
+                          agent_location_city: true
+                          agent_location_lat: true
+                          agent_location_lon: true
+                          agent_provider_name: true
+                          agent_tags:
+                            - tag_1
+                            - tag_2
+                          agent_name: true
+                        agent_modified_at: "2022-06-17T13:31:30.614Z"
+                        agent_is_virtual: true
+                        agent_type: LINUX
+                        agent_provider:
+                          agent_provider_name: Amazon Web Services
+                          agent_provider_id: 1
+                        agent_tags:
+                          - agent_tag_name: tag_1
+                            agent_tag_id: 2
+                        agent_services_subnets_enabled_count: 0
+                        agent_services_subnets_count: 0
+                        agent_location_country: LT
+                        agent_is_online: true
+        "400":
+          $ref: "#/components/responses/400"
+        "500":
+          $ref: "#/components/responses/500"
+      description: >-
+        Gets a list of all created Agents, filtered and ordered according to the
+        filter conditions provided in the request. The response may contain a
+        fewer than take number of results. Filter is an `array of agents IDs`.
+      summary: Get Agents
+      tags:
+        - Agents
+      security:
+        - accessToken: []
+        - jwt:
+            - ADMIN
+            - USER
+            - platform.agents.read
+      parameters:
+        - in: query
+          name: skip
+          required: false
+          schema:
+            $ref: "#/components/schemas/V1SkipNumber"
+          description: Skip the number of returned Agents.
+        - in: query
+          name: take
+          required: false
+          schema:
+            $ref: "#/components/schemas/V1TakeNumber"
+          description: Limit the number of returned Agents.
+        - description: Array of agent IDs.
+          example: 1,2,3
+          in: query
+          name: filter
+          required: false
+          schema:
+            $ref: "#/components/schemas/WhereString"
+    post:
+      operationId: V1NetworkAgentsCreate
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/V1NetworkAgentsCreateResponse"
+              examples:
+                Success example:
+                  value:
+                    data:
+                      agent_id: 1110
+                      agent_public_ipv4: 198.185.159.144
+                      agent_location_city: Vilnius
+                      agent_device_id: 2852:fTNiX0klwU01r0fe
+                      agent_name: default agent
+                      agent_status: OK
+                      agent_version: 3.2.0
+                      agent_locked_fields:
+                        agent_location_country: true
+                        agent_location_city: true
+                        agent_location_lat: true
+                        agent_location_lon: true
+                        agent_provider_name: true
+                        agent_tags:
+                          - tag_1
+                          - tag_2
+                        agent_name: true
+                      agent_modified_at: "2022-06-17T13:31:30.614Z"
+                      agent_is_virtual: true
+                      agent_type: LINUX
+                      agent_provider:
+                        agent_provider_name: Amazon Web Services
+                        agent_provider_id: 1
+                      agent_tags:
+                        - agent_tag_name: tag_1
+                          agent_tag_id: 2
+                      agent_services_subnets_enabled_count: 0
+                      agent_services_subnets_count: 0
+                      agent_location_country: LT
+                      agent_is_online: true
+        "400":
+          $ref: "#/components/responses/400"
+        "500":
+          $ref: "#/components/responses/500"
+      description: >-
+        Creates new agent. Only `VIRTUAL` agents creation is supported. Not
+        `VIRTUAL` agents are automatically created when first WebSocket
+
+        connection is established.
+      summary: Create Agent
+      tags:
+        - Agents
+      security:
+        - accessToken: []
+        - jwt:
+            - ADMIN
+            - USER
+            - platform.agents.write
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/V1NetworkAgentsCreateRequest"
+  /v1/network/agents/{agent_id}:
+    patch:
+      operationId: V1NetworkAgentsUpdate
+      responses:
+        "204":
+          description: No Content
+        "400":
+          $ref: "#/components/responses/400"
+        "500":
+          $ref: "#/components/responses/500"
+      description: >-
+        Updates the agent properties by `agent_id` (please make sure that none
+        of the properties that you want to update are not locked: `GET` the
+        agent and see `agent_locked_fields` ). You can add `tags` and also
+        update the `provider` for the agent - please see the full [list of
+        available
+        providers](https://docs.syntropystack.com/docs/syntropy-agent-variables#syntropy-provider).
+      summary: Updates Agent
+      tags:
+        - Agents
+      security:
+        - accessToken: []
+        - jwt:
+            - ADMIN
+            - USER
+            - platform.agents.write
+      parameters:
+        - in: path
+          name: agent_id
+          required: true
+          schema:
+            $ref: "#/components/schemas/IdNumber"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/V1NetworkAgentsUpdateRequest"
+  /v1/network/agents/remove:
+    post:
+      operationId: V1NetworkAgentsRemove
+      responses:
+        "204":
+          description: No Content
+        "400":
+          $ref: "#/components/responses/400"
+        "500":
+          $ref: "#/components/responses/500"
+      description: >-
+        Deletes Agents with existing connections. Learn more about platform
+        agents
+        [here](https://docs.syntropystack.com/docs/what-is-syntropy-agent).
+      summary: Delete Agents
+      tags:
+        - Agents
+      security:
+        - accessToken: []
+        - jwt:
+            - ADMIN
+            - USER
+            - platform.agents.write
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/V1NetworkAgentsRemoveRequest"
+  /v1/network/connections:
+    get:
+      operationId: V1NetworkConnectionsGet
+      responses:
+        "206":
+          description: Partial Content
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/V1NetworkConnectionsGetResponse"
+              examples:
+                Success:
+                  value:
+                    data:
+                      - agent_connection_subnets_enabled_count: 4
+                        agent_connection_group_updated_at: "2022-06-20T15:49:43.080Z"
+                        agent_connection_group_status_reason: >-
+                          Connection status for connections with virtual agents
+                          is not supported.
+                        agent_connection_group_status: PENDING
+                        agent_connection_group_sdn_enabled: true
+                        agent_connection_group_id: 1230
+                        agent_connection_group_created_by: API
+                        agent_2:
+                          agent_is_online: true
+                          agent_status: OK
+                          agent_subnets_count: 0
+                          agent_is_virtual: true
+                          agent_name: string
+                          agent_public_ipv4: string
+                          agent_id: 0
+                          agent_provider_id: 0
+                        agent_1:
+                          agent_is_online: true
+                          agent_status: OK
+                          agent_subnets_count: 0
+                          agent_is_virtual: true
+                          agent_name: string
+                          agent_public_ipv4: string
+                          agent_id: 0
+                          agent_provider_id: 0
+        "400":
+          $ref: "#/components/responses/400"
+        "500":
+          $ref: "#/components/responses/500"
+      summary: Get Connections
+      description: >-
+        Gets a list of all connections established between agents, filtered and
+        ordered according to the filter conditions provided in the request. The
+        response may contain fewer results than `take` number. The `filter` is
+        an array of connection IDs.
+      tags:
+        - Connections
+      security:
+        - accessToken: []
+        - jwt:
+            - ADMIN
+            - USER
+            - platform.connections.read
+      parameters:
+        - in: query
+          name: skip
+          required: false
+          schema:
+            $ref: "#/components/schemas/V1SkipNumber"
+        - in: query
+          name: take
+          required: false
+          schema:
+            $ref: "#/components/schemas/V1TakeNumber"
+        - description: array of Agent Connection ids
+          example: 1,2,3
+          in: query
+          name: filter
+          required: false
+          schema:
+            $ref: "#/components/schemas/WhereString"
+    patch:
+      operationId: V1NetworkConnectionsUpdate
+      responses:
+        "204":
+          description: No Content
+        "400":
+          $ref: "#/components/responses/400"
+        "500":
+          $ref: "#/components/responses/500"
+      description: >-
+        Enables or disables SDN for specified Connections. You can update a
+        multiple `connections` by providing elements to `changes` array with
+        following structure: `connection_group_id` alongside the boolean value
+        for enabling/disabling
+        [SDN](https://docs.syntropystack.com/docs/connection-sdn) for that
+        specific connection. Additionally, you can specify the `paths`.
+      summary: Update Connections
+      tags:
+        - Connections
+      security:
+        - accessToken: []
+        - jwt:
+            - ADMIN
+            - USER
+            - platform.connections.write
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/V1NetworkConnectionsUpdateRequest"
+  /v1/network/connections/remove:
+    post:
+      operationId: V1NetworkConnectionsRemove
+      responses:
+        "204":
+          description: No Content
+        "400":
+          $ref: "#/components/responses/400"
+        "500":
+          $ref: "#/components/responses/500"
+      description: Deletes Agent Connections by `agent_connection_group_id`.
+      summary: Delete Connections
+      tags:
+        - Connections
+      security:
+        - accessToken: []
+        - jwt:
+            - ADMIN
+            - USER
+            - platform.connections.write
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/V1NetworkConnectionsRemoveRequest"
+  /v1/network/connections/point-to-point:
+    post:
+      operationId: V1NetworkConnectionsCreateP2P
+      responses:
+        "202":
+          description: 202 Accepted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/V1NetworkConnectionsCreateResponse"
+        "400":
+          $ref: "#/components/responses/400"
+        "500":
+          $ref: "#/components/responses/500"
+      description: >-
+        Creates point to point Connections.To establish a [P2P
+        connection](https://docs.syntropystack.com/docs/network-as-code-topologies#creating-complex-topologies)
+        between 2 agents, you need to provide the following:
+
+        - agent 1 ID
+
+        - agent 2 ID
+
+
+        Additionally, you can enable/disable SDN by providing the `boolean`
+        value to `sdn_enabled` property alongside with `sdn_paths` that is an
+        object containing 3 arrays of integers: `SDN1`, `SDN2` and `SDN3`.
+      summary: Create P2P Connections
+      tags:
+        - Connections
+      security:
+        - accessToken: []
+        - jwt:
+            - ADMIN
+            - USER
+            - platform.connections.write
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/V1NetworkConnectionsCreateP2PRequest"
+  /v1/network/connections/mesh:
+    post:
+      operationId: V1NetworkConnectionsCreateMesh
+      responses:
+        "202":
+          description: 202 Accepted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/V1NetworkConnectionsCreateResponse"
+        "400":
+          $ref: "#/components/responses/400"
+        "500":
+          $ref: "#/components/responses/500"
+      description: >-
+        Creates Mesh Connections.To establish a [mesh
+        connection](https://docs.syntropystack.com/docs/network-as-code-topologies#creating-complex-topologies)
+        between 2 agents, you need to provide the following:
+
+        - agent 1 ID
+
+        - agent 2 ID
+
+
+        Additionally, you can enable/disable SDN by providing the `boolean`
+        value to `sdn_enabled` property alongside with `sdn_paths` that is an
+        object containing 3 arrays of integers: `SDN1`, `SDN2` and `SDN3`.
+      summary: Create Connections Mesh
+      tags:
+        - Connections
+      security:
+        - accessToken: []
+        - jwt:
+            - ADMIN
+            - USER
+            - platform.connections.write
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/V1NetworkConnectionsCreateMeshRequest"
+  /v1/network/auth/agent-tokens:
+    get:
+      operationId: V1NetworkAuthAgentTokensGet
+      responses:
+        "206":
+          description: Partial Content
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/V1NetworkAuthAgentTokensGetResponse"
+              examples:
+                example-1:
+                  value:
+                    data:
+                      - agent_token_name: main token
+                        agent_token_description: short description of the token purpose
+                        agent_token_valid_until: "2022-06-20T15:35:43.300Z"
+                        agent_token_status: true
+                        agent_token_id: 123
+                        agent_token_created_at: "2022-06-20T15:35:43.300Z"
+                        agent_token_updated_at: "2022-06-20T15:35:43.300Z"
+                      - agent_token_name: main token
+                        agent_token_description: short description of the token purpose
+                        agent_token_valid_until: "2022-06-20T15:35:43.300Z"
+                        agent_token_status: true
+                        agent_token_id: 1234
+                        agent_token_created_at: "2022-06-20T15:35:43.300Z"
+                        agent_token_updated_at: "2022-06-20T15:35:43.300Z"
+        "400":
+          $ref: "#/components/responses/400"
+        "500":
+          $ref: "#/components/responses/500"
+      description: >-
+        Gets a list of all `agent tokens`, filtered and ordered according to the
+        `filter` and `order` (`ASC` or `DESC`) conditions provided in the
+        request. The response may contain fewer results than `take` number. The
+        filter is an array of agent tokens IDs.
+      summary: Get Agent Tokens
+      tags:
+        - Auth
+      security:
+        - accessToken: []
+        - jwt:
+            - ADMIN
+            - USER
+            - platform.api-keys.read
+            - platform.agent-tokens.read
+      parameters:
+        - in: query
+          name: skip
+          required: false
+          schema:
+            $ref: "#/components/schemas/V1SkipNumber"
+          description: Number of tokens to skip.
+        - in: query
+          name: take
+          required: false
+          schema:
+            $ref: "#/components/schemas/V1TakeNumber"
+          description: Limit of returned tokens.
+        - description: "string: 'ASC' | 'DESC'"
+          in: query
+          name: order
+          required: false
+          schema:
+            $ref: "#/components/schemas/OrderString"
+        - example: 1,2,3
+          description: Array of agent_token_ids
+          in: query
+          name: filter
+          required: false
+          schema:
+            $ref: "#/components/schemas/WhereString"
+    post:
+      operationId: V1NetworkAuthAgentTokensCreate
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/V1NetworkAuthAgentTokensCreateResponse"
+              examples:
+                Success:
+                  value:
+                    data:
+                      agent_token_name: main token
+                      agent_token_description: short description of the token purpose
+                      agent_token_valid_until: "2022-06-20T15:35:43.300Z"
+                      agent_token_status: true
+                      agent_token_id: 123
+                      agent_token_created_at: "2022-06-20T15:35:43.300Z"
+                      agent_token_updated_at: "2022-06-20T15:35:43.300Z"
+        "400":
+          $ref: "#/components/responses/400"
+        "500":
+          $ref: "#/components/responses/500"
+      description: >-
+        Creates Agent Token. To start using `Agent` you need to set up an `Agent
+        token` by using this endpoint. You can also [create it in
+        UI](https://docs.syntropystack.com/docs/get-your-agent-token). Remember
+        NOT to expose your`api_key_secret` value to anyone. Specific tags can be
+        set as scopes even though they might not exist yet.
+      summary: Create Agent Token
+      tags:
+        - Auth
+      security:
+        - accessToken: []
+        - jwt:
+            - ADMIN
+            - USER
+            - platform.api-keys.write
+            - platform.agent-tokens.write
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/V1NetworkAuthAgentTokensCreateRequest"
+  /v1/network/auth/agent-tokens/{agent_token_id}:
+    delete:
+      operationId: V1NetworkAuthAgentTokensDelete
+      responses:
+        "204":
+          description: No Content
+        "400":
+          $ref: "#/components/responses/400"
+        "500":
+          $ref: "#/components/responses/500"
+      description: Deletes Agent Token.
+      summary: Delete Agent Token
+      tags:
+        - Auth
+      security:
+        - accessToken: []
+        - jwt:
+            - ADMIN
+            - USER
+            - platform.api-keys.write
+            - platform.agent-tokens.write
+      parameters:
+        - in: path
+          name: agent_token_id
+          required: true
+          schema:
+            $ref: "#/components/schemas/IdNumber"
+  /v1/network/auth/access-tokens:
+    get:
+      operationId: V1NetworkAuthAccessTokensGet
+      responses:
+        "206":
+          description: Partial Content
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/V1NetworkAuthAccessTokensGetResponse"
+              examples:
+                Succeess:
+                  value:
+                    data:
+                      - access_token_name: main token
+                        access_token_expiration: "2022-06-20T15:35:43.300Z"
+                        access_token_description: short description of the token purpose
+                        access_token_id: dfa23123fs
+        "400":
+          $ref: "#/components/responses/400"
+        "500":
+          $ref: "#/components/responses/500"
+      description: >-
+        Gets a list of all `access tokens`, filtered and ordered according to
+        the `order` (`ASC` or `DESC` for `access_token_name` or
+        `access_token_expiration`, eg. `access_token_name:ASC`) conditions
+        provided in the request. The response may contain fewer results than
+        `take`  or `skip` number.
+      summary: Get Access tokens
+      tags:
+        - Auth
+      security:
+        - accessToken: []
+        - jwt:
+            - ADMIN
+            - USER
+      parameters:
+        - in: query
+          name: skip
+          required: false
+          schema:
+            $ref: "#/components/schemas/V1SkipNumber"
+          description: Number of tokens to skip.
+        - in: query
+          name: take
+          required: false
+          schema:
+            $ref: "#/components/schemas/V1TakeNumber"
+          description: Limit of returned access tokens.
+        - in: query
+          name: order
+          required: false
+          schema:
+            $ref: "#/components/schemas/AccessTokenOrder"
+          example: access_token_name:ASC
+          description: "Order: ascending or descending "
+    post:
+      operationId: V1NetworkAuthAccessTokensCreate
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/V1NetworkAuthAccessTokensCreateResponse"
+              examples:
+                Success:
+                  value:
+                    data:
+                      access_token: dfa23123fs
+        "400":
+          $ref: "#/components/responses/400"
+        "500":
+          $ref: "#/components/responses/500"
+      description: >-
+        To be able to create a new `access token` you need to [create one in the
+        platform's UI](https://docs.syntropystack.com/docs/access-tokens). This
+        endpoint will provide `access_token` value only once. Make sure that you
+        provide the right set of `permissions`, you can list all of them using
+        [Get Access token
+        permissions](https://docs.syntropystack.com/reference/v1networkauthaccesstokenspermissionsget)
+        endpoint.
+      summary: Create Access token
+      tags:
+        - Auth
+      security:
+        - accessToken: []
+        - jwt:
+            - ADMIN
+            - USER
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/V1NetworkAuthAccessTokensCreateRequest"
+  /v1/network/auth/access-tokens/{access_token_id}:
+    delete:
+      operationId: V1NetworkAuthAccessTokensDelete
+      responses:
+        "204":
+          description: No Content
+        "400":
+          $ref: "#/components/responses/400"
+        "500":
+          $ref: "#/components/responses/500"
+      description: Deletes Access token.
+      summary: Delete Access token
+      tags:
+        - Auth
+      security:
+        - accessToken: []
+        - jwt:
+            - ADMIN
+            - USER
+      parameters:
+        - in: path
+          name: access_token_id
+          required: true
+          schema:
+            type: string
+  /v1/network/auth/access-tokens/permissions:
+    get:
+      operationId: V1NetworkAuthAccessTokensPermissionsGet
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: >-
+                  #/components/schemas/V1NetworkAuthAccessTokensPermissionsGetResponse
+              examples:
+                One permission example:
+                  value:
+                    data:
+                      - permission_id: 1
+                        permission_name: platform.agent-groups.read
+                        permission_description: Read agent groups
+        "400":
+          $ref: "#/components/responses/400"
+        "500":
+          $ref: "#/components/responses/500"
+      description: "Lists all available permissions for access tokens with their names, description and id, eg.\n```\n{\n\t\"permission_id\": 1,\n\t\"permission_name\": \"platform.agent-groups.read\",\n\t\"permission_description\": \"Read agent groups\"\n}\n```"
+      summary: Get Access token permissions
+      tags:
+        - Auth
+      security:
+        - accessToken: []
+        - jwt:
+            - ADMIN
+            - USER
+      parameters:
+        - in: query
+          name: skip
+          required: false
+          schema:
+            $ref: "#/components/schemas/V1SkipNumber"
+          description: Number of permission to be skipped.
+        - in: query
+          name: take
+          required: false
+          schema:
+            $ref: "#/components/schemas/V1TakeNumber"
+          description: Limit the number of returned permissions.
