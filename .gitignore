@@ -1,0 +1,9 @@
+syntropy/vendor
+syntropy/go.mod
+syntropy/go.sum
+syntropy/.travis.yml
+syntropy/git_push.sh
+syntropy/api
+syntropy/.openapi-generator
+vendor
+.idea
