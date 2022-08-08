@@ -461,6 +461,150 @@ func (a *AgentsApiService) V1NetworkAgentsRemoveExecute(r ApiV1NetworkAgentsRemo
 	return localVarHTTPResponse, nil
 }
 
+type ApiV1NetworkAgentsSearchRequest struct {
+	ctx                          context.Context
+	ApiService                   *AgentsApiService
+	v1NetworkAgentsSearchRequest *V1NetworkAgentsSearchRequest
+}
+
+func (r ApiV1NetworkAgentsSearchRequest) V1NetworkAgentsSearchRequest(v1NetworkAgentsSearchRequest V1NetworkAgentsSearchRequest) ApiV1NetworkAgentsSearchRequest {
+	r.v1NetworkAgentsSearchRequest = &v1NetworkAgentsSearchRequest
+	return r
+}
+
+func (r ApiV1NetworkAgentsSearchRequest) Execute() (*V1NetworkAgentsSearchResponse, *http.Response, error) {
+	return r.ApiService.V1NetworkAgentsSearchExecute(r)
+}
+
+/*
+V1NetworkAgentsSearch Search Agents
+
+Return a list of agents.
+Learn more about platform agents [here](https://docs.syntropystack.com/docs/what-is-syntropy-agent).
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiV1NetworkAgentsSearchRequest
+*/
+func (a *AgentsApiService) V1NetworkAgentsSearch(ctx context.Context) ApiV1NetworkAgentsSearchRequest {
+	return ApiV1NetworkAgentsSearchRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//  @return V1NetworkAgentsSearchResponse
+func (a *AgentsApiService) V1NetworkAgentsSearchExecute(r ApiV1NetworkAgentsSearchRequest) (*V1NetworkAgentsSearchResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *V1NetworkAgentsSearchResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AgentsApiService.V1NetworkAgentsSearch")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v1/network/agents/search"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.v1NetworkAgentsSearchRequest == nil {
+		return localVarReturnValue, nil, reportError("v1NetworkAgentsSearchRequest is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.v1NetworkAgentsSearchRequest
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["accessToken"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["api-key"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v V1ErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v V1ErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiV1NetworkAgentsUpdateRequest struct {
 	ctx                          context.Context
 	ApiService                   *AgentsApiService
@@ -480,7 +624,7 @@ func (r ApiV1NetworkAgentsUpdateRequest) Execute() (*http.Response, error) {
 /*
 V1NetworkAgentsUpdate Updates Agent
 
-Updates the agent properties by `agent_id` (please make sure that none of the properties that you want to update are not locked: `GET` the agent and see `agent_locked_fields` ). You can add `tags` and also update the `provider` for the agent - please see the full [list of available providers](https://docs.syntropystack.com/docs/syntropy-agent-variables#syntropy-provider).
+Updates the agent properties by `agent_id` (please make sure that none of the properties that you want to update are locked: `GET` the agent and see `agent_locked_fields` ). You can add `tags` and also update the `provider` for the agent - please see the full [list of available providers](https://docs.syntropystack.com/docs/syntropy-agent-variables#syntropy-provider).
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param agentId

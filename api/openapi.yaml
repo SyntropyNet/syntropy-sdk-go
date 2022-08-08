@@ -90,6 +90,33 @@ components:
         - agent_name
       type: object
       additionalProperties: false
+    V1NetworkAgentsSearchResponse:
+      required:
+        - data
+      properties:
+        data:
+          required:
+            - data
+          items:
+            $ref: "#/components/schemas/V1Agent"
+          type: array
+      type: object
+      additionalProperties: false
+    V1NetworkAgentsSearchRequest:
+      properties:
+        filter:
+          $ref: "#/components/schemas/V1AgentFilter"
+        order:
+          $ref: "#/components/schemas/V1AgentOrder"
+        skip:
+          $ref: "#/components/schemas/V1SkipNumber"
+        take:
+          $ref: "#/components/schemas/V1TakeNumber"
+        search:
+          type: string
+          example: prod
+      type: object
+      additionalProperties: false
     IdNumber:
       type: integer
       format: int32
@@ -108,6 +135,8 @@ components:
           example: aws_1
         agent_provider_id:
           $ref: "#/components/schemas/IdNumber"
+        network:
+          $ref: "#/components/schemas/AgentInterfacesMetadata"
       type: object
       additionalProperties: false
     V1NetworkAgentsRemoveRequest:
@@ -140,6 +169,30 @@ components:
           type: array
       required:
         - changes
+      type: object
+      additionalProperties: false
+    V1NetworkConnectionsSearchResponse:
+      properties:
+        data:
+          required:
+            - data
+          items:
+            $ref: "#/components/schemas/V1Connection"
+          type: array
+      required:
+        - data
+      type: object
+      additionalProperties: false
+    V1NetworkConnectionsSearchRequest:
+      properties:
+        filter:
+          $ref: "#/components/schemas/V1ConnectionFilter"
+        order:
+          $ref: "#/components/schemas/V1ConnectionOrder"
+        skip:
+          $ref: "#/components/schemas/V1SkipNumber"
+        take:
+          $ref: "#/components/schemas/V1TakeNumber"
       type: object
       additionalProperties: false
     V1NetworkConnectionsRemoveRequest:
@@ -201,6 +254,31 @@ components:
           example: false
       required:
         - agent_ids
+      type: object
+      additionalProperties: false
+    V1NetworkConnectionsServicesGetResponse:
+      required:
+        - data
+      properties:
+        data:
+          required:
+            - data
+          items:
+            $ref: "#/components/schemas/V1ConnectionService"
+          type: array
+      type: object
+      additionalProperties: false
+    V1NetworkConnectionsServicesUpdateRequest:
+      properties:
+        agent_connection_group_id:
+          $ref: "#/components/schemas/IdNumber"
+        changes:
+          items:
+            $ref: "#/components/schemas/AgentServicesUpdateChanges"
+          type: array
+      required:
+        - connectionGroupId
+        - changes
       type: object
       additionalProperties: false
     V1NetworkAuthAgentTokensGetResponse:
@@ -468,6 +546,115 @@ components:
         - agent_updated_at
         - agent_id
       type: object
+    V1AgentFilter:
+      properties:
+        agent_id:
+          items:
+            $ref: "#/components/schemas/IdNumber"
+          type: array
+          example:
+            - 1
+            - 2
+        agent_provider_id:
+          items:
+            $ref: "#/components/schemas/IdNumber"
+          type: array
+          example:
+            - 1
+            - 2
+        agent_tag_id:
+          items:
+            $ref: "#/components/schemas/IdNumber"
+          type: array
+          example:
+            - 1
+            - 2
+        agent_type:
+          items:
+            $ref: "#/components/schemas/AgentType"
+          type: array
+          example:
+            - LINUX
+        agent_version:
+          items:
+            type: string
+          type: array
+          example:
+            - 0.0.1
+        agent_tag_name:
+          items:
+            type: string
+          type: array
+          example:
+            - VPN
+        agent_status:
+          items:
+            $ref: "#/components/schemas/AgentFilterAgentStatus"
+          type: array
+        agent_location_country:
+          items:
+            type: string
+          type: array
+          example: DE
+        agent_modified_at_from:
+          type: string
+          format: date-time
+          example: "2021-08-29T12:31:23.114Z"
+        agent_modified_at_to:
+          type: string
+          format: date-time
+          example: "2021-08-30T12:31:23.114Z"
+        agent_name:
+          type: string
+          example: agent-aws-1
+      type: object
+      additionalProperties: false
+    V1AgentOrder:
+      type: array
+      items:
+        anyOf:
+          - properties:
+              agent_name:
+                $ref: "#/components/schemas/Order"
+            required:
+              - agent_name
+            type: object
+          - properties:
+              agent_provider_name:
+                $ref: "#/components/schemas/Order"
+            required:
+              - agent_provider_name
+            type: object
+          - properties:
+              agent_type:
+                $ref: "#/components/schemas/Order"
+            required:
+              - agent_type
+            type: object
+          - properties:
+              agent_location_country:
+                $ref: "#/components/schemas/Order"
+            required:
+              - agent_location_country
+            type: object
+          - properties:
+              agent_modified_at:
+                $ref: "#/components/schemas/Order"
+            required:
+              - agent_modified_at
+            type: object
+    AgentInterfacesMetadata:
+      properties:
+        PUBLIC:
+          $ref: "#/components/schemas/AgentInterfaceMetadata"
+        SDN1:
+          $ref: "#/components/schemas/AgentInterfaceMetadata"
+        SDN2:
+          $ref: "#/components/schemas/AgentInterfaceMetadata"
+        SDN3:
+          $ref: "#/components/schemas/AgentInterfaceMetadata"
+      type: object
+      additionalProperties: false
     V1Connection:
       properties:
         agent_connection_subnets_enabled_count:
@@ -512,6 +699,50 @@ components:
         - is_sdn_enabled
       type: object
       additionalProperties: false
+    V1ConnectionFilter:
+      properties:
+        agent_connection_group_id:
+          items:
+            $ref: "#/components/schemas/IdNumber"
+          type: array
+        agent_id:
+          items:
+            $ref: "#/components/schemas/IdNumber"
+          type: array
+        agent_pair:
+          items:
+            $ref: "#/components/schemas/V1AgentPairFilter"
+          type: array
+      type: object
+      additionalProperties: false
+    V1ConnectionOrder:
+      type: array
+      items:
+        oneOf:
+          - properties:
+              agent_connection_group_id:
+                $ref: "#/components/schemas/Order"
+            required:
+              - agent_connection_group_id
+            type: object
+          - properties:
+              agent_1_name:
+                $ref: "#/components/schemas/Order"
+            required:
+              - agent_1_name
+            type: object
+          - properties:
+              agent_2_name:
+                $ref: "#/components/schemas/Order"
+            required:
+              - agent_2_name
+            type: object
+          - properties:
+              agent_connection_group_updated_at:
+                $ref: "#/components/schemas/Order"
+            required:
+              - agent_connection_group_updated_at
+            type: object
     V1ConnectionCreateItem:
       properties:
         agent_1_id:
@@ -523,6 +754,36 @@ components:
         agent_connection_group_id:
           type: integer
           format: int32
+    V1ConnectionService:
+      properties:
+        agent_connection_group_id:
+          type: integer
+          format: int32
+        agent_connection_subnets:
+          items:
+            $ref: "#/components/schemas/V1ConnectionServiceSubnet"
+          type: array
+        agent_2:
+          $ref: "#/components/schemas/V1ConnectionServiceAgent"
+        agent_1:
+          $ref: "#/components/schemas/V1ConnectionServiceAgent"
+      required:
+        - agent_connection_group_id
+        - agent_connection_subnets
+        - agent_2
+        - agent_1
+      type: object
+    AgentServicesUpdateChanges:
+      properties:
+        agent_service_subnet_id:
+          $ref: "#/components/schemas/IdNumber"
+        is_enabled:
+          type: boolean
+      required:
+        - agent_service_subnet_id
+        - is_enabled
+      type: object
+      additionalProperties: false
     V1AuthAgentToken:
       properties:
         agent_token_name:
@@ -678,6 +939,22 @@ components:
         - agent_tag_name
         - agent_tag_id
       type: object
+    AgentFilterAgentStatus:
+      type: string
+      enum:
+        - CONNECTED
+        - CONNECTED_WITH_ERRORS
+        - DISCONNECTED
+    Order:
+      enum:
+        - ASC
+        - DESC
+    AgentInterfaceMetadata:
+      properties:
+        agent_interface_public_key:
+          $ref: "#/components/schemas/WgPublicKey"
+      type: object
+      additionalProperties: false
     V1ConnectionStatus:
       enum:
         - PENDING
@@ -724,6 +1001,127 @@ components:
         - agent_id
         - agent_provider_id
       type: object
+    V1AgentPairFilter:
+      properties:
+        agent_2_id:
+          $ref: "#/components/schemas/IdNumber"
+        agent_1_id:
+          $ref: "#/components/schemas/IdNumber"
+      required:
+        - agent_2_id
+        - agent_1_id
+      type: object
+    V1ConnectionServiceSubnet:
+      properties:
+        agent_service_subnet_id:
+          type: integer
+          format: int32
+        agent_connection_subnet_id:
+          type: integer
+          format: int32
+        agent_connection_subnet_is_enabled:
+          type: boolean
+        agent_connection_subnet_error:
+          type: string
+          nullable: true
+        agent_connection_subnet_status:
+          $ref: "#/components/schemas/AgentConnectionSubnetStatuses"
+      required:
+        - agent_service_subnet_id
+        - agent_connection_subnet_id
+        - agent_connection_subnet_is_enabled
+        - agent_connection_subnet_error
+        - agent_connection_subnet_status
+      type: object
+    V1ConnectionServiceAgent:
+      properties:
+        agent_services:
+          items:
+            $ref: "#/components/schemas/V1ConnectionServiceAgentService"
+          type: array
+        agent_type:
+          $ref: "#/components/schemas/AgentType"
+          nullable: true
+        agent_id:
+          type: integer
+          format: int32
+      required:
+        - agent_services
+        - agent_type
+        - agent_id
+      type: object
+    WgPublicKey:
+      type: string
+      pattern: ^[A-Za-z0-9+/]{42}[A|E|I|M|Q|U|Y|c|g|k|o|s|w|4|8|0]=$
+    AgentConnectionSubnetStatuses:
+      enum:
+        - OK
+        - PENDING
+        - ERROR
+      type: string
+    V1ConnectionServiceAgentService:
+      properties:
+        agent_service_subnets:
+          items:
+            $ref: "#/components/schemas/ConnectionServiceAgentServiceSubnet"
+          type: array
+        agent_service_udp_ports:
+          items:
+            type: integer
+            format: int32
+          type: array
+        agent_service_tcp_ports:
+          items:
+            type: integer
+            format: int32
+          type: array
+        agent_service_type:
+          $ref: "#/components/schemas/AgentServiceTypes"
+        agent_service_name:
+          type: string
+        agent_service_is_active:
+          type: boolean
+        agent_service_id:
+          type: integer
+          format: int32
+        agent_service_created_at:
+          type: string
+          format: date-string
+        agent_service_updated_at:
+          type: string
+          format: date-string
+      required:
+        - agent_service_subnets
+        - agent_service_udp_ports
+        - agent_service_tcp_ports
+        - agent_service_type
+        - agent_service_name
+        - agent_service_is_active
+        - agent_service_id
+        - agent_service_created_at
+        - agent_service_updated_at
+      type: object
+    ConnectionServiceAgentServiceSubnet:
+      properties:
+        agent_service_subnet_is_active:
+          type: boolean
+        agent_service_subnet_ip:
+          type: string
+        agent_service_subnet_id:
+          type: integer
+          format: int32
+      required:
+        - agent_service_subnet_is_active
+        - agent_service_subnet_ip
+        - agent_service_subnet_id
+      type: object
+    AgentServiceTypes:
+      enum:
+        - DOCKER
+        - HOST
+        - KUBERNETES
+        - MANUAL
+      type: string
   securitySchemes:
     jwt:
       type: http
@@ -883,6 +1281,57 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/V1NetworkAgentsCreateRequest"
+  /v1/network/agents/search:
+    post:
+      operationId: V1NetworkAgentsSearch
+      responses:
+        "206":
+          description: Partial Content
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/V1NetworkAgentsSearchResponse"
+              examples:
+                Example 1:
+                  value:
+                    data:
+                      - agent_name: us-homelab.host
+                        agent_type: Linux
+                        agent_id: 1
+                        agent_is_virtual: false
+                        agent_location_country: DE
+                        agent_provider: null
+                        agent_public_ipv4: 213.45.2.17
+                        agent_services_subnets_count: 0
+                        agent_services_subnets_enabled_count: 0
+                        agent_tags:
+                          - agent_tag_id: 1
+                            agent_tag_name: VPN
+        "400":
+          $ref: "#/components/responses/400"
+        "500":
+          $ref: "#/components/responses/500"
+      description: >-
+        Return a list of agents.
+
+        Learn more about platform agents
+        [here](https://docs.syntropystack.com/docs/what-is-syntropy-agent).
+      summary: Search Agents
+      tags:
+        - Agents
+      security:
+        - accessToken: []
+        - jwt:
+            - ADMIN
+            - USER
+            - platform.agents.read
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/V1NetworkAgentsSearchRequest"
   /v1/network/agents/{agent_id}:
     patch:
       operationId: V1NetworkAgentsUpdate
@@ -895,10 +1344,9 @@ paths:
           $ref: "#/components/responses/500"
       description: >-
         Updates the agent properties by `agent_id` (please make sure that none
-        of the properties that you want to update are not locked: `GET` the
-        agent and see `agent_locked_fields` ). You can add `tags` and also
-        update the `provider` for the agent - please see the full [list of
-        available
+        of the properties that you want to update are locked: `GET` the agent
+        and see `agent_locked_fields` ). You can add `tags` and also update the
+        `provider` for the agent - please see the full [list of available
         providers](https://docs.syntropystack.com/docs/syntropy-agent-variables#syntropy-provider).
       summary: Updates Agent
       tags:
@@ -1060,6 +1508,68 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/V1NetworkConnectionsUpdateRequest"
+  /v1/network/connections/search:
+    post:
+      operationId: V1NetworkConnectionsSearch
+      responses:
+        "206":
+          description: Partial Content
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/V1NetworkConnectionsSearchResponse"
+              examples:
+                Success:
+                  value:
+                    data:
+                      - agent_connection_subnets_enabled_count: 4
+                        agent_connection_group_updated_at: "2022-06-20T15:49:43.080Z"
+                        agent_connection_group_status_reason: >-
+                          Connection status for connections with virtual agents
+                          is not supported.
+                        agent_connection_group_status: PENDING
+                        agent_connection_group_sdn_enabled: true
+                        agent_connection_group_id: 1230
+                        agent_connection_group_created_by: API
+                        agent_2:
+                          agent_is_online: true
+                          agent_status: OK
+                          agent_subnets_count: 0
+                          agent_is_virtual: true
+                          agent_name: string
+                          agent_public_ipv4: string
+                          agent_id: 0
+                          agent_provider_id: 0
+                        agent_1:
+                          agent_is_online: true
+                          agent_status: OK
+                          agent_subnets_count: 0
+                          agent_is_virtual: true
+                          agent_name: string
+                          agent_public_ipv4: string
+                          agent_id: 0
+                          agent_provider_id: 0
+        "400":
+          $ref: "#/components/responses/400"
+        "500":
+          $ref: "#/components/responses/500"
+      description: ""
+      summary: Search Connections
+      tags:
+        - Connections
+      security:
+        - accessToken: []
+        - jwt:
+            - ADMIN
+            - USER
+            - platform.connections.read
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/V1NetworkConnectionsSearchRequest"
   /v1/network/connections/remove:
     post:
       operationId: V1NetworkConnectionsRemove
@@ -1173,6 +1683,74 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/V1NetworkConnectionsCreateMeshRequest"
+  /v1/network/connections/services:
+    get:
+      operationId: V1NetworkConnectionsServicesGet
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/V1NetworkConnectionsServicesGetResponse"
+        "400":
+          $ref: "#/components/responses/400"
+        "500":
+          $ref: "#/components/responses/500"
+      description: Retrieves Agent Connection services.
+      summary: Get Connection services
+      tags:
+        - Connections
+      security:
+        - accessToken: []
+        - jwt:
+            - ADMIN
+            - USER
+            - platform.connection-services.read
+      parameters:
+        - description: array of Agent Connection group ids
+          example: 1,2,3
+          in: query
+          name: filter
+          required: false
+          schema:
+            $ref: "#/components/schemas/WhereString"
+        - in: query
+          name: skip
+          required: false
+          schema:
+            $ref: "#/components/schemas/V1SkipNumber"
+        - in: query
+          name: take
+          required: false
+          schema:
+            $ref: "#/components/schemas/V1TakeNumber"
+    patch:
+      operationId: V1NetworkConnectionsServicesUpdate
+      responses:
+        "204":
+          description: No Content
+        "400":
+          $ref: "#/components/responses/400"
+        "500":
+          $ref: "#/components/responses/500"
+      description: Updates Agent Connection services.
+      summary: Update Connection services
+      tags:
+        - Connections
+      security:
+        - accessToken: []
+        - jwt:
+            - ADMIN
+            - USER
+            - platform.connection-services.write
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/V1NetworkConnectionsServicesUpdateRequest"
   /v1/network/auth/agent-tokens:
     get:
       operationId: V1NetworkAuthAgentTokensGet

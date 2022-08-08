@@ -17,9 +17,10 @@ import (
 
 // V1NetworkAgentsUpdateRequest struct for V1NetworkAgentsUpdateRequest
 type V1NetworkAgentsUpdateRequest struct {
-	AgentTags       []string `json:"agent_tags,omitempty"`
-	AgentName       *string  `json:"agent_name,omitempty"`
-	AgentProviderId *int32   `json:"agent_provider_id,omitempty"`
+	AgentTags       []string                 `json:"agent_tags,omitempty"`
+	AgentName       *string                  `json:"agent_name,omitempty"`
+	AgentProviderId *int32                   `json:"agent_provider_id,omitempty"`
+	Network         *AgentInterfacesMetadata `json:"network,omitempty"`
 }
 
 // NewV1NetworkAgentsUpdateRequest instantiates a new V1NetworkAgentsUpdateRequest object
@@ -135,6 +136,38 @@ func (o *V1NetworkAgentsUpdateRequest) SetAgentProviderId(v int32) {
 	o.AgentProviderId = &v
 }
 
+// GetNetwork returns the Network field value if set, zero value otherwise.
+func (o *V1NetworkAgentsUpdateRequest) GetNetwork() AgentInterfacesMetadata {
+	if o == nil || o.Network == nil {
+		var ret AgentInterfacesMetadata
+		return ret
+	}
+	return *o.Network
+}
+
+// GetNetworkOk returns a tuple with the Network field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *V1NetworkAgentsUpdateRequest) GetNetworkOk() (*AgentInterfacesMetadata, bool) {
+	if o == nil || o.Network == nil {
+		return nil, false
+	}
+	return o.Network, true
+}
+
+// HasNetwork returns a boolean if a field has been set.
+func (o *V1NetworkAgentsUpdateRequest) HasNetwork() bool {
+	if o != nil && o.Network != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetNetwork gets a reference to the given AgentInterfacesMetadata and assigns it to the Network field.
+func (o *V1NetworkAgentsUpdateRequest) SetNetwork(v AgentInterfacesMetadata) {
+	o.Network = &v
+}
+
 func (o V1NetworkAgentsUpdateRequest) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.AgentTags != nil {
@@ -145,6 +178,9 @@ func (o V1NetworkAgentsUpdateRequest) MarshalJSON() ([]byte, error) {
 	}
 	if o.AgentProviderId != nil {
 		toSerialize["agent_provider_id"] = o.AgentProviderId
+	}
+	if o.Network != nil {
+		toSerialize["network"] = o.Network
 	}
 	return json.Marshal(toSerialize)
 }

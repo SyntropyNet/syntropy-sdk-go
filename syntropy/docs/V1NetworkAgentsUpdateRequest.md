@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **AgentTags** | Pointer to **[]string** |  | [optional] 
 **AgentName** | Pointer to **string** |  | [optional] 
 **AgentProviderId** | Pointer to **int32** |  | [optional] 
+**Network** | Pointer to [**AgentInterfacesMetadata**](AgentInterfacesMetadata.md) |  | [optional] 
 
 ## Methods
 
@@ -101,6 +102,31 @@ SetAgentProviderId sets AgentProviderId field to given value.
 `func (o *V1NetworkAgentsUpdateRequest) HasAgentProviderId() bool`
 
 HasAgentProviderId returns a boolean if a field has been set.
+
+### GetNetwork
+
+`func (o *V1NetworkAgentsUpdateRequest) GetNetwork() AgentInterfacesMetadata`
+
+GetNetwork returns the Network field if non-nil, zero value otherwise.
+
+### GetNetworkOk
+
+`func (o *V1NetworkAgentsUpdateRequest) GetNetworkOk() (*AgentInterfacesMetadata, bool)`
+
+GetNetworkOk returns a tuple with the Network field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNetwork
+
+`func (o *V1NetworkAgentsUpdateRequest) SetNetwork(v AgentInterfacesMetadata)`
+
+SetNetwork sets Network field to given value.
+
+### HasNetwork
+
+`func (o *V1NetworkAgentsUpdateRequest) HasNetwork() bool`
+
+HasNetwork returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
