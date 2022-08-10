@@ -7,6 +7,7 @@ Method | HTTP request | Description
 [**V1NetworkAgentsCreate**](AgentsApi.md#V1NetworkAgentsCreate) | **Post** /v1/network/agents | Create Agent
 [**V1NetworkAgentsGet**](AgentsApi.md#V1NetworkAgentsGet) | **Get** /v1/network/agents | Get Agents
 [**V1NetworkAgentsRemove**](AgentsApi.md#V1NetworkAgentsRemove) | **Post** /v1/network/agents/remove | Delete Agents
+[**V1NetworkAgentsSearch**](AgentsApi.md#V1NetworkAgentsSearch) | **Post** /v1/network/agents/search | Search Agents
 [**V1NetworkAgentsUpdate**](AgentsApi.md#V1NetworkAgentsUpdate) | **Patch** /v1/network/agents/{agent_id} | Updates Agent
 
 
@@ -196,6 +197,72 @@ Name | Type | Description  | Notes
 ### Return type
 
  (empty response body)
+
+### Authorization
+
+[accessToken](../README.md#accessToken), [jwt](../README.md#jwt)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## V1NetworkAgentsSearch
+
+> V1NetworkAgentsSearchResponse V1NetworkAgentsSearch(ctx).V1NetworkAgentsSearchRequest(v1NetworkAgentsSearchRequest).Execute()
+
+Search Agents
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    v1NetworkAgentsSearchRequest := *openapiclient.NewV1NetworkAgentsSearchRequest() // V1NetworkAgentsSearchRequest | 
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.AgentsApi.V1NetworkAgentsSearch(context.Background()).V1NetworkAgentsSearchRequest(v1NetworkAgentsSearchRequest).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `AgentsApi.V1NetworkAgentsSearch``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `V1NetworkAgentsSearch`: V1NetworkAgentsSearchResponse
+    fmt.Fprintf(os.Stdout, "Response from `AgentsApi.V1NetworkAgentsSearch`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiV1NetworkAgentsSearchRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **v1NetworkAgentsSearchRequest** | [**V1NetworkAgentsSearchRequest**](V1NetworkAgentsSearchRequest.md) |  | 
+
+### Return type
+
+[**V1NetworkAgentsSearchResponse**](V1NetworkAgentsSearchResponse.md)
 
 ### Authorization
 

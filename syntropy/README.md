@@ -81,6 +81,7 @@ Class | Method | HTTP request | Description
 *AgentsApi* | [**V1NetworkAgentsCreate**](docs/AgentsApi.md#v1networkagentscreate) | **Post** /v1/network/agents | Create Agent
 *AgentsApi* | [**V1NetworkAgentsGet**](docs/AgentsApi.md#v1networkagentsget) | **Get** /v1/network/agents | Get Agents
 *AgentsApi* | [**V1NetworkAgentsRemove**](docs/AgentsApi.md#v1networkagentsremove) | **Post** /v1/network/agents/remove | Delete Agents
+*AgentsApi* | [**V1NetworkAgentsSearch**](docs/AgentsApi.md#v1networkagentssearch) | **Post** /v1/network/agents/search | Search Agents
 *AgentsApi* | [**V1NetworkAgentsUpdate**](docs/AgentsApi.md#v1networkagentsupdate) | **Patch** /v1/network/agents/{agent_id} | Updates Agent
 *AuthApi* | [**V1NetworkAuthAccessTokensCreate**](docs/AuthApi.md#v1networkauthaccesstokenscreate) | **Post** /v1/network/auth/access-tokens | Create Access token
 *AuthApi* | [**V1NetworkAuthAccessTokensDelete**](docs/AuthApi.md#v1networkauthaccesstokensdelete) | **Delete** /v1/network/auth/access-tokens/{access_token_id} | Delete Access token
@@ -93,18 +94,31 @@ Class | Method | HTTP request | Description
 *ConnectionsApi* | [**V1NetworkConnectionsCreateP2P**](docs/ConnectionsApi.md#v1networkconnectionscreatep2p) | **Post** /v1/network/connections/point-to-point | Create P2P Connections
 *ConnectionsApi* | [**V1NetworkConnectionsGet**](docs/ConnectionsApi.md#v1networkconnectionsget) | **Get** /v1/network/connections | Get Connections
 *ConnectionsApi* | [**V1NetworkConnectionsRemove**](docs/ConnectionsApi.md#v1networkconnectionsremove) | **Post** /v1/network/connections/remove | Delete Connections
+*ConnectionsApi* | [**V1NetworkConnectionsSearch**](docs/ConnectionsApi.md#v1networkconnectionssearch) | **Post** /v1/network/connections/search | Search Connections
+*ConnectionsApi* | [**V1NetworkConnectionsServicesGet**](docs/ConnectionsApi.md#v1networkconnectionsservicesget) | **Get** /v1/network/connections/services | Get Connection services
+*ConnectionsApi* | [**V1NetworkConnectionsServicesUpdate**](docs/ConnectionsApi.md#v1networkconnectionsservicesupdate) | **Patch** /v1/network/connections/services | Update Connection services
 *ConnectionsApi* | [**V1NetworkConnectionsUpdate**](docs/ConnectionsApi.md#v1networkconnectionsupdate) | **Patch** /v1/network/connections | Update Connections
 
 
 ## Documentation For Models
 
+ - [AgentConnectionSubnetStatuses](docs/AgentConnectionSubnetStatuses.md)
+ - [AgentFilterAgentStatus](docs/AgentFilterAgentStatus.md)
+ - [AgentInterfaceMetadata](docs/AgentInterfaceMetadata.md)
+ - [AgentInterfacesMetadata](docs/AgentInterfacesMetadata.md)
  - [AgentLockedFields](docs/AgentLockedFields.md)
  - [AgentProviderNameAndId](docs/AgentProviderNameAndId.md)
+ - [AgentServiceTypes](docs/AgentServiceTypes.md)
+ - [AgentServicesUpdateChanges](docs/AgentServicesUpdateChanges.md)
  - [AgentStatus](docs/AgentStatus.md)
  - [AgentTag](docs/AgentTag.md)
  - [AgentType](docs/AgentType.md)
+ - [ConnectionServiceAgentServiceSubnet](docs/ConnectionServiceAgentServiceSubnet.md)
+ - [Order](docs/Order.md)
  - [V1Agent](docs/V1Agent.md)
  - [V1AgentCreateItem](docs/V1AgentCreateItem.md)
+ - [V1AgentFilter](docs/V1AgentFilter.md)
+ - [V1AgentPairFilter](docs/V1AgentPairFilter.md)
  - [V1AuthAccessToken](docs/V1AuthAccessToken.md)
  - [V1AuthAccessTokenPermissions](docs/V1AuthAccessTokenPermissions.md)
  - [V1AuthAccessTokensCreateItem](docs/V1AuthAccessTokensCreateItem.md)
@@ -114,6 +128,11 @@ Class | Method | HTTP request | Description
  - [V1ConnectionAgent](docs/V1ConnectionAgent.md)
  - [V1ConnectionCreateItem](docs/V1ConnectionCreateItem.md)
  - [V1ConnectionCreatedBy](docs/V1ConnectionCreatedBy.md)
+ - [V1ConnectionFilter](docs/V1ConnectionFilter.md)
+ - [V1ConnectionService](docs/V1ConnectionService.md)
+ - [V1ConnectionServiceAgent](docs/V1ConnectionServiceAgent.md)
+ - [V1ConnectionServiceAgentService](docs/V1ConnectionServiceAgentService.md)
+ - [V1ConnectionServiceSubnet](docs/V1ConnectionServiceSubnet.md)
  - [V1ConnectionStatus](docs/V1ConnectionStatus.md)
  - [V1ConnectionUpdateChange](docs/V1ConnectionUpdateChange.md)
  - [V1ErrorResponse](docs/V1ErrorResponse.md)
@@ -122,6 +141,8 @@ Class | Method | HTTP request | Description
  - [V1NetworkAgentsCreateResponse](docs/V1NetworkAgentsCreateResponse.md)
  - [V1NetworkAgentsGetResponse](docs/V1NetworkAgentsGetResponse.md)
  - [V1NetworkAgentsRemoveRequest](docs/V1NetworkAgentsRemoveRequest.md)
+ - [V1NetworkAgentsSearchRequest](docs/V1NetworkAgentsSearchRequest.md)
+ - [V1NetworkAgentsSearchResponse](docs/V1NetworkAgentsSearchResponse.md)
  - [V1NetworkAgentsUpdateRequest](docs/V1NetworkAgentsUpdateRequest.md)
  - [V1NetworkAuthAccessTokensCreateRequest](docs/V1NetworkAuthAccessTokensCreateRequest.md)
  - [V1NetworkAuthAccessTokensCreateResponse](docs/V1NetworkAuthAccessTokensCreateResponse.md)
@@ -137,6 +158,10 @@ Class | Method | HTTP request | Description
  - [V1NetworkConnectionsCreateResponse](docs/V1NetworkConnectionsCreateResponse.md)
  - [V1NetworkConnectionsGetResponse](docs/V1NetworkConnectionsGetResponse.md)
  - [V1NetworkConnectionsRemoveRequest](docs/V1NetworkConnectionsRemoveRequest.md)
+ - [V1NetworkConnectionsSearchRequest](docs/V1NetworkConnectionsSearchRequest.md)
+ - [V1NetworkConnectionsSearchResponse](docs/V1NetworkConnectionsSearchResponse.md)
+ - [V1NetworkConnectionsServicesGetResponse](docs/V1NetworkConnectionsServicesGetResponse.md)
+ - [V1NetworkConnectionsServicesUpdateRequest](docs/V1NetworkConnectionsServicesUpdateRequest.md)
  - [V1NetworkConnectionsUpdateRequest](docs/V1NetworkConnectionsUpdateRequest.md)
 
 
