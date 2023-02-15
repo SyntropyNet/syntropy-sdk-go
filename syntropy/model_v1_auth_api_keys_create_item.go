@@ -16,6 +16,9 @@ import (
 	"time"
 )
 
+// checks if the V1AuthApiKeysCreateItem type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &V1AuthApiKeysCreateItem{}
+
 // V1AuthApiKeysCreateItem struct for V1AuthApiKeysCreateItem
 type V1AuthApiKeysCreateItem struct {
 	ApiKeyName            string     `json:"api_key_name"`
@@ -78,7 +81,7 @@ func (o *V1AuthApiKeysCreateItem) SetApiKeyName(v string) {
 
 // GetApiKeyDescription returns the ApiKeyDescription field value if set, zero value otherwise.
 func (o *V1AuthApiKeysCreateItem) GetApiKeyDescription() string {
-	if o == nil || o.ApiKeyDescription == nil {
+	if o == nil || isNil(o.ApiKeyDescription) {
 		var ret string
 		return ret
 	}
@@ -88,7 +91,7 @@ func (o *V1AuthApiKeysCreateItem) GetApiKeyDescription() string {
 // GetApiKeyDescriptionOk returns a tuple with the ApiKeyDescription field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *V1AuthApiKeysCreateItem) GetApiKeyDescriptionOk() (*string, bool) {
-	if o == nil || o.ApiKeyDescription == nil {
+	if o == nil || isNil(o.ApiKeyDescription) {
 		return nil, false
 	}
 	return o.ApiKeyDescription, true
@@ -96,7 +99,7 @@ func (o *V1AuthApiKeysCreateItem) GetApiKeyDescriptionOk() (*string, bool) {
 
 // HasApiKeyDescription returns a boolean if a field has been set.
 func (o *V1AuthApiKeysCreateItem) HasApiKeyDescription() bool {
-	if o != nil && o.ApiKeyDescription != nil {
+	if o != nil && !isNil(o.ApiKeyDescription) {
 		return true
 	}
 
@@ -110,7 +113,7 @@ func (o *V1AuthApiKeysCreateItem) SetApiKeyDescription(v string) {
 
 // GetApiKeyValidUntil returns the ApiKeyValidUntil field value if set, zero value otherwise.
 func (o *V1AuthApiKeysCreateItem) GetApiKeyValidUntil() time.Time {
-	if o == nil || o.ApiKeyValidUntil == nil {
+	if o == nil || isNil(o.ApiKeyValidUntil) {
 		var ret time.Time
 		return ret
 	}
@@ -120,7 +123,7 @@ func (o *V1AuthApiKeysCreateItem) GetApiKeyValidUntil() time.Time {
 // GetApiKeyValidUntilOk returns a tuple with the ApiKeyValidUntil field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *V1AuthApiKeysCreateItem) GetApiKeyValidUntilOk() (*time.Time, bool) {
-	if o == nil || o.ApiKeyValidUntil == nil {
+	if o == nil || isNil(o.ApiKeyValidUntil) {
 		return nil, false
 	}
 	return o.ApiKeyValidUntil, true
@@ -128,7 +131,7 @@ func (o *V1AuthApiKeysCreateItem) GetApiKeyValidUntilOk() (*time.Time, bool) {
 
 // HasApiKeyValidUntil returns a boolean if a field has been set.
 func (o *V1AuthApiKeysCreateItem) HasApiKeyValidUntil() bool {
-	if o != nil && o.ApiKeyValidUntil != nil {
+	if o != nil && !isNil(o.ApiKeyValidUntil) {
 		return true
 	}
 
@@ -142,7 +145,7 @@ func (o *V1AuthApiKeysCreateItem) SetApiKeyValidUntil(v time.Time) {
 
 // GetApiKeyAllowedTagNames returns the ApiKeyAllowedTagNames field value if set, zero value otherwise.
 func (o *V1AuthApiKeysCreateItem) GetApiKeyAllowedTagNames() []string {
-	if o == nil || o.ApiKeyAllowedTagNames == nil {
+	if o == nil || isNil(o.ApiKeyAllowedTagNames) {
 		var ret []string
 		return ret
 	}
@@ -152,7 +155,7 @@ func (o *V1AuthApiKeysCreateItem) GetApiKeyAllowedTagNames() []string {
 // GetApiKeyAllowedTagNamesOk returns a tuple with the ApiKeyAllowedTagNames field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *V1AuthApiKeysCreateItem) GetApiKeyAllowedTagNamesOk() ([]string, bool) {
-	if o == nil || o.ApiKeyAllowedTagNames == nil {
+	if o == nil || isNil(o.ApiKeyAllowedTagNames) {
 		return nil, false
 	}
 	return o.ApiKeyAllowedTagNames, true
@@ -160,7 +163,7 @@ func (o *V1AuthApiKeysCreateItem) GetApiKeyAllowedTagNamesOk() ([]string, bool) 
 
 // HasApiKeyAllowedTagNames returns a boolean if a field has been set.
 func (o *V1AuthApiKeysCreateItem) HasApiKeyAllowedTagNames() bool {
-	if o != nil && o.ApiKeyAllowedTagNames != nil {
+	if o != nil && !isNil(o.ApiKeyAllowedTagNames) {
 		return true
 	}
 
@@ -293,35 +296,31 @@ func (o *V1AuthApiKeysCreateItem) SetApiKeyUpdatedAt(v time.Time) {
 }
 
 func (o V1AuthApiKeysCreateItem) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["api_key_name"] = o.ApiKeyName
-	}
-	if o.ApiKeyDescription != nil {
-		toSerialize["api_key_description"] = o.ApiKeyDescription
-	}
-	if o.ApiKeyValidUntil != nil {
-		toSerialize["api_key_valid_until"] = o.ApiKeyValidUntil
-	}
-	if o.ApiKeyAllowedTagNames != nil {
-		toSerialize["api_key_allowed_tag_names"] = o.ApiKeyAllowedTagNames
-	}
-	if true {
-		toSerialize["api_key_secret"] = o.ApiKeySecret
-	}
-	if true {
-		toSerialize["user_id"] = o.UserId
-	}
-	if true {
-		toSerialize["api_key_id"] = o.ApiKeyId
-	}
-	if true {
-		toSerialize["api_key_created_at"] = o.ApiKeyCreatedAt
-	}
-	if true {
-		toSerialize["api_key_updated_at"] = o.ApiKeyUpdatedAt
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o V1AuthApiKeysCreateItem) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["api_key_name"] = o.ApiKeyName
+	if !isNil(o.ApiKeyDescription) {
+		toSerialize["api_key_description"] = o.ApiKeyDescription
+	}
+	if !isNil(o.ApiKeyValidUntil) {
+		toSerialize["api_key_valid_until"] = o.ApiKeyValidUntil
+	}
+	if !isNil(o.ApiKeyAllowedTagNames) {
+		toSerialize["api_key_allowed_tag_names"] = o.ApiKeyAllowedTagNames
+	}
+	toSerialize["api_key_secret"] = o.ApiKeySecret
+	toSerialize["user_id"] = o.UserId
+	toSerialize["api_key_id"] = o.ApiKeyId
+	toSerialize["api_key_created_at"] = o.ApiKeyCreatedAt
+	toSerialize["api_key_updated_at"] = o.ApiKeyUpdatedAt
+	return toSerialize, nil
 }
 
 type NullableV1AuthApiKeysCreateItem struct {

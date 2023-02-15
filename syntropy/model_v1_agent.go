@@ -16,6 +16,9 @@ import (
 	"time"
 )
 
+// checks if the V1Agent type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &V1Agent{}
+
 // V1Agent struct for V1Agent
 type V1Agent struct {
 	AgentId                          int32                  `json:"agent_id"`
@@ -486,59 +489,33 @@ func (o *V1Agent) SetAgentIsOnline(v bool) {
 }
 
 func (o V1Agent) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["agent_id"] = o.AgentId
-	}
-	if true {
-		toSerialize["agent_public_ipv4"] = o.AgentPublicIpv4
-	}
-	if true {
-		toSerialize["agent_location_city"] = o.AgentLocationCity.Get()
-	}
-	if true {
-		toSerialize["agent_device_id"] = o.AgentDeviceId
-	}
-	if true {
-		toSerialize["agent_name"] = o.AgentName
-	}
-	if true {
-		toSerialize["agent_status"] = o.AgentStatus.Get()
-	}
-	if true {
-		toSerialize["agent_version"] = o.AgentVersion
-	}
-	if true {
-		toSerialize["agent_locked_fields"] = o.AgentLockedFields
-	}
-	if true {
-		toSerialize["agent_modified_at"] = o.AgentModifiedAt
-	}
-	if true {
-		toSerialize["agent_is_virtual"] = o.AgentIsVirtual
-	}
-	if true {
-		toSerialize["agent_type"] = o.AgentType
-	}
-	if true {
-		toSerialize["agent_provider"] = o.AgentProvider
-	}
-	if true {
-		toSerialize["agent_tags"] = o.AgentTags
-	}
-	if true {
-		toSerialize["agent_services_subnets_enabled_count"] = o.AgentServicesSubnetsEnabledCount
-	}
-	if true {
-		toSerialize["agent_services_subnets_count"] = o.AgentServicesSubnetsCount
-	}
-	if true {
-		toSerialize["agent_location_country"] = o.AgentLocationCountry.Get()
-	}
-	if true {
-		toSerialize["agent_is_online"] = o.AgentIsOnline
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o V1Agent) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["agent_id"] = o.AgentId
+	toSerialize["agent_public_ipv4"] = o.AgentPublicIpv4
+	toSerialize["agent_location_city"] = o.AgentLocationCity.Get()
+	toSerialize["agent_device_id"] = o.AgentDeviceId
+	toSerialize["agent_name"] = o.AgentName
+	toSerialize["agent_status"] = o.AgentStatus.Get()
+	toSerialize["agent_version"] = o.AgentVersion
+	toSerialize["agent_locked_fields"] = o.AgentLockedFields
+	toSerialize["agent_modified_at"] = o.AgentModifiedAt
+	toSerialize["agent_is_virtual"] = o.AgentIsVirtual
+	toSerialize["agent_type"] = o.AgentType
+	toSerialize["agent_provider"] = o.AgentProvider
+	toSerialize["agent_tags"] = o.AgentTags
+	toSerialize["agent_services_subnets_enabled_count"] = o.AgentServicesSubnetsEnabledCount
+	toSerialize["agent_services_subnets_count"] = o.AgentServicesSubnetsCount
+	toSerialize["agent_location_country"] = o.AgentLocationCountry.Get()
+	toSerialize["agent_is_online"] = o.AgentIsOnline
+	return toSerialize, nil
 }
 
 type NullableV1Agent struct {

@@ -140,6 +140,7 @@ func (a *AgentsApiService) V1NetworkAgentsCreateExecute(r ApiV1NetworkAgentsCrea
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -150,6 +151,7 @@ func (a *AgentsApiService) V1NetworkAgentsCreateExecute(r ApiV1NetworkAgentsCrea
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -234,13 +236,13 @@ func (a *AgentsApiService) V1NetworkAgentsGetExecute(r ApiV1NetworkAgentsGetRequ
 	localVarFormParams := url.Values{}
 
 	if r.skip != nil {
-		localVarQueryParams.Add("skip", parameterToString(*r.skip, ""))
+		parameterAddToQuery(localVarQueryParams, "skip", r.skip, "")
 	}
 	if r.take != nil {
-		localVarQueryParams.Add("take", parameterToString(*r.take, ""))
+		parameterAddToQuery(localVarQueryParams, "take", r.take, "")
 	}
 	if r.filter != nil {
-		localVarQueryParams.Add("filter", parameterToString(*r.filter, ""))
+		parameterAddToQuery(localVarQueryParams, "filter", r.filter, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -302,6 +304,7 @@ func (a *AgentsApiService) V1NetworkAgentsGetExecute(r ApiV1NetworkAgentsGetRequ
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -312,6 +315,7 @@ func (a *AgentsApiService) V1NetworkAgentsGetExecute(r ApiV1NetworkAgentsGetRequ
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -443,6 +447,7 @@ func (a *AgentsApiService) V1NetworkAgentsRemoveExecute(r ApiV1NetworkAgentsRemo
 				newErr.error = err.Error()
 				return localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarHTTPResponse, newErr
 		}
@@ -453,6 +458,7 @@ func (a *AgentsApiService) V1NetworkAgentsRemoveExecute(r ApiV1NetworkAgentsRemo
 				newErr.error = err.Error()
 				return localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarHTTPResponse, newErr
@@ -578,6 +584,7 @@ func (a *AgentsApiService) V1NetworkAgentsSearchExecute(r ApiV1NetworkAgentsSear
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -588,6 +595,7 @@ func (a *AgentsApiService) V1NetworkAgentsSearchExecute(r ApiV1NetworkAgentsSear
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -652,7 +660,7 @@ func (a *AgentsApiService) V1NetworkAgentsUpdateExecute(r ApiV1NetworkAgentsUpda
 	}
 
 	localVarPath := localBasePath + "/v1/network/agents/{agent_id}"
-	localVarPath = strings.Replace(localVarPath, "{"+"agent_id"+"}", url.PathEscape(parameterToString(r.agentId, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"agent_id"+"}", url.PathEscape(parameterValueToString(r.agentId, "agentId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -729,6 +737,7 @@ func (a *AgentsApiService) V1NetworkAgentsUpdateExecute(r ApiV1NetworkAgentsUpda
 				newErr.error = err.Error()
 				return localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarHTTPResponse, newErr
 		}
@@ -739,6 +748,7 @@ func (a *AgentsApiService) V1NetworkAgentsUpdateExecute(r ApiV1NetworkAgentsUpda
 				newErr.error = err.Error()
 				return localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarHTTPResponse, newErr

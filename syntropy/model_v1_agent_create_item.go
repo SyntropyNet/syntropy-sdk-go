@@ -16,6 +16,9 @@ import (
 	"time"
 )
 
+// checks if the V1AgentCreateItem type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &V1AgentCreateItem{}
+
 // V1AgentCreateItem struct for V1AgentCreateItem
 type V1AgentCreateItem struct {
 	AgentServicesDefaultStatus bool                `json:"agent_services_default_status"`
@@ -354,7 +357,7 @@ func (o *V1AgentCreateItem) SetAgentVersion(v string) {
 
 // GetAgentProviderId returns the AgentProviderId field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *V1AgentCreateItem) GetAgentProviderId() int32 {
-	if o == nil || o.AgentProviderId.Get() == nil {
+	if o == nil || isNil(o.AgentProviderId.Get()) {
 		var ret int32
 		return ret
 	}
@@ -590,68 +593,38 @@ func (o *V1AgentCreateItem) SetAgentId(v int32) {
 }
 
 func (o V1AgentCreateItem) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o V1AgentCreateItem) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["agent_services_default_status"] = o.AgentServicesDefaultStatus
-	}
-	if true {
-		toSerialize["api_key_id"] = o.ApiKeyId
-	}
-	if true {
-		toSerialize["agent_public_ipv4"] = o.AgentPublicIpv4
-	}
-	if true {
-		toSerialize["agent_location_lat"] = o.AgentLocationLat.Get()
-	}
-	if true {
-		toSerialize["agent_location_lon"] = o.AgentLocationLon.Get()
-	}
-	if true {
-		toSerialize["agent_location_city"] = o.AgentLocationCity.Get()
-	}
-	if true {
-		toSerialize["agent_location_country"] = o.AgentLocationCountry.Get()
-	}
-	if true {
-		toSerialize["agent_device_id"] = o.AgentDeviceId
-	}
-	if true {
-		toSerialize["agent_name"] = o.AgentName
-	}
-	if true {
-		toSerialize["agent_status"] = o.AgentStatus.Get()
-	}
-	if true {
-		toSerialize["agent_version"] = o.AgentVersion.Get()
-	}
+	toSerialize["agent_services_default_status"] = o.AgentServicesDefaultStatus
+	toSerialize["api_key_id"] = o.ApiKeyId
+	toSerialize["agent_public_ipv4"] = o.AgentPublicIpv4
+	toSerialize["agent_location_lat"] = o.AgentLocationLat.Get()
+	toSerialize["agent_location_lon"] = o.AgentLocationLon.Get()
+	toSerialize["agent_location_city"] = o.AgentLocationCity.Get()
+	toSerialize["agent_location_country"] = o.AgentLocationCountry.Get()
+	toSerialize["agent_device_id"] = o.AgentDeviceId
+	toSerialize["agent_name"] = o.AgentName
+	toSerialize["agent_status"] = o.AgentStatus.Get()
+	toSerialize["agent_version"] = o.AgentVersion.Get()
 	if o.AgentProviderId.IsSet() {
 		toSerialize["agent_provider_id"] = o.AgentProviderId.Get()
 	}
-	if true {
-		toSerialize["agent_locked_fields"] = o.AgentLockedFields
-	}
-	if true {
-		toSerialize["agent_modified_at"] = o.AgentModifiedAt.Get()
-	}
-	if true {
-		toSerialize["agent_is_virtual"] = o.AgentIsVirtual
-	}
-	if true {
-		toSerialize["agent_type"] = o.AgentType
-	}
-	if true {
-		toSerialize["agent_internal_subnet"] = o.AgentInternalSubnet
-	}
-	if true {
-		toSerialize["agent_created_at"] = o.AgentCreatedAt
-	}
-	if true {
-		toSerialize["agent_updated_at"] = o.AgentUpdatedAt
-	}
-	if true {
-		toSerialize["agent_id"] = o.AgentId
-	}
-	return json.Marshal(toSerialize)
+	toSerialize["agent_locked_fields"] = o.AgentLockedFields
+	toSerialize["agent_modified_at"] = o.AgentModifiedAt.Get()
+	toSerialize["agent_is_virtual"] = o.AgentIsVirtual
+	toSerialize["agent_type"] = o.AgentType
+	toSerialize["agent_internal_subnet"] = o.AgentInternalSubnet
+	toSerialize["agent_created_at"] = o.AgentCreatedAt
+	toSerialize["agent_updated_at"] = o.AgentUpdatedAt
+	toSerialize["agent_id"] = o.AgentId
+	return toSerialize, nil
 }
 
 type NullableV1AgentCreateItem struct {

@@ -15,17 +15,20 @@ import (
 	"encoding/json"
 )
 
+// checks if the V1NetworkConnectionsCreateMeshRequest type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &V1NetworkConnectionsCreateMeshRequest{}
+
 // V1NetworkConnectionsCreateMeshRequest struct for V1NetworkConnectionsCreateMeshRequest
 type V1NetworkConnectionsCreateMeshRequest struct {
-	AgentIds   []V1NetworkConnectionsCreateMeshRequestAgentIds `json:"agent_ids"`
-	SdnEnabled *bool                                           `json:"sdn_enabled,omitempty"`
+	AgentIds   []V1NetworkConnectionsCreateMeshRequestAgentIdsInner `json:"agent_ids"`
+	SdnEnabled *bool                                                `json:"sdn_enabled,omitempty"`
 }
 
 // NewV1NetworkConnectionsCreateMeshRequest instantiates a new V1NetworkConnectionsCreateMeshRequest object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewV1NetworkConnectionsCreateMeshRequest(agentIds []V1NetworkConnectionsCreateMeshRequestAgentIds) *V1NetworkConnectionsCreateMeshRequest {
+func NewV1NetworkConnectionsCreateMeshRequest(agentIds []V1NetworkConnectionsCreateMeshRequestAgentIdsInner) *V1NetworkConnectionsCreateMeshRequest {
 	this := V1NetworkConnectionsCreateMeshRequest{}
 	this.AgentIds = agentIds
 	return &this
@@ -40,9 +43,9 @@ func NewV1NetworkConnectionsCreateMeshRequestWithDefaults() *V1NetworkConnection
 }
 
 // GetAgentIds returns the AgentIds field value
-func (o *V1NetworkConnectionsCreateMeshRequest) GetAgentIds() []V1NetworkConnectionsCreateMeshRequestAgentIds {
+func (o *V1NetworkConnectionsCreateMeshRequest) GetAgentIds() []V1NetworkConnectionsCreateMeshRequestAgentIdsInner {
 	if o == nil {
-		var ret []V1NetworkConnectionsCreateMeshRequestAgentIds
+		var ret []V1NetworkConnectionsCreateMeshRequestAgentIdsInner
 		return ret
 	}
 
@@ -51,7 +54,7 @@ func (o *V1NetworkConnectionsCreateMeshRequest) GetAgentIds() []V1NetworkConnect
 
 // GetAgentIdsOk returns a tuple with the AgentIds field value
 // and a boolean to check if the value has been set.
-func (o *V1NetworkConnectionsCreateMeshRequest) GetAgentIdsOk() ([]V1NetworkConnectionsCreateMeshRequestAgentIds, bool) {
+func (o *V1NetworkConnectionsCreateMeshRequest) GetAgentIdsOk() ([]V1NetworkConnectionsCreateMeshRequestAgentIdsInner, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -59,13 +62,13 @@ func (o *V1NetworkConnectionsCreateMeshRequest) GetAgentIdsOk() ([]V1NetworkConn
 }
 
 // SetAgentIds sets field value
-func (o *V1NetworkConnectionsCreateMeshRequest) SetAgentIds(v []V1NetworkConnectionsCreateMeshRequestAgentIds) {
+func (o *V1NetworkConnectionsCreateMeshRequest) SetAgentIds(v []V1NetworkConnectionsCreateMeshRequestAgentIdsInner) {
 	o.AgentIds = v
 }
 
 // GetSdnEnabled returns the SdnEnabled field value if set, zero value otherwise.
 func (o *V1NetworkConnectionsCreateMeshRequest) GetSdnEnabled() bool {
-	if o == nil || o.SdnEnabled == nil {
+	if o == nil || isNil(o.SdnEnabled) {
 		var ret bool
 		return ret
 	}
@@ -75,7 +78,7 @@ func (o *V1NetworkConnectionsCreateMeshRequest) GetSdnEnabled() bool {
 // GetSdnEnabledOk returns a tuple with the SdnEnabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *V1NetworkConnectionsCreateMeshRequest) GetSdnEnabledOk() (*bool, bool) {
-	if o == nil || o.SdnEnabled == nil {
+	if o == nil || isNil(o.SdnEnabled) {
 		return nil, false
 	}
 	return o.SdnEnabled, true
@@ -83,7 +86,7 @@ func (o *V1NetworkConnectionsCreateMeshRequest) GetSdnEnabledOk() (*bool, bool) 
 
 // HasSdnEnabled returns a boolean if a field has been set.
 func (o *V1NetworkConnectionsCreateMeshRequest) HasSdnEnabled() bool {
-	if o != nil && o.SdnEnabled != nil {
+	if o != nil && !isNil(o.SdnEnabled) {
 		return true
 	}
 
@@ -96,14 +99,20 @@ func (o *V1NetworkConnectionsCreateMeshRequest) SetSdnEnabled(v bool) {
 }
 
 func (o V1NetworkConnectionsCreateMeshRequest) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["agent_ids"] = o.AgentIds
-	}
-	if o.SdnEnabled != nil {
-		toSerialize["sdn_enabled"] = o.SdnEnabled
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o V1NetworkConnectionsCreateMeshRequest) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["agent_ids"] = o.AgentIds
+	if !isNil(o.SdnEnabled) {
+		toSerialize["sdn_enabled"] = o.SdnEnabled
+	}
+	return toSerialize, nil
 }
 
 type NullableV1NetworkConnectionsCreateMeshRequest struct {

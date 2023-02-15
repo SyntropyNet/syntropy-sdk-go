@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**AgentIds** | [**[]V1NetworkConnectionsCreateMeshRequestAgentIds**](V1NetworkConnectionsCreateMeshRequestAgentIds.md) |  | 
+**AgentIds** | [**[]V1NetworkConnectionsCreateMeshRequestAgentIdsInner**](V1NetworkConnectionsCreateMeshRequestAgentIdsInner.md) |  | 
 **SdnEnabled** | Pointer to **bool** |  | [optional] 
 
 ## Methods
 
 ### NewV1NetworkConnectionsCreateMeshRequest
 
-`func NewV1NetworkConnectionsCreateMeshRequest(agentIds []V1NetworkConnectionsCreateMeshRequestAgentIds, ) *V1NetworkConnectionsCreateMeshRequest`
+`func NewV1NetworkConnectionsCreateMeshRequest(agentIds []V1NetworkConnectionsCreateMeshRequestAgentIdsInner, ) *V1NetworkConnectionsCreateMeshRequest`
 
 NewV1NetworkConnectionsCreateMeshRequest instantiates a new V1NetworkConnectionsCreateMeshRequest object
 This constructor will assign default values to properties that have it defined,
@@ -28,20 +28,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetAgentIds
 
-`func (o *V1NetworkConnectionsCreateMeshRequest) GetAgentIds() []V1NetworkConnectionsCreateMeshRequestAgentIds`
+`func (o *V1NetworkConnectionsCreateMeshRequest) GetAgentIds() []V1NetworkConnectionsCreateMeshRequestAgentIdsInner`
 
 GetAgentIds returns the AgentIds field if non-nil, zero value otherwise.
 
 ### GetAgentIdsOk
 
-`func (o *V1NetworkConnectionsCreateMeshRequest) GetAgentIdsOk() (*[]V1NetworkConnectionsCreateMeshRequestAgentIds, bool)`
+`func (o *V1NetworkConnectionsCreateMeshRequest) GetAgentIdsOk() (*[]V1NetworkConnectionsCreateMeshRequestAgentIdsInner, bool)`
 
 GetAgentIdsOk returns a tuple with the AgentIds field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAgentIds
 
-`func (o *V1NetworkConnectionsCreateMeshRequest) SetAgentIds(v []V1NetworkConnectionsCreateMeshRequestAgentIds)`
+`func (o *V1NetworkConnectionsCreateMeshRequest) SetAgentIds(v []V1NetworkConnectionsCreateMeshRequestAgentIdsInner)`
 
 SetAgentIds sets AgentIds field to given value.
 

@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the V1NetworkConnectionsServicesUpdateRequest type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &V1NetworkConnectionsServicesUpdateRequest{}
+
 // V1NetworkConnectionsServicesUpdateRequest struct for V1NetworkConnectionsServicesUpdateRequest
 type V1NetworkConnectionsServicesUpdateRequest struct {
 	AgentConnectionGroupId *int32                       `json:"agent_connection_group_id,omitempty"`
@@ -41,7 +44,7 @@ func NewV1NetworkConnectionsServicesUpdateRequestWithDefaults() *V1NetworkConnec
 
 // GetAgentConnectionGroupId returns the AgentConnectionGroupId field value if set, zero value otherwise.
 func (o *V1NetworkConnectionsServicesUpdateRequest) GetAgentConnectionGroupId() int32 {
-	if o == nil || o.AgentConnectionGroupId == nil {
+	if o == nil || isNil(o.AgentConnectionGroupId) {
 		var ret int32
 		return ret
 	}
@@ -51,7 +54,7 @@ func (o *V1NetworkConnectionsServicesUpdateRequest) GetAgentConnectionGroupId() 
 // GetAgentConnectionGroupIdOk returns a tuple with the AgentConnectionGroupId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *V1NetworkConnectionsServicesUpdateRequest) GetAgentConnectionGroupIdOk() (*int32, bool) {
-	if o == nil || o.AgentConnectionGroupId == nil {
+	if o == nil || isNil(o.AgentConnectionGroupId) {
 		return nil, false
 	}
 	return o.AgentConnectionGroupId, true
@@ -59,7 +62,7 @@ func (o *V1NetworkConnectionsServicesUpdateRequest) GetAgentConnectionGroupIdOk(
 
 // HasAgentConnectionGroupId returns a boolean if a field has been set.
 func (o *V1NetworkConnectionsServicesUpdateRequest) HasAgentConnectionGroupId() bool {
-	if o != nil && o.AgentConnectionGroupId != nil {
+	if o != nil && !isNil(o.AgentConnectionGroupId) {
 		return true
 	}
 
@@ -96,14 +99,20 @@ func (o *V1NetworkConnectionsServicesUpdateRequest) SetChanges(v []AgentServices
 }
 
 func (o V1NetworkConnectionsServicesUpdateRequest) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if o.AgentConnectionGroupId != nil {
-		toSerialize["agent_connection_group_id"] = o.AgentConnectionGroupId
-	}
-	if true {
-		toSerialize["changes"] = o.Changes
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o V1NetworkConnectionsServicesUpdateRequest) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !isNil(o.AgentConnectionGroupId) {
+		toSerialize["agent_connection_group_id"] = o.AgentConnectionGroupId
+	}
+	toSerialize["changes"] = o.Changes
+	return toSerialize, nil
 }
 
 type NullableV1NetworkConnectionsServicesUpdateRequest struct {

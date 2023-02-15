@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Filter** | Pointer to [**V1ConnectionFilter**](V1ConnectionFilter.md) |  | [optional] 
-**Order** | Pointer to [**[]OneOfobjectobjectobjectobject**](OneOfobjectobjectobjectobject.md) |  | [optional] 
+**Order** | Pointer to [**[]V1ConnectionOrderInner**](V1ConnectionOrderInner.md) |  | [optional] 
 **Skip** | Pointer to **int32** | Skip number of items. | [optional] [default to 0]
 **Take** | Pointer to **int32** | Limit returned values count. | [optional] [default to 20]
 
@@ -55,20 +55,20 @@ HasFilter returns a boolean if a field has been set.
 
 ### GetOrder
 
-`func (o *V1NetworkConnectionsSearchRequest) GetOrder() []OneOfobjectobjectobjectobject`
+`func (o *V1NetworkConnectionsSearchRequest) GetOrder() []V1ConnectionOrderInner`
 
 GetOrder returns the Order field if non-nil, zero value otherwise.
 
 ### GetOrderOk
 
-`func (o *V1NetworkConnectionsSearchRequest) GetOrderOk() (*[]OneOfobjectobjectobjectobject, bool)`
+`func (o *V1NetworkConnectionsSearchRequest) GetOrderOk() (*[]V1ConnectionOrderInner, bool)`
 
 GetOrderOk returns a tuple with the Order field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetOrder
 
-`func (o *V1NetworkConnectionsSearchRequest) SetOrder(v []OneOfobjectobjectobjectobject)`
+`func (o *V1NetworkConnectionsSearchRequest) SetOrder(v []V1ConnectionOrderInner)`
 
 SetOrder sets Order field to given value.
 

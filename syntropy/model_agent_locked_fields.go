@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the AgentLockedFields type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &AgentLockedFields{}
+
 // AgentLockedFields struct for AgentLockedFields
 type AgentLockedFields struct {
 	AgentLocationCountry *bool    `json:"agent_location_country,omitempty"`
@@ -45,7 +48,7 @@ func NewAgentLockedFieldsWithDefaults() *AgentLockedFields {
 
 // GetAgentLocationCountry returns the AgentLocationCountry field value if set, zero value otherwise.
 func (o *AgentLockedFields) GetAgentLocationCountry() bool {
-	if o == nil || o.AgentLocationCountry == nil {
+	if o == nil || isNil(o.AgentLocationCountry) {
 		var ret bool
 		return ret
 	}
@@ -55,7 +58,7 @@ func (o *AgentLockedFields) GetAgentLocationCountry() bool {
 // GetAgentLocationCountryOk returns a tuple with the AgentLocationCountry field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AgentLockedFields) GetAgentLocationCountryOk() (*bool, bool) {
-	if o == nil || o.AgentLocationCountry == nil {
+	if o == nil || isNil(o.AgentLocationCountry) {
 		return nil, false
 	}
 	return o.AgentLocationCountry, true
@@ -63,7 +66,7 @@ func (o *AgentLockedFields) GetAgentLocationCountryOk() (*bool, bool) {
 
 // HasAgentLocationCountry returns a boolean if a field has been set.
 func (o *AgentLockedFields) HasAgentLocationCountry() bool {
-	if o != nil && o.AgentLocationCountry != nil {
+	if o != nil && !isNil(o.AgentLocationCountry) {
 		return true
 	}
 
@@ -77,7 +80,7 @@ func (o *AgentLockedFields) SetAgentLocationCountry(v bool) {
 
 // GetAgentLocationCity returns the AgentLocationCity field value if set, zero value otherwise.
 func (o *AgentLockedFields) GetAgentLocationCity() bool {
-	if o == nil || o.AgentLocationCity == nil {
+	if o == nil || isNil(o.AgentLocationCity) {
 		var ret bool
 		return ret
 	}
@@ -87,7 +90,7 @@ func (o *AgentLockedFields) GetAgentLocationCity() bool {
 // GetAgentLocationCityOk returns a tuple with the AgentLocationCity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AgentLockedFields) GetAgentLocationCityOk() (*bool, bool) {
-	if o == nil || o.AgentLocationCity == nil {
+	if o == nil || isNil(o.AgentLocationCity) {
 		return nil, false
 	}
 	return o.AgentLocationCity, true
@@ -95,7 +98,7 @@ func (o *AgentLockedFields) GetAgentLocationCityOk() (*bool, bool) {
 
 // HasAgentLocationCity returns a boolean if a field has been set.
 func (o *AgentLockedFields) HasAgentLocationCity() bool {
-	if o != nil && o.AgentLocationCity != nil {
+	if o != nil && !isNil(o.AgentLocationCity) {
 		return true
 	}
 
@@ -109,7 +112,7 @@ func (o *AgentLockedFields) SetAgentLocationCity(v bool) {
 
 // GetAgentLocationLat returns the AgentLocationLat field value if set, zero value otherwise.
 func (o *AgentLockedFields) GetAgentLocationLat() bool {
-	if o == nil || o.AgentLocationLat == nil {
+	if o == nil || isNil(o.AgentLocationLat) {
 		var ret bool
 		return ret
 	}
@@ -119,7 +122,7 @@ func (o *AgentLockedFields) GetAgentLocationLat() bool {
 // GetAgentLocationLatOk returns a tuple with the AgentLocationLat field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AgentLockedFields) GetAgentLocationLatOk() (*bool, bool) {
-	if o == nil || o.AgentLocationLat == nil {
+	if o == nil || isNil(o.AgentLocationLat) {
 		return nil, false
 	}
 	return o.AgentLocationLat, true
@@ -127,7 +130,7 @@ func (o *AgentLockedFields) GetAgentLocationLatOk() (*bool, bool) {
 
 // HasAgentLocationLat returns a boolean if a field has been set.
 func (o *AgentLockedFields) HasAgentLocationLat() bool {
-	if o != nil && o.AgentLocationLat != nil {
+	if o != nil && !isNil(o.AgentLocationLat) {
 		return true
 	}
 
@@ -141,7 +144,7 @@ func (o *AgentLockedFields) SetAgentLocationLat(v bool) {
 
 // GetAgentLocationLon returns the AgentLocationLon field value if set, zero value otherwise.
 func (o *AgentLockedFields) GetAgentLocationLon() bool {
-	if o == nil || o.AgentLocationLon == nil {
+	if o == nil || isNil(o.AgentLocationLon) {
 		var ret bool
 		return ret
 	}
@@ -151,7 +154,7 @@ func (o *AgentLockedFields) GetAgentLocationLon() bool {
 // GetAgentLocationLonOk returns a tuple with the AgentLocationLon field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AgentLockedFields) GetAgentLocationLonOk() (*bool, bool) {
-	if o == nil || o.AgentLocationLon == nil {
+	if o == nil || isNil(o.AgentLocationLon) {
 		return nil, false
 	}
 	return o.AgentLocationLon, true
@@ -159,7 +162,7 @@ func (o *AgentLockedFields) GetAgentLocationLonOk() (*bool, bool) {
 
 // HasAgentLocationLon returns a boolean if a field has been set.
 func (o *AgentLockedFields) HasAgentLocationLon() bool {
-	if o != nil && o.AgentLocationLon != nil {
+	if o != nil && !isNil(o.AgentLocationLon) {
 		return true
 	}
 
@@ -173,7 +176,7 @@ func (o *AgentLockedFields) SetAgentLocationLon(v bool) {
 
 // GetAgentProviderName returns the AgentProviderName field value if set, zero value otherwise.
 func (o *AgentLockedFields) GetAgentProviderName() bool {
-	if o == nil || o.AgentProviderName == nil {
+	if o == nil || isNil(o.AgentProviderName) {
 		var ret bool
 		return ret
 	}
@@ -183,7 +186,7 @@ func (o *AgentLockedFields) GetAgentProviderName() bool {
 // GetAgentProviderNameOk returns a tuple with the AgentProviderName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AgentLockedFields) GetAgentProviderNameOk() (*bool, bool) {
-	if o == nil || o.AgentProviderName == nil {
+	if o == nil || isNil(o.AgentProviderName) {
 		return nil, false
 	}
 	return o.AgentProviderName, true
@@ -191,7 +194,7 @@ func (o *AgentLockedFields) GetAgentProviderNameOk() (*bool, bool) {
 
 // HasAgentProviderName returns a boolean if a field has been set.
 func (o *AgentLockedFields) HasAgentProviderName() bool {
-	if o != nil && o.AgentProviderName != nil {
+	if o != nil && !isNil(o.AgentProviderName) {
 		return true
 	}
 
@@ -205,7 +208,7 @@ func (o *AgentLockedFields) SetAgentProviderName(v bool) {
 
 // GetAgentTags returns the AgentTags field value if set, zero value otherwise.
 func (o *AgentLockedFields) GetAgentTags() []string {
-	if o == nil || o.AgentTags == nil {
+	if o == nil || isNil(o.AgentTags) {
 		var ret []string
 		return ret
 	}
@@ -215,7 +218,7 @@ func (o *AgentLockedFields) GetAgentTags() []string {
 // GetAgentTagsOk returns a tuple with the AgentTags field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AgentLockedFields) GetAgentTagsOk() ([]string, bool) {
-	if o == nil || o.AgentTags == nil {
+	if o == nil || isNil(o.AgentTags) {
 		return nil, false
 	}
 	return o.AgentTags, true
@@ -223,7 +226,7 @@ func (o *AgentLockedFields) GetAgentTagsOk() ([]string, bool) {
 
 // HasAgentTags returns a boolean if a field has been set.
 func (o *AgentLockedFields) HasAgentTags() bool {
-	if o != nil && o.AgentTags != nil {
+	if o != nil && !isNil(o.AgentTags) {
 		return true
 	}
 
@@ -237,7 +240,7 @@ func (o *AgentLockedFields) SetAgentTags(v []string) {
 
 // GetAgentName returns the AgentName field value if set, zero value otherwise.
 func (o *AgentLockedFields) GetAgentName() bool {
-	if o == nil || o.AgentName == nil {
+	if o == nil || isNil(o.AgentName) {
 		var ret bool
 		return ret
 	}
@@ -247,7 +250,7 @@ func (o *AgentLockedFields) GetAgentName() bool {
 // GetAgentNameOk returns a tuple with the AgentName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AgentLockedFields) GetAgentNameOk() (*bool, bool) {
-	if o == nil || o.AgentName == nil {
+	if o == nil || isNil(o.AgentName) {
 		return nil, false
 	}
 	return o.AgentName, true
@@ -255,7 +258,7 @@ func (o *AgentLockedFields) GetAgentNameOk() (*bool, bool) {
 
 // HasAgentName returns a boolean if a field has been set.
 func (o *AgentLockedFields) HasAgentName() bool {
-	if o != nil && o.AgentName != nil {
+	if o != nil && !isNil(o.AgentName) {
 		return true
 	}
 
@@ -268,29 +271,37 @@ func (o *AgentLockedFields) SetAgentName(v bool) {
 }
 
 func (o AgentLockedFields) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if o.AgentLocationCountry != nil {
-		toSerialize["agent_location_country"] = o.AgentLocationCountry
-	}
-	if o.AgentLocationCity != nil {
-		toSerialize["agent_location_city"] = o.AgentLocationCity
-	}
-	if o.AgentLocationLat != nil {
-		toSerialize["agent_location_lat"] = o.AgentLocationLat
-	}
-	if o.AgentLocationLon != nil {
-		toSerialize["agent_location_lon"] = o.AgentLocationLon
-	}
-	if o.AgentProviderName != nil {
-		toSerialize["agent_provider_name"] = o.AgentProviderName
-	}
-	if o.AgentTags != nil {
-		toSerialize["agent_tags"] = o.AgentTags
-	}
-	if o.AgentName != nil {
-		toSerialize["agent_name"] = o.AgentName
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o AgentLockedFields) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !isNil(o.AgentLocationCountry) {
+		toSerialize["agent_location_country"] = o.AgentLocationCountry
+	}
+	if !isNil(o.AgentLocationCity) {
+		toSerialize["agent_location_city"] = o.AgentLocationCity
+	}
+	if !isNil(o.AgentLocationLat) {
+		toSerialize["agent_location_lat"] = o.AgentLocationLat
+	}
+	if !isNil(o.AgentLocationLon) {
+		toSerialize["agent_location_lon"] = o.AgentLocationLon
+	}
+	if !isNil(o.AgentProviderName) {
+		toSerialize["agent_provider_name"] = o.AgentProviderName
+	}
+	if !isNil(o.AgentTags) {
+		toSerialize["agent_tags"] = o.AgentTags
+	}
+	if !isNil(o.AgentName) {
+		toSerialize["agent_name"] = o.AgentName
+	}
+	return toSerialize, nil
 }
 
 type NullableAgentLockedFields struct {

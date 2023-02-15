@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the AgentServicesUpdateChanges type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &AgentServicesUpdateChanges{}
+
 // AgentServicesUpdateChanges struct for AgentServicesUpdateChanges
 type AgentServicesUpdateChanges struct {
 	AgentServiceSubnetId int32 `json:"agent_service_subnet_id"`
@@ -89,14 +92,18 @@ func (o *AgentServicesUpdateChanges) SetIsEnabled(v bool) {
 }
 
 func (o AgentServicesUpdateChanges) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["agent_service_subnet_id"] = o.AgentServiceSubnetId
-	}
-	if true {
-		toSerialize["is_enabled"] = o.IsEnabled
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o AgentServicesUpdateChanges) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["agent_service_subnet_id"] = o.AgentServiceSubnetId
+	toSerialize["is_enabled"] = o.IsEnabled
+	return toSerialize, nil
 }
 
 type NullableAgentServicesUpdateChanges struct {

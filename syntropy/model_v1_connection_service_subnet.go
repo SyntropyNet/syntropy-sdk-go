@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the V1ConnectionServiceSubnet type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &V1ConnectionServiceSubnet{}
+
 // V1ConnectionServiceSubnet struct for V1ConnectionServiceSubnet
 type V1ConnectionServiceSubnet struct {
 	AgentServiceSubnetId           int32                         `json:"agent_service_subnet_id"`
@@ -169,23 +172,21 @@ func (o *V1ConnectionServiceSubnet) SetAgentConnectionSubnetStatus(v AgentConnec
 }
 
 func (o V1ConnectionServiceSubnet) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["agent_service_subnet_id"] = o.AgentServiceSubnetId
-	}
-	if true {
-		toSerialize["agent_connection_subnet_id"] = o.AgentConnectionSubnetId
-	}
-	if true {
-		toSerialize["agent_connection_subnet_is_enabled"] = o.AgentConnectionSubnetIsEnabled
-	}
-	if true {
-		toSerialize["agent_connection_subnet_error"] = o.AgentConnectionSubnetError.Get()
-	}
-	if true {
-		toSerialize["agent_connection_subnet_status"] = o.AgentConnectionSubnetStatus
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o V1ConnectionServiceSubnet) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["agent_service_subnet_id"] = o.AgentServiceSubnetId
+	toSerialize["agent_connection_subnet_id"] = o.AgentConnectionSubnetId
+	toSerialize["agent_connection_subnet_is_enabled"] = o.AgentConnectionSubnetIsEnabled
+	toSerialize["agent_connection_subnet_error"] = o.AgentConnectionSubnetError.Get()
+	toSerialize["agent_connection_subnet_status"] = o.AgentConnectionSubnetStatus
+	return toSerialize, nil
 }
 
 type NullableV1ConnectionServiceSubnet struct {

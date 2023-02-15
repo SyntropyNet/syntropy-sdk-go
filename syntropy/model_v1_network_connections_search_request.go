@@ -15,10 +15,13 @@ import (
 	"encoding/json"
 )
 
+// checks if the V1NetworkConnectionsSearchRequest type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &V1NetworkConnectionsSearchRequest{}
+
 // V1NetworkConnectionsSearchRequest struct for V1NetworkConnectionsSearchRequest
 type V1NetworkConnectionsSearchRequest struct {
-	Filter *V1ConnectionFilter             `json:"filter,omitempty"`
-	Order  []OneOfobjectobjectobjectobject `json:"order,omitempty"`
+	Filter *V1ConnectionFilter      `json:"filter,omitempty"`
+	Order  []V1ConnectionOrderInner `json:"order,omitempty"`
 	// Skip number of items.
 	Skip *int32 `json:"skip,omitempty"`
 	// Limit returned values count.
@@ -52,7 +55,7 @@ func NewV1NetworkConnectionsSearchRequestWithDefaults() *V1NetworkConnectionsSea
 
 // GetFilter returns the Filter field value if set, zero value otherwise.
 func (o *V1NetworkConnectionsSearchRequest) GetFilter() V1ConnectionFilter {
-	if o == nil || o.Filter == nil {
+	if o == nil || isNil(o.Filter) {
 		var ret V1ConnectionFilter
 		return ret
 	}
@@ -62,7 +65,7 @@ func (o *V1NetworkConnectionsSearchRequest) GetFilter() V1ConnectionFilter {
 // GetFilterOk returns a tuple with the Filter field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *V1NetworkConnectionsSearchRequest) GetFilterOk() (*V1ConnectionFilter, bool) {
-	if o == nil || o.Filter == nil {
+	if o == nil || isNil(o.Filter) {
 		return nil, false
 	}
 	return o.Filter, true
@@ -70,7 +73,7 @@ func (o *V1NetworkConnectionsSearchRequest) GetFilterOk() (*V1ConnectionFilter, 
 
 // HasFilter returns a boolean if a field has been set.
 func (o *V1NetworkConnectionsSearchRequest) HasFilter() bool {
-	if o != nil && o.Filter != nil {
+	if o != nil && !isNil(o.Filter) {
 		return true
 	}
 
@@ -83,9 +86,9 @@ func (o *V1NetworkConnectionsSearchRequest) SetFilter(v V1ConnectionFilter) {
 }
 
 // GetOrder returns the Order field value if set, zero value otherwise.
-func (o *V1NetworkConnectionsSearchRequest) GetOrder() []OneOfobjectobjectobjectobject {
-	if o == nil || o.Order == nil {
-		var ret []OneOfobjectobjectobjectobject
+func (o *V1NetworkConnectionsSearchRequest) GetOrder() []V1ConnectionOrderInner {
+	if o == nil || isNil(o.Order) {
+		var ret []V1ConnectionOrderInner
 		return ret
 	}
 	return o.Order
@@ -93,8 +96,8 @@ func (o *V1NetworkConnectionsSearchRequest) GetOrder() []OneOfobjectobjectobject
 
 // GetOrderOk returns a tuple with the Order field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *V1NetworkConnectionsSearchRequest) GetOrderOk() ([]OneOfobjectobjectobjectobject, bool) {
-	if o == nil || o.Order == nil {
+func (o *V1NetworkConnectionsSearchRequest) GetOrderOk() ([]V1ConnectionOrderInner, bool) {
+	if o == nil || isNil(o.Order) {
 		return nil, false
 	}
 	return o.Order, true
@@ -102,21 +105,21 @@ func (o *V1NetworkConnectionsSearchRequest) GetOrderOk() ([]OneOfobjectobjectobj
 
 // HasOrder returns a boolean if a field has been set.
 func (o *V1NetworkConnectionsSearchRequest) HasOrder() bool {
-	if o != nil && o.Order != nil {
+	if o != nil && !isNil(o.Order) {
 		return true
 	}
 
 	return false
 }
 
-// SetOrder gets a reference to the given []OneOfobjectobjectobjectobject and assigns it to the Order field.
-func (o *V1NetworkConnectionsSearchRequest) SetOrder(v []OneOfobjectobjectobjectobject) {
+// SetOrder gets a reference to the given []V1ConnectionOrderInner and assigns it to the Order field.
+func (o *V1NetworkConnectionsSearchRequest) SetOrder(v []V1ConnectionOrderInner) {
 	o.Order = v
 }
 
 // GetSkip returns the Skip field value if set, zero value otherwise.
 func (o *V1NetworkConnectionsSearchRequest) GetSkip() int32 {
-	if o == nil || o.Skip == nil {
+	if o == nil || isNil(o.Skip) {
 		var ret int32
 		return ret
 	}
@@ -126,7 +129,7 @@ func (o *V1NetworkConnectionsSearchRequest) GetSkip() int32 {
 // GetSkipOk returns a tuple with the Skip field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *V1NetworkConnectionsSearchRequest) GetSkipOk() (*int32, bool) {
-	if o == nil || o.Skip == nil {
+	if o == nil || isNil(o.Skip) {
 		return nil, false
 	}
 	return o.Skip, true
@@ -134,7 +137,7 @@ func (o *V1NetworkConnectionsSearchRequest) GetSkipOk() (*int32, bool) {
 
 // HasSkip returns a boolean if a field has been set.
 func (o *V1NetworkConnectionsSearchRequest) HasSkip() bool {
-	if o != nil && o.Skip != nil {
+	if o != nil && !isNil(o.Skip) {
 		return true
 	}
 
@@ -148,7 +151,7 @@ func (o *V1NetworkConnectionsSearchRequest) SetSkip(v int32) {
 
 // GetTake returns the Take field value if set, zero value otherwise.
 func (o *V1NetworkConnectionsSearchRequest) GetTake() int32 {
-	if o == nil || o.Take == nil {
+	if o == nil || isNil(o.Take) {
 		var ret int32
 		return ret
 	}
@@ -158,7 +161,7 @@ func (o *V1NetworkConnectionsSearchRequest) GetTake() int32 {
 // GetTakeOk returns a tuple with the Take field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *V1NetworkConnectionsSearchRequest) GetTakeOk() (*int32, bool) {
-	if o == nil || o.Take == nil {
+	if o == nil || isNil(o.Take) {
 		return nil, false
 	}
 	return o.Take, true
@@ -166,7 +169,7 @@ func (o *V1NetworkConnectionsSearchRequest) GetTakeOk() (*int32, bool) {
 
 // HasTake returns a boolean if a field has been set.
 func (o *V1NetworkConnectionsSearchRequest) HasTake() bool {
-	if o != nil && o.Take != nil {
+	if o != nil && !isNil(o.Take) {
 		return true
 	}
 
@@ -179,20 +182,28 @@ func (o *V1NetworkConnectionsSearchRequest) SetTake(v int32) {
 }
 
 func (o V1NetworkConnectionsSearchRequest) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if o.Filter != nil {
-		toSerialize["filter"] = o.Filter
-	}
-	if o.Order != nil {
-		toSerialize["order"] = o.Order
-	}
-	if o.Skip != nil {
-		toSerialize["skip"] = o.Skip
-	}
-	if o.Take != nil {
-		toSerialize["take"] = o.Take
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o V1NetworkConnectionsSearchRequest) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !isNil(o.Filter) {
+		toSerialize["filter"] = o.Filter
+	}
+	if !isNil(o.Order) {
+		toSerialize["order"] = o.Order
+	}
+	if !isNil(o.Skip) {
+		toSerialize["skip"] = o.Skip
+	}
+	if !isNil(o.Take) {
+		toSerialize["take"] = o.Take
+	}
+	return toSerialize, nil
 }
 
 type NullableV1NetworkConnectionsSearchRequest struct {

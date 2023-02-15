@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the AgentInterfacesMetadata type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &AgentInterfacesMetadata{}
+
 // AgentInterfacesMetadata struct for AgentInterfacesMetadata
 type AgentInterfacesMetadata struct {
 	PUBLIC *AgentInterfaceMetadata `json:"PUBLIC,omitempty"`
@@ -42,7 +45,7 @@ func NewAgentInterfacesMetadataWithDefaults() *AgentInterfacesMetadata {
 
 // GetPUBLIC returns the PUBLIC field value if set, zero value otherwise.
 func (o *AgentInterfacesMetadata) GetPUBLIC() AgentInterfaceMetadata {
-	if o == nil || o.PUBLIC == nil {
+	if o == nil || isNil(o.PUBLIC) {
 		var ret AgentInterfaceMetadata
 		return ret
 	}
@@ -52,7 +55,7 @@ func (o *AgentInterfacesMetadata) GetPUBLIC() AgentInterfaceMetadata {
 // GetPUBLICOk returns a tuple with the PUBLIC field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AgentInterfacesMetadata) GetPUBLICOk() (*AgentInterfaceMetadata, bool) {
-	if o == nil || o.PUBLIC == nil {
+	if o == nil || isNil(o.PUBLIC) {
 		return nil, false
 	}
 	return o.PUBLIC, true
@@ -60,7 +63,7 @@ func (o *AgentInterfacesMetadata) GetPUBLICOk() (*AgentInterfaceMetadata, bool) 
 
 // HasPUBLIC returns a boolean if a field has been set.
 func (o *AgentInterfacesMetadata) HasPUBLIC() bool {
-	if o != nil && o.PUBLIC != nil {
+	if o != nil && !isNil(o.PUBLIC) {
 		return true
 	}
 
@@ -74,7 +77,7 @@ func (o *AgentInterfacesMetadata) SetPUBLIC(v AgentInterfaceMetadata) {
 
 // GetSDN1 returns the SDN1 field value if set, zero value otherwise.
 func (o *AgentInterfacesMetadata) GetSDN1() AgentInterfaceMetadata {
-	if o == nil || o.SDN1 == nil {
+	if o == nil || isNil(o.SDN1) {
 		var ret AgentInterfaceMetadata
 		return ret
 	}
@@ -84,7 +87,7 @@ func (o *AgentInterfacesMetadata) GetSDN1() AgentInterfaceMetadata {
 // GetSDN1Ok returns a tuple with the SDN1 field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AgentInterfacesMetadata) GetSDN1Ok() (*AgentInterfaceMetadata, bool) {
-	if o == nil || o.SDN1 == nil {
+	if o == nil || isNil(o.SDN1) {
 		return nil, false
 	}
 	return o.SDN1, true
@@ -92,7 +95,7 @@ func (o *AgentInterfacesMetadata) GetSDN1Ok() (*AgentInterfaceMetadata, bool) {
 
 // HasSDN1 returns a boolean if a field has been set.
 func (o *AgentInterfacesMetadata) HasSDN1() bool {
-	if o != nil && o.SDN1 != nil {
+	if o != nil && !isNil(o.SDN1) {
 		return true
 	}
 
@@ -106,7 +109,7 @@ func (o *AgentInterfacesMetadata) SetSDN1(v AgentInterfaceMetadata) {
 
 // GetSDN2 returns the SDN2 field value if set, zero value otherwise.
 func (o *AgentInterfacesMetadata) GetSDN2() AgentInterfaceMetadata {
-	if o == nil || o.SDN2 == nil {
+	if o == nil || isNil(o.SDN2) {
 		var ret AgentInterfaceMetadata
 		return ret
 	}
@@ -116,7 +119,7 @@ func (o *AgentInterfacesMetadata) GetSDN2() AgentInterfaceMetadata {
 // GetSDN2Ok returns a tuple with the SDN2 field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AgentInterfacesMetadata) GetSDN2Ok() (*AgentInterfaceMetadata, bool) {
-	if o == nil || o.SDN2 == nil {
+	if o == nil || isNil(o.SDN2) {
 		return nil, false
 	}
 	return o.SDN2, true
@@ -124,7 +127,7 @@ func (o *AgentInterfacesMetadata) GetSDN2Ok() (*AgentInterfaceMetadata, bool) {
 
 // HasSDN2 returns a boolean if a field has been set.
 func (o *AgentInterfacesMetadata) HasSDN2() bool {
-	if o != nil && o.SDN2 != nil {
+	if o != nil && !isNil(o.SDN2) {
 		return true
 	}
 
@@ -138,7 +141,7 @@ func (o *AgentInterfacesMetadata) SetSDN2(v AgentInterfaceMetadata) {
 
 // GetSDN3 returns the SDN3 field value if set, zero value otherwise.
 func (o *AgentInterfacesMetadata) GetSDN3() AgentInterfaceMetadata {
-	if o == nil || o.SDN3 == nil {
+	if o == nil || isNil(o.SDN3) {
 		var ret AgentInterfaceMetadata
 		return ret
 	}
@@ -148,7 +151,7 @@ func (o *AgentInterfacesMetadata) GetSDN3() AgentInterfaceMetadata {
 // GetSDN3Ok returns a tuple with the SDN3 field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AgentInterfacesMetadata) GetSDN3Ok() (*AgentInterfaceMetadata, bool) {
-	if o == nil || o.SDN3 == nil {
+	if o == nil || isNil(o.SDN3) {
 		return nil, false
 	}
 	return o.SDN3, true
@@ -156,7 +159,7 @@ func (o *AgentInterfacesMetadata) GetSDN3Ok() (*AgentInterfaceMetadata, bool) {
 
 // HasSDN3 returns a boolean if a field has been set.
 func (o *AgentInterfacesMetadata) HasSDN3() bool {
-	if o != nil && o.SDN3 != nil {
+	if o != nil && !isNil(o.SDN3) {
 		return true
 	}
 
@@ -169,20 +172,28 @@ func (o *AgentInterfacesMetadata) SetSDN3(v AgentInterfaceMetadata) {
 }
 
 func (o AgentInterfacesMetadata) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if o.PUBLIC != nil {
-		toSerialize["PUBLIC"] = o.PUBLIC
-	}
-	if o.SDN1 != nil {
-		toSerialize["SDN1"] = o.SDN1
-	}
-	if o.SDN2 != nil {
-		toSerialize["SDN2"] = o.SDN2
-	}
-	if o.SDN3 != nil {
-		toSerialize["SDN3"] = o.SDN3
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o AgentInterfacesMetadata) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !isNil(o.PUBLIC) {
+		toSerialize["PUBLIC"] = o.PUBLIC
+	}
+	if !isNil(o.SDN1) {
+		toSerialize["SDN1"] = o.SDN1
+	}
+	if !isNil(o.SDN2) {
+		toSerialize["SDN2"] = o.SDN2
+	}
+	if !isNil(o.SDN3) {
+		toSerialize["SDN3"] = o.SDN3
+	}
+	return toSerialize, nil
 }
 
 type NullableAgentInterfacesMetadata struct {

@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**AgentPairs** | [**[]V1NetworkConnectionsCreateP2PRequestAgentPairs**](V1NetworkConnectionsCreateP2PRequestAgentPairs.md) |  | 
+**AgentPairs** | [**[]V1NetworkConnectionsCreateP2PRequestAgentPairsInner**](V1NetworkConnectionsCreateP2PRequestAgentPairsInner.md) |  | 
 **SdnEnabled** | Pointer to **bool** |  | [optional] 
 
 ## Methods
 
 ### NewV1NetworkConnectionsCreateP2PRequest
 
-`func NewV1NetworkConnectionsCreateP2PRequest(agentPairs []V1NetworkConnectionsCreateP2PRequestAgentPairs, ) *V1NetworkConnectionsCreateP2PRequest`
+`func NewV1NetworkConnectionsCreateP2PRequest(agentPairs []V1NetworkConnectionsCreateP2PRequestAgentPairsInner, ) *V1NetworkConnectionsCreateP2PRequest`
 
 NewV1NetworkConnectionsCreateP2PRequest instantiates a new V1NetworkConnectionsCreateP2PRequest object
 This constructor will assign default values to properties that have it defined,
@@ -28,20 +28,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetAgentPairs
 
-`func (o *V1NetworkConnectionsCreateP2PRequest) GetAgentPairs() []V1NetworkConnectionsCreateP2PRequestAgentPairs`
+`func (o *V1NetworkConnectionsCreateP2PRequest) GetAgentPairs() []V1NetworkConnectionsCreateP2PRequestAgentPairsInner`
 
 GetAgentPairs returns the AgentPairs field if non-nil, zero value otherwise.
 
 ### GetAgentPairsOk
 
-`func (o *V1NetworkConnectionsCreateP2PRequest) GetAgentPairsOk() (*[]V1NetworkConnectionsCreateP2PRequestAgentPairs, bool)`
+`func (o *V1NetworkConnectionsCreateP2PRequest) GetAgentPairsOk() (*[]V1NetworkConnectionsCreateP2PRequestAgentPairsInner, bool)`
 
 GetAgentPairsOk returns a tuple with the AgentPairs field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAgentPairs
 
-`func (o *V1NetworkConnectionsCreateP2PRequest) SetAgentPairs(v []V1NetworkConnectionsCreateP2PRequestAgentPairs)`
+`func (o *V1NetworkConnectionsCreateP2PRequest) SetAgentPairs(v []V1NetworkConnectionsCreateP2PRequestAgentPairsInner)`
 
 SetAgentPairs sets AgentPairs field to given value.
 

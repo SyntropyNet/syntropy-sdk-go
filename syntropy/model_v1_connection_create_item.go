@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the V1ConnectionCreateItem type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &V1ConnectionCreateItem{}
+
 // V1ConnectionCreateItem struct for V1ConnectionCreateItem
 type V1ConnectionCreateItem struct {
 	Agent1Id               *int32 `json:"agent_1_id,omitempty"`
@@ -41,7 +44,7 @@ func NewV1ConnectionCreateItemWithDefaults() *V1ConnectionCreateItem {
 
 // GetAgent1Id returns the Agent1Id field value if set, zero value otherwise.
 func (o *V1ConnectionCreateItem) GetAgent1Id() int32 {
-	if o == nil || o.Agent1Id == nil {
+	if o == nil || isNil(o.Agent1Id) {
 		var ret int32
 		return ret
 	}
@@ -51,7 +54,7 @@ func (o *V1ConnectionCreateItem) GetAgent1Id() int32 {
 // GetAgent1IdOk returns a tuple with the Agent1Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *V1ConnectionCreateItem) GetAgent1IdOk() (*int32, bool) {
-	if o == nil || o.Agent1Id == nil {
+	if o == nil || isNil(o.Agent1Id) {
 		return nil, false
 	}
 	return o.Agent1Id, true
@@ -59,7 +62,7 @@ func (o *V1ConnectionCreateItem) GetAgent1IdOk() (*int32, bool) {
 
 // HasAgent1Id returns a boolean if a field has been set.
 func (o *V1ConnectionCreateItem) HasAgent1Id() bool {
-	if o != nil && o.Agent1Id != nil {
+	if o != nil && !isNil(o.Agent1Id) {
 		return true
 	}
 
@@ -73,7 +76,7 @@ func (o *V1ConnectionCreateItem) SetAgent1Id(v int32) {
 
 // GetAgent2Id returns the Agent2Id field value if set, zero value otherwise.
 func (o *V1ConnectionCreateItem) GetAgent2Id() int32 {
-	if o == nil || o.Agent2Id == nil {
+	if o == nil || isNil(o.Agent2Id) {
 		var ret int32
 		return ret
 	}
@@ -83,7 +86,7 @@ func (o *V1ConnectionCreateItem) GetAgent2Id() int32 {
 // GetAgent2IdOk returns a tuple with the Agent2Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *V1ConnectionCreateItem) GetAgent2IdOk() (*int32, bool) {
-	if o == nil || o.Agent2Id == nil {
+	if o == nil || isNil(o.Agent2Id) {
 		return nil, false
 	}
 	return o.Agent2Id, true
@@ -91,7 +94,7 @@ func (o *V1ConnectionCreateItem) GetAgent2IdOk() (*int32, bool) {
 
 // HasAgent2Id returns a boolean if a field has been set.
 func (o *V1ConnectionCreateItem) HasAgent2Id() bool {
-	if o != nil && o.Agent2Id != nil {
+	if o != nil && !isNil(o.Agent2Id) {
 		return true
 	}
 
@@ -105,7 +108,7 @@ func (o *V1ConnectionCreateItem) SetAgent2Id(v int32) {
 
 // GetAgentConnectionGroupId returns the AgentConnectionGroupId field value if set, zero value otherwise.
 func (o *V1ConnectionCreateItem) GetAgentConnectionGroupId() int32 {
-	if o == nil || o.AgentConnectionGroupId == nil {
+	if o == nil || isNil(o.AgentConnectionGroupId) {
 		var ret int32
 		return ret
 	}
@@ -115,7 +118,7 @@ func (o *V1ConnectionCreateItem) GetAgentConnectionGroupId() int32 {
 // GetAgentConnectionGroupIdOk returns a tuple with the AgentConnectionGroupId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *V1ConnectionCreateItem) GetAgentConnectionGroupIdOk() (*int32, bool) {
-	if o == nil || o.AgentConnectionGroupId == nil {
+	if o == nil || isNil(o.AgentConnectionGroupId) {
 		return nil, false
 	}
 	return o.AgentConnectionGroupId, true
@@ -123,7 +126,7 @@ func (o *V1ConnectionCreateItem) GetAgentConnectionGroupIdOk() (*int32, bool) {
 
 // HasAgentConnectionGroupId returns a boolean if a field has been set.
 func (o *V1ConnectionCreateItem) HasAgentConnectionGroupId() bool {
-	if o != nil && o.AgentConnectionGroupId != nil {
+	if o != nil && !isNil(o.AgentConnectionGroupId) {
 		return true
 	}
 
@@ -136,17 +139,25 @@ func (o *V1ConnectionCreateItem) SetAgentConnectionGroupId(v int32) {
 }
 
 func (o V1ConnectionCreateItem) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if o.Agent1Id != nil {
-		toSerialize["agent_1_id"] = o.Agent1Id
-	}
-	if o.Agent2Id != nil {
-		toSerialize["agent_2_id"] = o.Agent2Id
-	}
-	if o.AgentConnectionGroupId != nil {
-		toSerialize["agent_connection_group_id"] = o.AgentConnectionGroupId
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o V1ConnectionCreateItem) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !isNil(o.Agent1Id) {
+		toSerialize["agent_1_id"] = o.Agent1Id
+	}
+	if !isNil(o.Agent2Id) {
+		toSerialize["agent_2_id"] = o.Agent2Id
+	}
+	if !isNil(o.AgentConnectionGroupId) {
+		toSerialize["agent_connection_group_id"] = o.AgentConnectionGroupId
+	}
+	return toSerialize, nil
 }
 
 type NullableV1ConnectionCreateItem struct {

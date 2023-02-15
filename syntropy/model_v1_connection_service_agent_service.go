@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the V1ConnectionServiceAgentService type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &V1ConnectionServiceAgentService{}
+
 // V1ConnectionServiceAgentService struct for V1ConnectionServiceAgentService
 type V1ConnectionServiceAgentService struct {
 	AgentServiceSubnets   []ConnectionServiceAgentServiceSubnet `json:"agent_service_subnets"`
@@ -271,35 +274,25 @@ func (o *V1ConnectionServiceAgentService) SetAgentServiceUpdatedAt(v string) {
 }
 
 func (o V1ConnectionServiceAgentService) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["agent_service_subnets"] = o.AgentServiceSubnets
-	}
-	if true {
-		toSerialize["agent_service_udp_ports"] = o.AgentServiceUdpPorts
-	}
-	if true {
-		toSerialize["agent_service_tcp_ports"] = o.AgentServiceTcpPorts
-	}
-	if true {
-		toSerialize["agent_service_type"] = o.AgentServiceType
-	}
-	if true {
-		toSerialize["agent_service_name"] = o.AgentServiceName
-	}
-	if true {
-		toSerialize["agent_service_is_active"] = o.AgentServiceIsActive
-	}
-	if true {
-		toSerialize["agent_service_id"] = o.AgentServiceId
-	}
-	if true {
-		toSerialize["agent_service_created_at"] = o.AgentServiceCreatedAt
-	}
-	if true {
-		toSerialize["agent_service_updated_at"] = o.AgentServiceUpdatedAt
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o V1ConnectionServiceAgentService) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["agent_service_subnets"] = o.AgentServiceSubnets
+	toSerialize["agent_service_udp_ports"] = o.AgentServiceUdpPorts
+	toSerialize["agent_service_tcp_ports"] = o.AgentServiceTcpPorts
+	toSerialize["agent_service_type"] = o.AgentServiceType
+	toSerialize["agent_service_name"] = o.AgentServiceName
+	toSerialize["agent_service_is_active"] = o.AgentServiceIsActive
+	toSerialize["agent_service_id"] = o.AgentServiceId
+	toSerialize["agent_service_created_at"] = o.AgentServiceCreatedAt
+	toSerialize["agent_service_updated_at"] = o.AgentServiceUpdatedAt
+	return toSerialize, nil
 }
 
 type NullableV1ConnectionServiceAgentService struct {

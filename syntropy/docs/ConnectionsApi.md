@@ -36,7 +36,7 @@ import (
 )
 
 func main() {
-    v1NetworkConnectionsCreateMeshRequest := *openapiclient.NewV1NetworkConnectionsCreateMeshRequest([]openapiclient.V1NetworkConnectionsCreateMeshRequestAgentIds{*openapiclient.NewV1NetworkConnectionsCreateMeshRequestAgentIds(int32(1))}) // V1NetworkConnectionsCreateMeshRequest | 
+    v1NetworkConnectionsCreateMeshRequest := *openapiclient.NewV1NetworkConnectionsCreateMeshRequest([]openapiclient.V1NetworkConnectionsCreateMeshRequestAgentIdsInner{*openapiclient.NewV1NetworkConnectionsCreateMeshRequestAgentIdsInner(int32(1))}) // V1NetworkConnectionsCreateMeshRequest | 
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -102,7 +102,7 @@ import (
 )
 
 func main() {
-    v1NetworkConnectionsCreateP2PRequest := *openapiclient.NewV1NetworkConnectionsCreateP2PRequest([]openapiclient.V1NetworkConnectionsCreateP2PRequestAgentPairs{*openapiclient.NewV1NetworkConnectionsCreateP2PRequestAgentPairs(int32(1), int32(1))}) // V1NetworkConnectionsCreateP2PRequest | 
+    v1NetworkConnectionsCreateP2PRequest := *openapiclient.NewV1NetworkConnectionsCreateP2PRequest([]openapiclient.V1NetworkConnectionsCreateP2PRequestAgentPairsInner{*openapiclient.NewV1NetworkConnectionsCreateP2PRequestAgentPairsInner(int32(1), int32(1))}) // V1NetworkConnectionsCreateP2PRequest | 
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)

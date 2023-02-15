@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Filter** | Pointer to [**V1AgentFilter**](V1AgentFilter.md) |  | [optional] 
-**Order** | Pointer to [**[]AnyOfobjectobjectobjectobjectobject**](AnyOfobjectobjectobjectobjectobject.md) |  | [optional] 
+**Order** | Pointer to [**[]V1AgentOrderInner**](V1AgentOrderInner.md) |  | [optional] 
 **Skip** | Pointer to **int32** | Skip number of items. | [optional] [default to 0]
 **Take** | Pointer to **int32** | Limit returned values count. | [optional] [default to 20]
 **Search** | Pointer to **string** |  | [optional] 
@@ -56,20 +56,20 @@ HasFilter returns a boolean if a field has been set.
 
 ### GetOrder
 
-`func (o *V1NetworkAgentsSearchRequest) GetOrder() []AnyOfobjectobjectobjectobjectobject`
+`func (o *V1NetworkAgentsSearchRequest) GetOrder() []V1AgentOrderInner`
 
 GetOrder returns the Order field if non-nil, zero value otherwise.
 
 ### GetOrderOk
 
-`func (o *V1NetworkAgentsSearchRequest) GetOrderOk() (*[]AnyOfobjectobjectobjectobjectobject, bool)`
+`func (o *V1NetworkAgentsSearchRequest) GetOrderOk() (*[]V1AgentOrderInner, bool)`
 
 GetOrderOk returns a tuple with the Order field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetOrder
 
-`func (o *V1NetworkAgentsSearchRequest) SetOrder(v []AnyOfobjectobjectobjectobjectobject)`
+`func (o *V1NetworkAgentsSearchRequest) SetOrder(v []V1AgentOrderInner)`
 
 SetOrder sets Order field to given value.
 

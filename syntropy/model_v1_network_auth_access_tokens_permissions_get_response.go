@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the V1NetworkAuthAccessTokensPermissionsGetResponse type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &V1NetworkAuthAccessTokensPermissionsGetResponse{}
+
 // V1NetworkAuthAccessTokensPermissionsGetResponse struct for V1NetworkAuthAccessTokensPermissionsGetResponse
 type V1NetworkAuthAccessTokensPermissionsGetResponse struct {
 	Data []V1AuthAccessTokenPermissions `json:"data"`
@@ -63,11 +66,17 @@ func (o *V1NetworkAuthAccessTokensPermissionsGetResponse) SetData(v []V1AuthAcce
 }
 
 func (o V1NetworkAuthAccessTokensPermissionsGetResponse) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["data"] = o.Data
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o V1NetworkAuthAccessTokensPermissionsGetResponse) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["data"] = o.Data
+	return toSerialize, nil
 }
 
 type NullableV1NetworkAuthAccessTokensPermissionsGetResponse struct {

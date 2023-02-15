@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the V1ConnectionUpdateChange type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &V1ConnectionUpdateChange{}
+
 // V1ConnectionUpdateChange struct for V1ConnectionUpdateChange
 type V1ConnectionUpdateChange struct {
 	ConnectionGroupId int32 `json:"connection_group_id"`
@@ -89,14 +92,18 @@ func (o *V1ConnectionUpdateChange) SetIsSdnEnabled(v bool) {
 }
 
 func (o V1ConnectionUpdateChange) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["connection_group_id"] = o.ConnectionGroupId
-	}
-	if true {
-		toSerialize["is_sdn_enabled"] = o.IsSdnEnabled
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o V1ConnectionUpdateChange) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["connection_group_id"] = o.ConnectionGroupId
+	toSerialize["is_sdn_enabled"] = o.IsSdnEnabled
+	return toSerialize, nil
 }
 
 type NullableV1ConnectionUpdateChange struct {

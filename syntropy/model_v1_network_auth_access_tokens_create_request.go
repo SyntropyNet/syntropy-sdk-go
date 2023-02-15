@@ -16,6 +16,9 @@ import (
 	"time"
 )
 
+// checks if the V1NetworkAuthAccessTokensCreateRequest type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &V1NetworkAuthAccessTokensCreateRequest{}
+
 // V1NetworkAuthAccessTokensCreateRequest struct for V1NetworkAuthAccessTokensCreateRequest
 type V1NetworkAuthAccessTokensCreateRequest struct {
 	Permissions            []string  `json:"permissions"`
@@ -118,7 +121,7 @@ func (o *V1NetworkAuthAccessTokensCreateRequest) SetAccessTokenName(v string) {
 
 // GetAccessTokenDescription returns the AccessTokenDescription field value if set, zero value otherwise.
 func (o *V1NetworkAuthAccessTokensCreateRequest) GetAccessTokenDescription() string {
-	if o == nil || o.AccessTokenDescription == nil {
+	if o == nil || isNil(o.AccessTokenDescription) {
 		var ret string
 		return ret
 	}
@@ -128,7 +131,7 @@ func (o *V1NetworkAuthAccessTokensCreateRequest) GetAccessTokenDescription() str
 // GetAccessTokenDescriptionOk returns a tuple with the AccessTokenDescription field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *V1NetworkAuthAccessTokensCreateRequest) GetAccessTokenDescriptionOk() (*string, bool) {
-	if o == nil || o.AccessTokenDescription == nil {
+	if o == nil || isNil(o.AccessTokenDescription) {
 		return nil, false
 	}
 	return o.AccessTokenDescription, true
@@ -136,7 +139,7 @@ func (o *V1NetworkAuthAccessTokensCreateRequest) GetAccessTokenDescriptionOk() (
 
 // HasAccessTokenDescription returns a boolean if a field has been set.
 func (o *V1NetworkAuthAccessTokensCreateRequest) HasAccessTokenDescription() bool {
-	if o != nil && o.AccessTokenDescription != nil {
+	if o != nil && !isNil(o.AccessTokenDescription) {
 		return true
 	}
 
@@ -149,20 +152,22 @@ func (o *V1NetworkAuthAccessTokensCreateRequest) SetAccessTokenDescription(v str
 }
 
 func (o V1NetworkAuthAccessTokensCreateRequest) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["permissions"] = o.Permissions
-	}
-	if true {
-		toSerialize["access_token_expiration"] = o.AccessTokenExpiration
-	}
-	if true {
-		toSerialize["access_token_name"] = o.AccessTokenName
-	}
-	if o.AccessTokenDescription != nil {
-		toSerialize["access_token_description"] = o.AccessTokenDescription
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o V1NetworkAuthAccessTokensCreateRequest) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["permissions"] = o.Permissions
+	toSerialize["access_token_expiration"] = o.AccessTokenExpiration
+	toSerialize["access_token_name"] = o.AccessTokenName
+	if !isNil(o.AccessTokenDescription) {
+		toSerialize["access_token_description"] = o.AccessTokenDescription
+	}
+	return toSerialize, nil
 }
 
 type NullableV1NetworkAuthAccessTokensCreateRequest struct {

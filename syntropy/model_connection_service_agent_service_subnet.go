@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the ConnectionServiceAgentServiceSubnet type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ConnectionServiceAgentServiceSubnet{}
+
 // ConnectionServiceAgentServiceSubnet struct for ConnectionServiceAgentServiceSubnet
 type ConnectionServiceAgentServiceSubnet struct {
 	AgentServiceSubnetIsActive bool   `json:"agent_service_subnet_is_active"`
@@ -115,17 +118,19 @@ func (o *ConnectionServiceAgentServiceSubnet) SetAgentServiceSubnetId(v int32) {
 }
 
 func (o ConnectionServiceAgentServiceSubnet) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["agent_service_subnet_is_active"] = o.AgentServiceSubnetIsActive
-	}
-	if true {
-		toSerialize["agent_service_subnet_ip"] = o.AgentServiceSubnetIp
-	}
-	if true {
-		toSerialize["agent_service_subnet_id"] = o.AgentServiceSubnetId
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o ConnectionServiceAgentServiceSubnet) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["agent_service_subnet_is_active"] = o.AgentServiceSubnetIsActive
+	toSerialize["agent_service_subnet_ip"] = o.AgentServiceSubnetIp
+	toSerialize["agent_service_subnet_id"] = o.AgentServiceSubnetId
+	return toSerialize, nil
 }
 
 type NullableConnectionServiceAgentServiceSubnet struct {

@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the V1AuthAccessToken type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &V1AuthAccessToken{}
+
 // V1AuthAccessToken struct for V1AuthAccessToken
 type V1AuthAccessToken struct {
 	AccessTokenName        *string `json:"access_token_name,omitempty"`
@@ -44,7 +47,7 @@ func NewV1AuthAccessTokenWithDefaults() *V1AuthAccessToken {
 
 // GetAccessTokenName returns the AccessTokenName field value if set, zero value otherwise.
 func (o *V1AuthAccessToken) GetAccessTokenName() string {
-	if o == nil || o.AccessTokenName == nil {
+	if o == nil || isNil(o.AccessTokenName) {
 		var ret string
 		return ret
 	}
@@ -54,7 +57,7 @@ func (o *V1AuthAccessToken) GetAccessTokenName() string {
 // GetAccessTokenNameOk returns a tuple with the AccessTokenName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *V1AuthAccessToken) GetAccessTokenNameOk() (*string, bool) {
-	if o == nil || o.AccessTokenName == nil {
+	if o == nil || isNil(o.AccessTokenName) {
 		return nil, false
 	}
 	return o.AccessTokenName, true
@@ -62,7 +65,7 @@ func (o *V1AuthAccessToken) GetAccessTokenNameOk() (*string, bool) {
 
 // HasAccessTokenName returns a boolean if a field has been set.
 func (o *V1AuthAccessToken) HasAccessTokenName() bool {
-	if o != nil && o.AccessTokenName != nil {
+	if o != nil && !isNil(o.AccessTokenName) {
 		return true
 	}
 
@@ -100,7 +103,7 @@ func (o *V1AuthAccessToken) SetAccessTokenExpiration(v string) {
 
 // GetAccessTokenDescription returns the AccessTokenDescription field value if set, zero value otherwise.
 func (o *V1AuthAccessToken) GetAccessTokenDescription() string {
-	if o == nil || o.AccessTokenDescription == nil {
+	if o == nil || isNil(o.AccessTokenDescription) {
 		var ret string
 		return ret
 	}
@@ -110,7 +113,7 @@ func (o *V1AuthAccessToken) GetAccessTokenDescription() string {
 // GetAccessTokenDescriptionOk returns a tuple with the AccessTokenDescription field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *V1AuthAccessToken) GetAccessTokenDescriptionOk() (*string, bool) {
-	if o == nil || o.AccessTokenDescription == nil {
+	if o == nil || isNil(o.AccessTokenDescription) {
 		return nil, false
 	}
 	return o.AccessTokenDescription, true
@@ -118,7 +121,7 @@ func (o *V1AuthAccessToken) GetAccessTokenDescriptionOk() (*string, bool) {
 
 // HasAccessTokenDescription returns a boolean if a field has been set.
 func (o *V1AuthAccessToken) HasAccessTokenDescription() bool {
-	if o != nil && o.AccessTokenDescription != nil {
+	if o != nil && !isNil(o.AccessTokenDescription) {
 		return true
 	}
 
@@ -155,20 +158,24 @@ func (o *V1AuthAccessToken) SetAccessTokenId(v string) {
 }
 
 func (o V1AuthAccessToken) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if o.AccessTokenName != nil {
-		toSerialize["access_token_name"] = o.AccessTokenName
-	}
-	if true {
-		toSerialize["access_token_expiration"] = o.AccessTokenExpiration
-	}
-	if o.AccessTokenDescription != nil {
-		toSerialize["access_token_description"] = o.AccessTokenDescription
-	}
-	if true {
-		toSerialize["access_token_id"] = o.AccessTokenId
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o V1AuthAccessToken) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !isNil(o.AccessTokenName) {
+		toSerialize["access_token_name"] = o.AccessTokenName
+	}
+	toSerialize["access_token_expiration"] = o.AccessTokenExpiration
+	if !isNil(o.AccessTokenDescription) {
+		toSerialize["access_token_description"] = o.AccessTokenDescription
+	}
+	toSerialize["access_token_id"] = o.AccessTokenId
+	return toSerialize, nil
 }
 
 type NullableV1AuthAccessToken struct {

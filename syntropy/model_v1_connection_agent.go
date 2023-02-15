@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the V1ConnectionAgent type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &V1ConnectionAgent{}
+
 // V1ConnectionAgent struct for V1ConnectionAgent
 type V1ConnectionAgent struct {
 	AgentIsOnline     bool                `json:"agent_is_online"`
@@ -249,32 +252,24 @@ func (o *V1ConnectionAgent) SetAgentProviderId(v int32) {
 }
 
 func (o V1ConnectionAgent) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["agent_is_online"] = o.AgentIsOnline
-	}
-	if true {
-		toSerialize["agent_status"] = o.AgentStatus.Get()
-	}
-	if true {
-		toSerialize["agent_subnets_count"] = o.AgentSubnetsCount
-	}
-	if true {
-		toSerialize["agent_is_virtual"] = o.AgentIsVirtual
-	}
-	if true {
-		toSerialize["agent_name"] = o.AgentName
-	}
-	if true {
-		toSerialize["agent_public_ipv4"] = o.AgentPublicIpv4
-	}
-	if true {
-		toSerialize["agent_id"] = o.AgentId
-	}
-	if true {
-		toSerialize["agent_provider_id"] = o.AgentProviderId.Get()
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o V1ConnectionAgent) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["agent_is_online"] = o.AgentIsOnline
+	toSerialize["agent_status"] = o.AgentStatus.Get()
+	toSerialize["agent_subnets_count"] = o.AgentSubnetsCount
+	toSerialize["agent_is_virtual"] = o.AgentIsVirtual
+	toSerialize["agent_name"] = o.AgentName
+	toSerialize["agent_public_ipv4"] = o.AgentPublicIpv4
+	toSerialize["agent_id"] = o.AgentId
+	toSerialize["agent_provider_id"] = o.AgentProviderId.Get()
+	return toSerialize, nil
 }
 
 type NullableV1ConnectionAgent struct {

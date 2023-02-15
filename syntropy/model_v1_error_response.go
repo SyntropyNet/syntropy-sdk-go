@@ -15,9 +15,12 @@ import (
 	"encoding/json"
 )
 
+// checks if the V1ErrorResponse type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &V1ErrorResponse{}
+
 // V1ErrorResponse struct for V1ErrorResponse
 type V1ErrorResponse struct {
-	Errors []V1ErrorResponseErrors `json:"errors,omitempty"`
+	Errors []V1ErrorResponseErrorsInner `json:"errors,omitempty"`
 }
 
 // NewV1ErrorResponse instantiates a new V1ErrorResponse object
@@ -38,9 +41,9 @@ func NewV1ErrorResponseWithDefaults() *V1ErrorResponse {
 }
 
 // GetErrors returns the Errors field value if set, zero value otherwise.
-func (o *V1ErrorResponse) GetErrors() []V1ErrorResponseErrors {
-	if o == nil || o.Errors == nil {
-		var ret []V1ErrorResponseErrors
+func (o *V1ErrorResponse) GetErrors() []V1ErrorResponseErrorsInner {
+	if o == nil || isNil(o.Errors) {
+		var ret []V1ErrorResponseErrorsInner
 		return ret
 	}
 	return o.Errors
@@ -48,8 +51,8 @@ func (o *V1ErrorResponse) GetErrors() []V1ErrorResponseErrors {
 
 // GetErrorsOk returns a tuple with the Errors field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *V1ErrorResponse) GetErrorsOk() ([]V1ErrorResponseErrors, bool) {
-	if o == nil || o.Errors == nil {
+func (o *V1ErrorResponse) GetErrorsOk() ([]V1ErrorResponseErrorsInner, bool) {
+	if o == nil || isNil(o.Errors) {
 		return nil, false
 	}
 	return o.Errors, true
@@ -57,24 +60,32 @@ func (o *V1ErrorResponse) GetErrorsOk() ([]V1ErrorResponseErrors, bool) {
 
 // HasErrors returns a boolean if a field has been set.
 func (o *V1ErrorResponse) HasErrors() bool {
-	if o != nil && o.Errors != nil {
+	if o != nil && !isNil(o.Errors) {
 		return true
 	}
 
 	return false
 }
 
-// SetErrors gets a reference to the given []V1ErrorResponseErrors and assigns it to the Errors field.
-func (o *V1ErrorResponse) SetErrors(v []V1ErrorResponseErrors) {
+// SetErrors gets a reference to the given []V1ErrorResponseErrorsInner and assigns it to the Errors field.
+func (o *V1ErrorResponse) SetErrors(v []V1ErrorResponseErrorsInner) {
 	o.Errors = v
 }
 
 func (o V1ErrorResponse) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if o.Errors != nil {
-		toSerialize["errors"] = o.Errors
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o V1ErrorResponse) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !isNil(o.Errors) {
+		toSerialize["errors"] = o.Errors
+	}
+	return toSerialize, nil
 }
 
 type NullableV1ErrorResponse struct {
