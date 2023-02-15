@@ -15,17 +15,20 @@ import (
 	"encoding/json"
 )
 
+// checks if the V1NetworkConnectionsCreateP2PRequest type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &V1NetworkConnectionsCreateP2PRequest{}
+
 // V1NetworkConnectionsCreateP2PRequest struct for V1NetworkConnectionsCreateP2PRequest
 type V1NetworkConnectionsCreateP2PRequest struct {
-	AgentPairs []V1NetworkConnectionsCreateP2PRequestAgentPairs `json:"agent_pairs"`
-	SdnEnabled *bool                                            `json:"sdn_enabled,omitempty"`
+	AgentPairs []V1NetworkConnectionsCreateP2PRequestAgentPairsInner `json:"agent_pairs"`
+	SdnEnabled *bool                                                 `json:"sdn_enabled,omitempty"`
 }
 
 // NewV1NetworkConnectionsCreateP2PRequest instantiates a new V1NetworkConnectionsCreateP2PRequest object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewV1NetworkConnectionsCreateP2PRequest(agentPairs []V1NetworkConnectionsCreateP2PRequestAgentPairs) *V1NetworkConnectionsCreateP2PRequest {
+func NewV1NetworkConnectionsCreateP2PRequest(agentPairs []V1NetworkConnectionsCreateP2PRequestAgentPairsInner) *V1NetworkConnectionsCreateP2PRequest {
 	this := V1NetworkConnectionsCreateP2PRequest{}
 	this.AgentPairs = agentPairs
 	return &this
@@ -40,9 +43,9 @@ func NewV1NetworkConnectionsCreateP2PRequestWithDefaults() *V1NetworkConnections
 }
 
 // GetAgentPairs returns the AgentPairs field value
-func (o *V1NetworkConnectionsCreateP2PRequest) GetAgentPairs() []V1NetworkConnectionsCreateP2PRequestAgentPairs {
+func (o *V1NetworkConnectionsCreateP2PRequest) GetAgentPairs() []V1NetworkConnectionsCreateP2PRequestAgentPairsInner {
 	if o == nil {
-		var ret []V1NetworkConnectionsCreateP2PRequestAgentPairs
+		var ret []V1NetworkConnectionsCreateP2PRequestAgentPairsInner
 		return ret
 	}
 
@@ -51,7 +54,7 @@ func (o *V1NetworkConnectionsCreateP2PRequest) GetAgentPairs() []V1NetworkConnec
 
 // GetAgentPairsOk returns a tuple with the AgentPairs field value
 // and a boolean to check if the value has been set.
-func (o *V1NetworkConnectionsCreateP2PRequest) GetAgentPairsOk() ([]V1NetworkConnectionsCreateP2PRequestAgentPairs, bool) {
+func (o *V1NetworkConnectionsCreateP2PRequest) GetAgentPairsOk() ([]V1NetworkConnectionsCreateP2PRequestAgentPairsInner, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -59,13 +62,13 @@ func (o *V1NetworkConnectionsCreateP2PRequest) GetAgentPairsOk() ([]V1NetworkCon
 }
 
 // SetAgentPairs sets field value
-func (o *V1NetworkConnectionsCreateP2PRequest) SetAgentPairs(v []V1NetworkConnectionsCreateP2PRequestAgentPairs) {
+func (o *V1NetworkConnectionsCreateP2PRequest) SetAgentPairs(v []V1NetworkConnectionsCreateP2PRequestAgentPairsInner) {
 	o.AgentPairs = v
 }
 
 // GetSdnEnabled returns the SdnEnabled field value if set, zero value otherwise.
 func (o *V1NetworkConnectionsCreateP2PRequest) GetSdnEnabled() bool {
-	if o == nil || o.SdnEnabled == nil {
+	if o == nil || isNil(o.SdnEnabled) {
 		var ret bool
 		return ret
 	}
@@ -75,7 +78,7 @@ func (o *V1NetworkConnectionsCreateP2PRequest) GetSdnEnabled() bool {
 // GetSdnEnabledOk returns a tuple with the SdnEnabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *V1NetworkConnectionsCreateP2PRequest) GetSdnEnabledOk() (*bool, bool) {
-	if o == nil || o.SdnEnabled == nil {
+	if o == nil || isNil(o.SdnEnabled) {
 		return nil, false
 	}
 	return o.SdnEnabled, true
@@ -83,7 +86,7 @@ func (o *V1NetworkConnectionsCreateP2PRequest) GetSdnEnabledOk() (*bool, bool) {
 
 // HasSdnEnabled returns a boolean if a field has been set.
 func (o *V1NetworkConnectionsCreateP2PRequest) HasSdnEnabled() bool {
-	if o != nil && o.SdnEnabled != nil {
+	if o != nil && !isNil(o.SdnEnabled) {
 		return true
 	}
 
@@ -96,14 +99,20 @@ func (o *V1NetworkConnectionsCreateP2PRequest) SetSdnEnabled(v bool) {
 }
 
 func (o V1NetworkConnectionsCreateP2PRequest) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["agent_pairs"] = o.AgentPairs
-	}
-	if o.SdnEnabled != nil {
-		toSerialize["sdn_enabled"] = o.SdnEnabled
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o V1NetworkConnectionsCreateP2PRequest) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["agent_pairs"] = o.AgentPairs
+	if !isNil(o.SdnEnabled) {
+		toSerialize["sdn_enabled"] = o.SdnEnabled
+	}
+	return toSerialize, nil
 }
 
 type NullableV1NetworkConnectionsCreateP2PRequest struct {

@@ -142,6 +142,7 @@ func (a *ConnectionsApiService) V1NetworkConnectionsCreateMeshExecute(r ApiV1Net
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -152,6 +153,7 @@ func (a *ConnectionsApiService) V1NetworkConnectionsCreateMeshExecute(r ApiV1Net
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -289,6 +291,7 @@ func (a *ConnectionsApiService) V1NetworkConnectionsCreateP2PExecute(r ApiV1Netw
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -299,6 +302,7 @@ func (a *ConnectionsApiService) V1NetworkConnectionsCreateP2PExecute(r ApiV1Netw
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -381,13 +385,13 @@ func (a *ConnectionsApiService) V1NetworkConnectionsGetExecute(r ApiV1NetworkCon
 	localVarFormParams := url.Values{}
 
 	if r.skip != nil {
-		localVarQueryParams.Add("skip", parameterToString(*r.skip, ""))
+		parameterAddToQuery(localVarQueryParams, "skip", r.skip, "")
 	}
 	if r.take != nil {
-		localVarQueryParams.Add("take", parameterToString(*r.take, ""))
+		parameterAddToQuery(localVarQueryParams, "take", r.take, "")
 	}
 	if r.filter != nil {
-		localVarQueryParams.Add("filter", parameterToString(*r.filter, ""))
+		parameterAddToQuery(localVarQueryParams, "filter", r.filter, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -449,6 +453,7 @@ func (a *ConnectionsApiService) V1NetworkConnectionsGetExecute(r ApiV1NetworkCon
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -459,6 +464,7 @@ func (a *ConnectionsApiService) V1NetworkConnectionsGetExecute(r ApiV1NetworkCon
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -590,6 +596,7 @@ func (a *ConnectionsApiService) V1NetworkConnectionsRemoveExecute(r ApiV1Network
 				newErr.error = err.Error()
 				return localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarHTTPResponse, newErr
 		}
@@ -600,6 +607,7 @@ func (a *ConnectionsApiService) V1NetworkConnectionsRemoveExecute(r ApiV1Network
 				newErr.error = err.Error()
 				return localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarHTTPResponse, newErr
@@ -724,6 +732,7 @@ func (a *ConnectionsApiService) V1NetworkConnectionsSearchExecute(r ApiV1Network
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -734,6 +743,7 @@ func (a *ConnectionsApiService) V1NetworkConnectionsSearchExecute(r ApiV1Network
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -816,13 +826,13 @@ func (a *ConnectionsApiService) V1NetworkConnectionsServicesGetExecute(r ApiV1Ne
 	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
-		localVarQueryParams.Add("filter", parameterToString(*r.filter, ""))
+		parameterAddToQuery(localVarQueryParams, "filter", r.filter, "")
 	}
 	if r.skip != nil {
-		localVarQueryParams.Add("skip", parameterToString(*r.skip, ""))
+		parameterAddToQuery(localVarQueryParams, "skip", r.skip, "")
 	}
 	if r.take != nil {
-		localVarQueryParams.Add("take", parameterToString(*r.take, ""))
+		parameterAddToQuery(localVarQueryParams, "take", r.take, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -884,6 +894,7 @@ func (a *ConnectionsApiService) V1NetworkConnectionsServicesGetExecute(r ApiV1Ne
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -894,6 +905,7 @@ func (a *ConnectionsApiService) V1NetworkConnectionsServicesGetExecute(r ApiV1Ne
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -1025,6 +1037,7 @@ func (a *ConnectionsApiService) V1NetworkConnectionsServicesUpdateExecute(r ApiV
 				newErr.error = err.Error()
 				return localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarHTTPResponse, newErr
 		}
@@ -1035,6 +1048,7 @@ func (a *ConnectionsApiService) V1NetworkConnectionsServicesUpdateExecute(r ApiV
 				newErr.error = err.Error()
 				return localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarHTTPResponse, newErr
@@ -1157,6 +1171,7 @@ func (a *ConnectionsApiService) V1NetworkConnectionsUpdateExecute(r ApiV1Network
 				newErr.error = err.Error()
 				return localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarHTTPResponse, newErr
 		}
@@ -1167,6 +1182,7 @@ func (a *ConnectionsApiService) V1NetworkConnectionsUpdateExecute(r ApiV1Network
 				newErr.error = err.Error()
 				return localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarHTTPResponse, newErr

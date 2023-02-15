@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the V1NetworkAgentsRemoveRequest type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &V1NetworkAgentsRemoveRequest{}
+
 // V1NetworkAgentsRemoveRequest struct for V1NetworkAgentsRemoveRequest
 type V1NetworkAgentsRemoveRequest struct {
 	AgentIds []int32 `json:"agent_ids"`
@@ -63,11 +66,17 @@ func (o *V1NetworkAgentsRemoveRequest) SetAgentIds(v []int32) {
 }
 
 func (o V1NetworkAgentsRemoveRequest) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["agent_ids"] = o.AgentIds
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o V1NetworkAgentsRemoveRequest) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["agent_ids"] = o.AgentIds
+	return toSerialize, nil
 }
 
 type NullableV1NetworkAgentsRemoveRequest struct {

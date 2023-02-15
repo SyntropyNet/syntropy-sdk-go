@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the V1AgentPairFilter type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &V1AgentPairFilter{}
+
 // V1AgentPairFilter struct for V1AgentPairFilter
 type V1AgentPairFilter struct {
 	Agent2Id int32 `json:"agent_2_id"`
@@ -89,14 +92,18 @@ func (o *V1AgentPairFilter) SetAgent1Id(v int32) {
 }
 
 func (o V1AgentPairFilter) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["agent_2_id"] = o.Agent2Id
-	}
-	if true {
-		toSerialize["agent_1_id"] = o.Agent1Id
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o V1AgentPairFilter) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["agent_2_id"] = o.Agent2Id
+	toSerialize["agent_1_id"] = o.Agent1Id
+	return toSerialize, nil
 }
 
 type NullableV1AgentPairFilter struct {

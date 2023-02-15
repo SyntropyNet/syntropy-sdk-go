@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the V1ConnectionFilter type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &V1ConnectionFilter{}
+
 // V1ConnectionFilter struct for V1ConnectionFilter
 type V1ConnectionFilter struct {
 	AgentConnectionGroupId []int32             `json:"agent_connection_group_id,omitempty"`
@@ -41,7 +44,7 @@ func NewV1ConnectionFilterWithDefaults() *V1ConnectionFilter {
 
 // GetAgentConnectionGroupId returns the AgentConnectionGroupId field value if set, zero value otherwise.
 func (o *V1ConnectionFilter) GetAgentConnectionGroupId() []int32 {
-	if o == nil || o.AgentConnectionGroupId == nil {
+	if o == nil || isNil(o.AgentConnectionGroupId) {
 		var ret []int32
 		return ret
 	}
@@ -51,7 +54,7 @@ func (o *V1ConnectionFilter) GetAgentConnectionGroupId() []int32 {
 // GetAgentConnectionGroupIdOk returns a tuple with the AgentConnectionGroupId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *V1ConnectionFilter) GetAgentConnectionGroupIdOk() ([]int32, bool) {
-	if o == nil || o.AgentConnectionGroupId == nil {
+	if o == nil || isNil(o.AgentConnectionGroupId) {
 		return nil, false
 	}
 	return o.AgentConnectionGroupId, true
@@ -59,7 +62,7 @@ func (o *V1ConnectionFilter) GetAgentConnectionGroupIdOk() ([]int32, bool) {
 
 // HasAgentConnectionGroupId returns a boolean if a field has been set.
 func (o *V1ConnectionFilter) HasAgentConnectionGroupId() bool {
-	if o != nil && o.AgentConnectionGroupId != nil {
+	if o != nil && !isNil(o.AgentConnectionGroupId) {
 		return true
 	}
 
@@ -73,7 +76,7 @@ func (o *V1ConnectionFilter) SetAgentConnectionGroupId(v []int32) {
 
 // GetAgentId returns the AgentId field value if set, zero value otherwise.
 func (o *V1ConnectionFilter) GetAgentId() []int32 {
-	if o == nil || o.AgentId == nil {
+	if o == nil || isNil(o.AgentId) {
 		var ret []int32
 		return ret
 	}
@@ -83,7 +86,7 @@ func (o *V1ConnectionFilter) GetAgentId() []int32 {
 // GetAgentIdOk returns a tuple with the AgentId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *V1ConnectionFilter) GetAgentIdOk() ([]int32, bool) {
-	if o == nil || o.AgentId == nil {
+	if o == nil || isNil(o.AgentId) {
 		return nil, false
 	}
 	return o.AgentId, true
@@ -91,7 +94,7 @@ func (o *V1ConnectionFilter) GetAgentIdOk() ([]int32, bool) {
 
 // HasAgentId returns a boolean if a field has been set.
 func (o *V1ConnectionFilter) HasAgentId() bool {
-	if o != nil && o.AgentId != nil {
+	if o != nil && !isNil(o.AgentId) {
 		return true
 	}
 
@@ -105,7 +108,7 @@ func (o *V1ConnectionFilter) SetAgentId(v []int32) {
 
 // GetAgentPair returns the AgentPair field value if set, zero value otherwise.
 func (o *V1ConnectionFilter) GetAgentPair() []V1AgentPairFilter {
-	if o == nil || o.AgentPair == nil {
+	if o == nil || isNil(o.AgentPair) {
 		var ret []V1AgentPairFilter
 		return ret
 	}
@@ -115,7 +118,7 @@ func (o *V1ConnectionFilter) GetAgentPair() []V1AgentPairFilter {
 // GetAgentPairOk returns a tuple with the AgentPair field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *V1ConnectionFilter) GetAgentPairOk() ([]V1AgentPairFilter, bool) {
-	if o == nil || o.AgentPair == nil {
+	if o == nil || isNil(o.AgentPair) {
 		return nil, false
 	}
 	return o.AgentPair, true
@@ -123,7 +126,7 @@ func (o *V1ConnectionFilter) GetAgentPairOk() ([]V1AgentPairFilter, bool) {
 
 // HasAgentPair returns a boolean if a field has been set.
 func (o *V1ConnectionFilter) HasAgentPair() bool {
-	if o != nil && o.AgentPair != nil {
+	if o != nil && !isNil(o.AgentPair) {
 		return true
 	}
 
@@ -136,17 +139,25 @@ func (o *V1ConnectionFilter) SetAgentPair(v []V1AgentPairFilter) {
 }
 
 func (o V1ConnectionFilter) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if o.AgentConnectionGroupId != nil {
-		toSerialize["agent_connection_group_id"] = o.AgentConnectionGroupId
-	}
-	if o.AgentId != nil {
-		toSerialize["agent_id"] = o.AgentId
-	}
-	if o.AgentPair != nil {
-		toSerialize["agent_pair"] = o.AgentPair
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o V1ConnectionFilter) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !isNil(o.AgentConnectionGroupId) {
+		toSerialize["agent_connection_group_id"] = o.AgentConnectionGroupId
+	}
+	if !isNil(o.AgentId) {
+		toSerialize["agent_id"] = o.AgentId
+	}
+	if !isNil(o.AgentPair) {
+		toSerialize["agent_pair"] = o.AgentPair
+	}
+	return toSerialize, nil
 }
 
 type NullableV1ConnectionFilter struct {

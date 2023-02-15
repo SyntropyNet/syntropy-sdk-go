@@ -16,6 +16,9 @@ import (
 	"time"
 )
 
+// checks if the V1NetworkAuthAgentTokensCreateRequest type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &V1NetworkAuthAgentTokensCreateRequest{}
+
 // V1NetworkAuthAgentTokensCreateRequest struct for V1NetworkAuthAgentTokensCreateRequest
 type V1NetworkAuthAgentTokensCreateRequest struct {
 	AgentTokenName            string     `json:"agent_token_name"`
@@ -68,7 +71,7 @@ func (o *V1NetworkAuthAgentTokensCreateRequest) SetAgentTokenName(v string) {
 
 // GetAgentTokenDescription returns the AgentTokenDescription field value if set, zero value otherwise.
 func (o *V1NetworkAuthAgentTokensCreateRequest) GetAgentTokenDescription() string {
-	if o == nil || o.AgentTokenDescription == nil {
+	if o == nil || isNil(o.AgentTokenDescription) {
 		var ret string
 		return ret
 	}
@@ -78,7 +81,7 @@ func (o *V1NetworkAuthAgentTokensCreateRequest) GetAgentTokenDescription() strin
 // GetAgentTokenDescriptionOk returns a tuple with the AgentTokenDescription field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *V1NetworkAuthAgentTokensCreateRequest) GetAgentTokenDescriptionOk() (*string, bool) {
-	if o == nil || o.AgentTokenDescription == nil {
+	if o == nil || isNil(o.AgentTokenDescription) {
 		return nil, false
 	}
 	return o.AgentTokenDescription, true
@@ -86,7 +89,7 @@ func (o *V1NetworkAuthAgentTokensCreateRequest) GetAgentTokenDescriptionOk() (*s
 
 // HasAgentTokenDescription returns a boolean if a field has been set.
 func (o *V1NetworkAuthAgentTokensCreateRequest) HasAgentTokenDescription() bool {
-	if o != nil && o.AgentTokenDescription != nil {
+	if o != nil && !isNil(o.AgentTokenDescription) {
 		return true
 	}
 
@@ -100,7 +103,7 @@ func (o *V1NetworkAuthAgentTokensCreateRequest) SetAgentTokenDescription(v strin
 
 // GetAgentTokenValidUntil returns the AgentTokenValidUntil field value if set, zero value otherwise.
 func (o *V1NetworkAuthAgentTokensCreateRequest) GetAgentTokenValidUntil() time.Time {
-	if o == nil || o.AgentTokenValidUntil == nil {
+	if o == nil || isNil(o.AgentTokenValidUntil) {
 		var ret time.Time
 		return ret
 	}
@@ -110,7 +113,7 @@ func (o *V1NetworkAuthAgentTokensCreateRequest) GetAgentTokenValidUntil() time.T
 // GetAgentTokenValidUntilOk returns a tuple with the AgentTokenValidUntil field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *V1NetworkAuthAgentTokensCreateRequest) GetAgentTokenValidUntilOk() (*time.Time, bool) {
-	if o == nil || o.AgentTokenValidUntil == nil {
+	if o == nil || isNil(o.AgentTokenValidUntil) {
 		return nil, false
 	}
 	return o.AgentTokenValidUntil, true
@@ -118,7 +121,7 @@ func (o *V1NetworkAuthAgentTokensCreateRequest) GetAgentTokenValidUntilOk() (*ti
 
 // HasAgentTokenValidUntil returns a boolean if a field has been set.
 func (o *V1NetworkAuthAgentTokensCreateRequest) HasAgentTokenValidUntil() bool {
-	if o != nil && o.AgentTokenValidUntil != nil {
+	if o != nil && !isNil(o.AgentTokenValidUntil) {
 		return true
 	}
 
@@ -132,7 +135,7 @@ func (o *V1NetworkAuthAgentTokensCreateRequest) SetAgentTokenValidUntil(v time.T
 
 // GetAgentTokenAllowedTagNames returns the AgentTokenAllowedTagNames field value if set, zero value otherwise.
 func (o *V1NetworkAuthAgentTokensCreateRequest) GetAgentTokenAllowedTagNames() []string {
-	if o == nil || o.AgentTokenAllowedTagNames == nil {
+	if o == nil || isNil(o.AgentTokenAllowedTagNames) {
 		var ret []string
 		return ret
 	}
@@ -142,7 +145,7 @@ func (o *V1NetworkAuthAgentTokensCreateRequest) GetAgentTokenAllowedTagNames() [
 // GetAgentTokenAllowedTagNamesOk returns a tuple with the AgentTokenAllowedTagNames field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *V1NetworkAuthAgentTokensCreateRequest) GetAgentTokenAllowedTagNamesOk() ([]string, bool) {
-	if o == nil || o.AgentTokenAllowedTagNames == nil {
+	if o == nil || isNil(o.AgentTokenAllowedTagNames) {
 		return nil, false
 	}
 	return o.AgentTokenAllowedTagNames, true
@@ -150,7 +153,7 @@ func (o *V1NetworkAuthAgentTokensCreateRequest) GetAgentTokenAllowedTagNamesOk()
 
 // HasAgentTokenAllowedTagNames returns a boolean if a field has been set.
 func (o *V1NetworkAuthAgentTokensCreateRequest) HasAgentTokenAllowedTagNames() bool {
-	if o != nil && o.AgentTokenAllowedTagNames != nil {
+	if o != nil && !isNil(o.AgentTokenAllowedTagNames) {
 		return true
 	}
 
@@ -163,20 +166,26 @@ func (o *V1NetworkAuthAgentTokensCreateRequest) SetAgentTokenAllowedTagNames(v [
 }
 
 func (o V1NetworkAuthAgentTokensCreateRequest) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["agent_token_name"] = o.AgentTokenName
-	}
-	if o.AgentTokenDescription != nil {
-		toSerialize["agent_token_description"] = o.AgentTokenDescription
-	}
-	if o.AgentTokenValidUntil != nil {
-		toSerialize["agent_token_valid_until"] = o.AgentTokenValidUntil
-	}
-	if o.AgentTokenAllowedTagNames != nil {
-		toSerialize["agent_token_allowed_tag_names"] = o.AgentTokenAllowedTagNames
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o V1NetworkAuthAgentTokensCreateRequest) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["agent_token_name"] = o.AgentTokenName
+	if !isNil(o.AgentTokenDescription) {
+		toSerialize["agent_token_description"] = o.AgentTokenDescription
+	}
+	if !isNil(o.AgentTokenValidUntil) {
+		toSerialize["agent_token_valid_until"] = o.AgentTokenValidUntil
+	}
+	if !isNil(o.AgentTokenAllowedTagNames) {
+		toSerialize["agent_token_allowed_tag_names"] = o.AgentTokenAllowedTagNames
+	}
+	return toSerialize, nil
 }
 
 type NullableV1NetworkAuthAgentTokensCreateRequest struct {

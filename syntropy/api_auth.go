@@ -139,6 +139,7 @@ func (a *AuthApiService) V1NetworkAuthAccessTokensCreateExecute(r ApiV1NetworkAu
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -149,6 +150,7 @@ func (a *AuthApiService) V1NetworkAuthAccessTokensCreateExecute(r ApiV1NetworkAu
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -207,7 +209,7 @@ func (a *AuthApiService) V1NetworkAuthAccessTokensDeleteExecute(r ApiV1NetworkAu
 	}
 
 	localVarPath := localBasePath + "/v1/network/auth/access-tokens/{access_token_id}"
-	localVarPath = strings.Replace(localVarPath, "{"+"access_token_id"+"}", url.PathEscape(parameterToString(r.accessTokenId, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"access_token_id"+"}", url.PathEscape(parameterValueToString(r.accessTokenId, "accessTokenId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -273,6 +275,7 @@ func (a *AuthApiService) V1NetworkAuthAccessTokensDeleteExecute(r ApiV1NetworkAu
 				newErr.error = err.Error()
 				return localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarHTTPResponse, newErr
 		}
@@ -283,6 +286,7 @@ func (a *AuthApiService) V1NetworkAuthAccessTokensDeleteExecute(r ApiV1NetworkAu
 				newErr.error = err.Error()
 				return localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarHTTPResponse, newErr
@@ -358,13 +362,13 @@ func (a *AuthApiService) V1NetworkAuthAccessTokensGetExecute(r ApiV1NetworkAuthA
 	localVarFormParams := url.Values{}
 
 	if r.skip != nil {
-		localVarQueryParams.Add("skip", parameterToString(*r.skip, ""))
+		parameterAddToQuery(localVarQueryParams, "skip", r.skip, "")
 	}
 	if r.take != nil {
-		localVarQueryParams.Add("take", parameterToString(*r.take, ""))
+		parameterAddToQuery(localVarQueryParams, "take", r.take, "")
 	}
 	if r.order != nil {
-		localVarQueryParams.Add("order", parameterToString(*r.order, ""))
+		parameterAddToQuery(localVarQueryParams, "order", r.order, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -426,6 +430,7 @@ func (a *AuthApiService) V1NetworkAuthAccessTokensGetExecute(r ApiV1NetworkAuthA
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -436,6 +441,7 @@ func (a *AuthApiService) V1NetworkAuthAccessTokensGetExecute(r ApiV1NetworkAuthA
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -520,10 +526,10 @@ func (a *AuthApiService) V1NetworkAuthAccessTokensPermissionsGetExecute(r ApiV1N
 	localVarFormParams := url.Values{}
 
 	if r.skip != nil {
-		localVarQueryParams.Add("skip", parameterToString(*r.skip, ""))
+		parameterAddToQuery(localVarQueryParams, "skip", r.skip, "")
 	}
 	if r.take != nil {
-		localVarQueryParams.Add("take", parameterToString(*r.take, ""))
+		parameterAddToQuery(localVarQueryParams, "take", r.take, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -585,6 +591,7 @@ func (a *AuthApiService) V1NetworkAuthAccessTokensPermissionsGetExecute(r ApiV1N
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -595,6 +602,7 @@ func (a *AuthApiService) V1NetworkAuthAccessTokensPermissionsGetExecute(r ApiV1N
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -728,6 +736,7 @@ func (a *AuthApiService) V1NetworkAuthAgentTokensCreateExecute(r ApiV1NetworkAut
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -738,6 +747,7 @@ func (a *AuthApiService) V1NetworkAuthAgentTokensCreateExecute(r ApiV1NetworkAut
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -796,7 +806,7 @@ func (a *AuthApiService) V1NetworkAuthAgentTokensDeleteExecute(r ApiV1NetworkAut
 	}
 
 	localVarPath := localBasePath + "/v1/network/auth/agent-tokens/{agent_token_id}"
-	localVarPath = strings.Replace(localVarPath, "{"+"agent_token_id"+"}", url.PathEscape(parameterToString(r.agentTokenId, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"agent_token_id"+"}", url.PathEscape(parameterValueToString(r.agentTokenId, "agentTokenId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -868,6 +878,7 @@ func (a *AuthApiService) V1NetworkAuthAgentTokensDeleteExecute(r ApiV1NetworkAut
 				newErr.error = err.Error()
 				return localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarHTTPResponse, newErr
 		}
@@ -878,6 +889,7 @@ func (a *AuthApiService) V1NetworkAuthAgentTokensDeleteExecute(r ApiV1NetworkAut
 				newErr.error = err.Error()
 				return localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarHTTPResponse, newErr
@@ -960,16 +972,16 @@ func (a *AuthApiService) V1NetworkAuthAgentTokensGetExecute(r ApiV1NetworkAuthAg
 	localVarFormParams := url.Values{}
 
 	if r.skip != nil {
-		localVarQueryParams.Add("skip", parameterToString(*r.skip, ""))
+		parameterAddToQuery(localVarQueryParams, "skip", r.skip, "")
 	}
 	if r.take != nil {
-		localVarQueryParams.Add("take", parameterToString(*r.take, ""))
+		parameterAddToQuery(localVarQueryParams, "take", r.take, "")
 	}
 	if r.order != nil {
-		localVarQueryParams.Add("order", parameterToString(*r.order, ""))
+		parameterAddToQuery(localVarQueryParams, "order", r.order, "")
 	}
 	if r.filter != nil {
-		localVarQueryParams.Add("filter", parameterToString(*r.filter, ""))
+		parameterAddToQuery(localVarQueryParams, "filter", r.filter, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1031,6 +1043,7 @@ func (a *AuthApiService) V1NetworkAuthAgentTokensGetExecute(r ApiV1NetworkAuthAg
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -1041,6 +1054,7 @@ func (a *AuthApiService) V1NetworkAuthAgentTokensGetExecute(r ApiV1NetworkAuthAg
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr

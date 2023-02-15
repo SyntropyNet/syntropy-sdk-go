@@ -16,6 +16,9 @@ import (
 	"time"
 )
 
+// checks if the V1AgentFilter type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &V1AgentFilter{}
+
 // V1AgentFilter struct for V1AgentFilter
 type V1AgentFilter struct {
 	AgentId              []int32                  `json:"agent_id,omitempty"`
@@ -50,7 +53,7 @@ func NewV1AgentFilterWithDefaults() *V1AgentFilter {
 
 // GetAgentId returns the AgentId field value if set, zero value otherwise.
 func (o *V1AgentFilter) GetAgentId() []int32 {
-	if o == nil || o.AgentId == nil {
+	if o == nil || isNil(o.AgentId) {
 		var ret []int32
 		return ret
 	}
@@ -60,7 +63,7 @@ func (o *V1AgentFilter) GetAgentId() []int32 {
 // GetAgentIdOk returns a tuple with the AgentId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *V1AgentFilter) GetAgentIdOk() ([]int32, bool) {
-	if o == nil || o.AgentId == nil {
+	if o == nil || isNil(o.AgentId) {
 		return nil, false
 	}
 	return o.AgentId, true
@@ -68,7 +71,7 @@ func (o *V1AgentFilter) GetAgentIdOk() ([]int32, bool) {
 
 // HasAgentId returns a boolean if a field has been set.
 func (o *V1AgentFilter) HasAgentId() bool {
-	if o != nil && o.AgentId != nil {
+	if o != nil && !isNil(o.AgentId) {
 		return true
 	}
 
@@ -82,7 +85,7 @@ func (o *V1AgentFilter) SetAgentId(v []int32) {
 
 // GetAgentProviderId returns the AgentProviderId field value if set, zero value otherwise.
 func (o *V1AgentFilter) GetAgentProviderId() []int32 {
-	if o == nil || o.AgentProviderId == nil {
+	if o == nil || isNil(o.AgentProviderId) {
 		var ret []int32
 		return ret
 	}
@@ -92,7 +95,7 @@ func (o *V1AgentFilter) GetAgentProviderId() []int32 {
 // GetAgentProviderIdOk returns a tuple with the AgentProviderId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *V1AgentFilter) GetAgentProviderIdOk() ([]int32, bool) {
-	if o == nil || o.AgentProviderId == nil {
+	if o == nil || isNil(o.AgentProviderId) {
 		return nil, false
 	}
 	return o.AgentProviderId, true
@@ -100,7 +103,7 @@ func (o *V1AgentFilter) GetAgentProviderIdOk() ([]int32, bool) {
 
 // HasAgentProviderId returns a boolean if a field has been set.
 func (o *V1AgentFilter) HasAgentProviderId() bool {
-	if o != nil && o.AgentProviderId != nil {
+	if o != nil && !isNil(o.AgentProviderId) {
 		return true
 	}
 
@@ -114,7 +117,7 @@ func (o *V1AgentFilter) SetAgentProviderId(v []int32) {
 
 // GetAgentTagId returns the AgentTagId field value if set, zero value otherwise.
 func (o *V1AgentFilter) GetAgentTagId() []int32 {
-	if o == nil || o.AgentTagId == nil {
+	if o == nil || isNil(o.AgentTagId) {
 		var ret []int32
 		return ret
 	}
@@ -124,7 +127,7 @@ func (o *V1AgentFilter) GetAgentTagId() []int32 {
 // GetAgentTagIdOk returns a tuple with the AgentTagId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *V1AgentFilter) GetAgentTagIdOk() ([]int32, bool) {
-	if o == nil || o.AgentTagId == nil {
+	if o == nil || isNil(o.AgentTagId) {
 		return nil, false
 	}
 	return o.AgentTagId, true
@@ -132,7 +135,7 @@ func (o *V1AgentFilter) GetAgentTagIdOk() ([]int32, bool) {
 
 // HasAgentTagId returns a boolean if a field has been set.
 func (o *V1AgentFilter) HasAgentTagId() bool {
-	if o != nil && o.AgentTagId != nil {
+	if o != nil && !isNil(o.AgentTagId) {
 		return true
 	}
 
@@ -146,7 +149,7 @@ func (o *V1AgentFilter) SetAgentTagId(v []int32) {
 
 // GetAgentType returns the AgentType field value if set, zero value otherwise.
 func (o *V1AgentFilter) GetAgentType() []AgentType {
-	if o == nil || o.AgentType == nil {
+	if o == nil || isNil(o.AgentType) {
 		var ret []AgentType
 		return ret
 	}
@@ -156,7 +159,7 @@ func (o *V1AgentFilter) GetAgentType() []AgentType {
 // GetAgentTypeOk returns a tuple with the AgentType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *V1AgentFilter) GetAgentTypeOk() ([]AgentType, bool) {
-	if o == nil || o.AgentType == nil {
+	if o == nil || isNil(o.AgentType) {
 		return nil, false
 	}
 	return o.AgentType, true
@@ -164,7 +167,7 @@ func (o *V1AgentFilter) GetAgentTypeOk() ([]AgentType, bool) {
 
 // HasAgentType returns a boolean if a field has been set.
 func (o *V1AgentFilter) HasAgentType() bool {
-	if o != nil && o.AgentType != nil {
+	if o != nil && !isNil(o.AgentType) {
 		return true
 	}
 
@@ -178,7 +181,7 @@ func (o *V1AgentFilter) SetAgentType(v []AgentType) {
 
 // GetAgentVersion returns the AgentVersion field value if set, zero value otherwise.
 func (o *V1AgentFilter) GetAgentVersion() []string {
-	if o == nil || o.AgentVersion == nil {
+	if o == nil || isNil(o.AgentVersion) {
 		var ret []string
 		return ret
 	}
@@ -188,7 +191,7 @@ func (o *V1AgentFilter) GetAgentVersion() []string {
 // GetAgentVersionOk returns a tuple with the AgentVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *V1AgentFilter) GetAgentVersionOk() ([]string, bool) {
-	if o == nil || o.AgentVersion == nil {
+	if o == nil || isNil(o.AgentVersion) {
 		return nil, false
 	}
 	return o.AgentVersion, true
@@ -196,7 +199,7 @@ func (o *V1AgentFilter) GetAgentVersionOk() ([]string, bool) {
 
 // HasAgentVersion returns a boolean if a field has been set.
 func (o *V1AgentFilter) HasAgentVersion() bool {
-	if o != nil && o.AgentVersion != nil {
+	if o != nil && !isNil(o.AgentVersion) {
 		return true
 	}
 
@@ -210,7 +213,7 @@ func (o *V1AgentFilter) SetAgentVersion(v []string) {
 
 // GetAgentTagName returns the AgentTagName field value if set, zero value otherwise.
 func (o *V1AgentFilter) GetAgentTagName() []string {
-	if o == nil || o.AgentTagName == nil {
+	if o == nil || isNil(o.AgentTagName) {
 		var ret []string
 		return ret
 	}
@@ -220,7 +223,7 @@ func (o *V1AgentFilter) GetAgentTagName() []string {
 // GetAgentTagNameOk returns a tuple with the AgentTagName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *V1AgentFilter) GetAgentTagNameOk() ([]string, bool) {
-	if o == nil || o.AgentTagName == nil {
+	if o == nil || isNil(o.AgentTagName) {
 		return nil, false
 	}
 	return o.AgentTagName, true
@@ -228,7 +231,7 @@ func (o *V1AgentFilter) GetAgentTagNameOk() ([]string, bool) {
 
 // HasAgentTagName returns a boolean if a field has been set.
 func (o *V1AgentFilter) HasAgentTagName() bool {
-	if o != nil && o.AgentTagName != nil {
+	if o != nil && !isNil(o.AgentTagName) {
 		return true
 	}
 
@@ -242,7 +245,7 @@ func (o *V1AgentFilter) SetAgentTagName(v []string) {
 
 // GetAgentStatus returns the AgentStatus field value if set, zero value otherwise.
 func (o *V1AgentFilter) GetAgentStatus() []AgentFilterAgentStatus {
-	if o == nil || o.AgentStatus == nil {
+	if o == nil || isNil(o.AgentStatus) {
 		var ret []AgentFilterAgentStatus
 		return ret
 	}
@@ -252,7 +255,7 @@ func (o *V1AgentFilter) GetAgentStatus() []AgentFilterAgentStatus {
 // GetAgentStatusOk returns a tuple with the AgentStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *V1AgentFilter) GetAgentStatusOk() ([]AgentFilterAgentStatus, bool) {
-	if o == nil || o.AgentStatus == nil {
+	if o == nil || isNil(o.AgentStatus) {
 		return nil, false
 	}
 	return o.AgentStatus, true
@@ -260,7 +263,7 @@ func (o *V1AgentFilter) GetAgentStatusOk() ([]AgentFilterAgentStatus, bool) {
 
 // HasAgentStatus returns a boolean if a field has been set.
 func (o *V1AgentFilter) HasAgentStatus() bool {
-	if o != nil && o.AgentStatus != nil {
+	if o != nil && !isNil(o.AgentStatus) {
 		return true
 	}
 
@@ -274,7 +277,7 @@ func (o *V1AgentFilter) SetAgentStatus(v []AgentFilterAgentStatus) {
 
 // GetAgentLocationCountry returns the AgentLocationCountry field value if set, zero value otherwise.
 func (o *V1AgentFilter) GetAgentLocationCountry() []string {
-	if o == nil || o.AgentLocationCountry == nil {
+	if o == nil || isNil(o.AgentLocationCountry) {
 		var ret []string
 		return ret
 	}
@@ -284,7 +287,7 @@ func (o *V1AgentFilter) GetAgentLocationCountry() []string {
 // GetAgentLocationCountryOk returns a tuple with the AgentLocationCountry field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *V1AgentFilter) GetAgentLocationCountryOk() ([]string, bool) {
-	if o == nil || o.AgentLocationCountry == nil {
+	if o == nil || isNil(o.AgentLocationCountry) {
 		return nil, false
 	}
 	return o.AgentLocationCountry, true
@@ -292,7 +295,7 @@ func (o *V1AgentFilter) GetAgentLocationCountryOk() ([]string, bool) {
 
 // HasAgentLocationCountry returns a boolean if a field has been set.
 func (o *V1AgentFilter) HasAgentLocationCountry() bool {
-	if o != nil && o.AgentLocationCountry != nil {
+	if o != nil && !isNil(o.AgentLocationCountry) {
 		return true
 	}
 
@@ -306,7 +309,7 @@ func (o *V1AgentFilter) SetAgentLocationCountry(v []string) {
 
 // GetAgentModifiedAtFrom returns the AgentModifiedAtFrom field value if set, zero value otherwise.
 func (o *V1AgentFilter) GetAgentModifiedAtFrom() time.Time {
-	if o == nil || o.AgentModifiedAtFrom == nil {
+	if o == nil || isNil(o.AgentModifiedAtFrom) {
 		var ret time.Time
 		return ret
 	}
@@ -316,7 +319,7 @@ func (o *V1AgentFilter) GetAgentModifiedAtFrom() time.Time {
 // GetAgentModifiedAtFromOk returns a tuple with the AgentModifiedAtFrom field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *V1AgentFilter) GetAgentModifiedAtFromOk() (*time.Time, bool) {
-	if o == nil || o.AgentModifiedAtFrom == nil {
+	if o == nil || isNil(o.AgentModifiedAtFrom) {
 		return nil, false
 	}
 	return o.AgentModifiedAtFrom, true
@@ -324,7 +327,7 @@ func (o *V1AgentFilter) GetAgentModifiedAtFromOk() (*time.Time, bool) {
 
 // HasAgentModifiedAtFrom returns a boolean if a field has been set.
 func (o *V1AgentFilter) HasAgentModifiedAtFrom() bool {
-	if o != nil && o.AgentModifiedAtFrom != nil {
+	if o != nil && !isNil(o.AgentModifiedAtFrom) {
 		return true
 	}
 
@@ -338,7 +341,7 @@ func (o *V1AgentFilter) SetAgentModifiedAtFrom(v time.Time) {
 
 // GetAgentModifiedAtTo returns the AgentModifiedAtTo field value if set, zero value otherwise.
 func (o *V1AgentFilter) GetAgentModifiedAtTo() time.Time {
-	if o == nil || o.AgentModifiedAtTo == nil {
+	if o == nil || isNil(o.AgentModifiedAtTo) {
 		var ret time.Time
 		return ret
 	}
@@ -348,7 +351,7 @@ func (o *V1AgentFilter) GetAgentModifiedAtTo() time.Time {
 // GetAgentModifiedAtToOk returns a tuple with the AgentModifiedAtTo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *V1AgentFilter) GetAgentModifiedAtToOk() (*time.Time, bool) {
-	if o == nil || o.AgentModifiedAtTo == nil {
+	if o == nil || isNil(o.AgentModifiedAtTo) {
 		return nil, false
 	}
 	return o.AgentModifiedAtTo, true
@@ -356,7 +359,7 @@ func (o *V1AgentFilter) GetAgentModifiedAtToOk() (*time.Time, bool) {
 
 // HasAgentModifiedAtTo returns a boolean if a field has been set.
 func (o *V1AgentFilter) HasAgentModifiedAtTo() bool {
-	if o != nil && o.AgentModifiedAtTo != nil {
+	if o != nil && !isNil(o.AgentModifiedAtTo) {
 		return true
 	}
 
@@ -370,7 +373,7 @@ func (o *V1AgentFilter) SetAgentModifiedAtTo(v time.Time) {
 
 // GetAgentName returns the AgentName field value if set, zero value otherwise.
 func (o *V1AgentFilter) GetAgentName() string {
-	if o == nil || o.AgentName == nil {
+	if o == nil || isNil(o.AgentName) {
 		var ret string
 		return ret
 	}
@@ -380,7 +383,7 @@ func (o *V1AgentFilter) GetAgentName() string {
 // GetAgentNameOk returns a tuple with the AgentName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *V1AgentFilter) GetAgentNameOk() (*string, bool) {
-	if o == nil || o.AgentName == nil {
+	if o == nil || isNil(o.AgentName) {
 		return nil, false
 	}
 	return o.AgentName, true
@@ -388,7 +391,7 @@ func (o *V1AgentFilter) GetAgentNameOk() (*string, bool) {
 
 // HasAgentName returns a boolean if a field has been set.
 func (o *V1AgentFilter) HasAgentName() bool {
-	if o != nil && o.AgentName != nil {
+	if o != nil && !isNil(o.AgentName) {
 		return true
 	}
 
@@ -401,41 +404,49 @@ func (o *V1AgentFilter) SetAgentName(v string) {
 }
 
 func (o V1AgentFilter) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if o.AgentId != nil {
-		toSerialize["agent_id"] = o.AgentId
-	}
-	if o.AgentProviderId != nil {
-		toSerialize["agent_provider_id"] = o.AgentProviderId
-	}
-	if o.AgentTagId != nil {
-		toSerialize["agent_tag_id"] = o.AgentTagId
-	}
-	if o.AgentType != nil {
-		toSerialize["agent_type"] = o.AgentType
-	}
-	if o.AgentVersion != nil {
-		toSerialize["agent_version"] = o.AgentVersion
-	}
-	if o.AgentTagName != nil {
-		toSerialize["agent_tag_name"] = o.AgentTagName
-	}
-	if o.AgentStatus != nil {
-		toSerialize["agent_status"] = o.AgentStatus
-	}
-	if o.AgentLocationCountry != nil {
-		toSerialize["agent_location_country"] = o.AgentLocationCountry
-	}
-	if o.AgentModifiedAtFrom != nil {
-		toSerialize["agent_modified_at_from"] = o.AgentModifiedAtFrom
-	}
-	if o.AgentModifiedAtTo != nil {
-		toSerialize["agent_modified_at_to"] = o.AgentModifiedAtTo
-	}
-	if o.AgentName != nil {
-		toSerialize["agent_name"] = o.AgentName
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o V1AgentFilter) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !isNil(o.AgentId) {
+		toSerialize["agent_id"] = o.AgentId
+	}
+	if !isNil(o.AgentProviderId) {
+		toSerialize["agent_provider_id"] = o.AgentProviderId
+	}
+	if !isNil(o.AgentTagId) {
+		toSerialize["agent_tag_id"] = o.AgentTagId
+	}
+	if !isNil(o.AgentType) {
+		toSerialize["agent_type"] = o.AgentType
+	}
+	if !isNil(o.AgentVersion) {
+		toSerialize["agent_version"] = o.AgentVersion
+	}
+	if !isNil(o.AgentTagName) {
+		toSerialize["agent_tag_name"] = o.AgentTagName
+	}
+	if !isNil(o.AgentStatus) {
+		toSerialize["agent_status"] = o.AgentStatus
+	}
+	if !isNil(o.AgentLocationCountry) {
+		toSerialize["agent_location_country"] = o.AgentLocationCountry
+	}
+	if !isNil(o.AgentModifiedAtFrom) {
+		toSerialize["agent_modified_at_from"] = o.AgentModifiedAtFrom
+	}
+	if !isNil(o.AgentModifiedAtTo) {
+		toSerialize["agent_modified_at_to"] = o.AgentModifiedAtTo
+	}
+	if !isNil(o.AgentName) {
+		toSerialize["agent_name"] = o.AgentName
+	}
+	return toSerialize, nil
 }
 
 type NullableV1AgentFilter struct {

@@ -15,7 +15,6 @@ Install the following dependencies:
 
 ```shell
 go get github.com/stretchr/testify/assert
-go get golang.org/x/oauth2
 go get golang.org/x/net/context
 ```
 
@@ -61,7 +60,7 @@ Each operation can use different server URL defined using `OperationServers` map
 An operation is uniquely identified by `"{classname}Service.{nickname}"` string.
 Similar rules for overriding default operation server index and variables applies by using `sw.ContextOperationServerIndices` and `sw.ContextOperationServerVariables` context maps.
 
-```
+```golang
 ctx := context.WithValue(context.Background(), syntropy.ContextOperationServerIndices, map[string]int{
 	"{classname}Service.{nickname}": 2,
 })
@@ -118,6 +117,12 @@ Class | Method | HTTP request | Description
  - [V1Agent](docs/V1Agent.md)
  - [V1AgentCreateItem](docs/V1AgentCreateItem.md)
  - [V1AgentFilter](docs/V1AgentFilter.md)
+ - [V1AgentOrderInner](docs/V1AgentOrderInner.md)
+ - [V1AgentOrderInnerAnyOf](docs/V1AgentOrderInnerAnyOf.md)
+ - [V1AgentOrderInnerAnyOf1](docs/V1AgentOrderInnerAnyOf1.md)
+ - [V1AgentOrderInnerAnyOf2](docs/V1AgentOrderInnerAnyOf2.md)
+ - [V1AgentOrderInnerAnyOf3](docs/V1AgentOrderInnerAnyOf3.md)
+ - [V1AgentOrderInnerAnyOf4](docs/V1AgentOrderInnerAnyOf4.md)
  - [V1AgentPairFilter](docs/V1AgentPairFilter.md)
  - [V1AuthAccessToken](docs/V1AuthAccessToken.md)
  - [V1AuthAccessTokenPermissions](docs/V1AuthAccessTokenPermissions.md)
@@ -129,6 +134,11 @@ Class | Method | HTTP request | Description
  - [V1ConnectionCreateItem](docs/V1ConnectionCreateItem.md)
  - [V1ConnectionCreatedBy](docs/V1ConnectionCreatedBy.md)
  - [V1ConnectionFilter](docs/V1ConnectionFilter.md)
+ - [V1ConnectionOrderInner](docs/V1ConnectionOrderInner.md)
+ - [V1ConnectionOrderInnerOneOf](docs/V1ConnectionOrderInnerOneOf.md)
+ - [V1ConnectionOrderInnerOneOf1](docs/V1ConnectionOrderInnerOneOf1.md)
+ - [V1ConnectionOrderInnerOneOf2](docs/V1ConnectionOrderInnerOneOf2.md)
+ - [V1ConnectionOrderInnerOneOf3](docs/V1ConnectionOrderInnerOneOf3.md)
  - [V1ConnectionService](docs/V1ConnectionService.md)
  - [V1ConnectionServiceAgent](docs/V1ConnectionServiceAgent.md)
  - [V1ConnectionServiceAgentService](docs/V1ConnectionServiceAgentService.md)
@@ -136,7 +146,7 @@ Class | Method | HTTP request | Description
  - [V1ConnectionStatus](docs/V1ConnectionStatus.md)
  - [V1ConnectionUpdateChange](docs/V1ConnectionUpdateChange.md)
  - [V1ErrorResponse](docs/V1ErrorResponse.md)
- - [V1ErrorResponseErrors](docs/V1ErrorResponseErrors.md)
+ - [V1ErrorResponseErrorsInner](docs/V1ErrorResponseErrorsInner.md)
  - [V1NetworkAgentsCreateRequest](docs/V1NetworkAgentsCreateRequest.md)
  - [V1NetworkAgentsCreateResponse](docs/V1NetworkAgentsCreateResponse.md)
  - [V1NetworkAgentsGetResponse](docs/V1NetworkAgentsGetResponse.md)
@@ -152,9 +162,9 @@ Class | Method | HTTP request | Description
  - [V1NetworkAuthAgentTokensCreateResponse](docs/V1NetworkAuthAgentTokensCreateResponse.md)
  - [V1NetworkAuthAgentTokensGetResponse](docs/V1NetworkAuthAgentTokensGetResponse.md)
  - [V1NetworkConnectionsCreateMeshRequest](docs/V1NetworkConnectionsCreateMeshRequest.md)
- - [V1NetworkConnectionsCreateMeshRequestAgentIds](docs/V1NetworkConnectionsCreateMeshRequestAgentIds.md)
+ - [V1NetworkConnectionsCreateMeshRequestAgentIdsInner](docs/V1NetworkConnectionsCreateMeshRequestAgentIdsInner.md)
  - [V1NetworkConnectionsCreateP2PRequest](docs/V1NetworkConnectionsCreateP2PRequest.md)
- - [V1NetworkConnectionsCreateP2PRequestAgentPairs](docs/V1NetworkConnectionsCreateP2PRequestAgentPairs.md)
+ - [V1NetworkConnectionsCreateP2PRequestAgentPairsInner](docs/V1NetworkConnectionsCreateP2PRequestAgentPairsInner.md)
  - [V1NetworkConnectionsCreateResponse](docs/V1NetworkConnectionsCreateResponse.md)
  - [V1NetworkConnectionsGetResponse](docs/V1NetworkConnectionsGetResponse.md)
  - [V1NetworkConnectionsRemoveRequest](docs/V1NetworkConnectionsRemoveRequest.md)

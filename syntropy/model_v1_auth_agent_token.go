@@ -16,6 +16,9 @@ import (
 	"time"
 )
 
+// checks if the V1AuthAgentToken type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &V1AuthAgentToken{}
+
 // V1AuthAgentToken struct for V1AuthAgentToken
 type V1AuthAgentToken struct {
 	AgentTokenName        *string        `json:"agent_token_name,omitempty"`
@@ -46,7 +49,7 @@ func NewV1AuthAgentTokenWithDefaults() *V1AuthAgentToken {
 
 // GetAgentTokenName returns the AgentTokenName field value if set, zero value otherwise.
 func (o *V1AuthAgentToken) GetAgentTokenName() string {
-	if o == nil || o.AgentTokenName == nil {
+	if o == nil || isNil(o.AgentTokenName) {
 		var ret string
 		return ret
 	}
@@ -56,7 +59,7 @@ func (o *V1AuthAgentToken) GetAgentTokenName() string {
 // GetAgentTokenNameOk returns a tuple with the AgentTokenName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *V1AuthAgentToken) GetAgentTokenNameOk() (*string, bool) {
-	if o == nil || o.AgentTokenName == nil {
+	if o == nil || isNil(o.AgentTokenName) {
 		return nil, false
 	}
 	return o.AgentTokenName, true
@@ -64,7 +67,7 @@ func (o *V1AuthAgentToken) GetAgentTokenNameOk() (*string, bool) {
 
 // HasAgentTokenName returns a boolean if a field has been set.
 func (o *V1AuthAgentToken) HasAgentTokenName() bool {
-	if o != nil && o.AgentTokenName != nil {
+	if o != nil && !isNil(o.AgentTokenName) {
 		return true
 	}
 
@@ -78,7 +81,7 @@ func (o *V1AuthAgentToken) SetAgentTokenName(v string) {
 
 // GetAgentTokenDescription returns the AgentTokenDescription field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *V1AuthAgentToken) GetAgentTokenDescription() string {
-	if o == nil || o.AgentTokenDescription.Get() == nil {
+	if o == nil || isNil(o.AgentTokenDescription.Get()) {
 		var ret string
 		return ret
 	}
@@ -121,7 +124,7 @@ func (o *V1AuthAgentToken) UnsetAgentTokenDescription() {
 
 // GetAgentTokenValidUntil returns the AgentTokenValidUntil field value if set, zero value otherwise.
 func (o *V1AuthAgentToken) GetAgentTokenValidUntil() time.Time {
-	if o == nil || o.AgentTokenValidUntil == nil {
+	if o == nil || isNil(o.AgentTokenValidUntil) {
 		var ret time.Time
 		return ret
 	}
@@ -131,7 +134,7 @@ func (o *V1AuthAgentToken) GetAgentTokenValidUntil() time.Time {
 // GetAgentTokenValidUntilOk returns a tuple with the AgentTokenValidUntil field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *V1AuthAgentToken) GetAgentTokenValidUntilOk() (*time.Time, bool) {
-	if o == nil || o.AgentTokenValidUntil == nil {
+	if o == nil || isNil(o.AgentTokenValidUntil) {
 		return nil, false
 	}
 	return o.AgentTokenValidUntil, true
@@ -139,7 +142,7 @@ func (o *V1AuthAgentToken) GetAgentTokenValidUntilOk() (*time.Time, bool) {
 
 // HasAgentTokenValidUntil returns a boolean if a field has been set.
 func (o *V1AuthAgentToken) HasAgentTokenValidUntil() bool {
-	if o != nil && o.AgentTokenValidUntil != nil {
+	if o != nil && !isNil(o.AgentTokenValidUntil) {
 		return true
 	}
 
@@ -153,7 +156,7 @@ func (o *V1AuthAgentToken) SetAgentTokenValidUntil(v time.Time) {
 
 // GetAgentTokenStatus returns the AgentTokenStatus field value if set, zero value otherwise.
 func (o *V1AuthAgentToken) GetAgentTokenStatus() bool {
-	if o == nil || o.AgentTokenStatus == nil {
+	if o == nil || isNil(o.AgentTokenStatus) {
 		var ret bool
 		return ret
 	}
@@ -163,7 +166,7 @@ func (o *V1AuthAgentToken) GetAgentTokenStatus() bool {
 // GetAgentTokenStatusOk returns a tuple with the AgentTokenStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *V1AuthAgentToken) GetAgentTokenStatusOk() (*bool, bool) {
-	if o == nil || o.AgentTokenStatus == nil {
+	if o == nil || isNil(o.AgentTokenStatus) {
 		return nil, false
 	}
 	return o.AgentTokenStatus, true
@@ -171,7 +174,7 @@ func (o *V1AuthAgentToken) GetAgentTokenStatusOk() (*bool, bool) {
 
 // HasAgentTokenStatus returns a boolean if a field has been set.
 func (o *V1AuthAgentToken) HasAgentTokenStatus() bool {
-	if o != nil && o.AgentTokenStatus != nil {
+	if o != nil && !isNil(o.AgentTokenStatus) {
 		return true
 	}
 
@@ -185,7 +188,7 @@ func (o *V1AuthAgentToken) SetAgentTokenStatus(v bool) {
 
 // GetAgentTokenId returns the AgentTokenId field value if set, zero value otherwise.
 func (o *V1AuthAgentToken) GetAgentTokenId() int32 {
-	if o == nil || o.AgentTokenId == nil {
+	if o == nil || isNil(o.AgentTokenId) {
 		var ret int32
 		return ret
 	}
@@ -195,7 +198,7 @@ func (o *V1AuthAgentToken) GetAgentTokenId() int32 {
 // GetAgentTokenIdOk returns a tuple with the AgentTokenId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *V1AuthAgentToken) GetAgentTokenIdOk() (*int32, bool) {
-	if o == nil || o.AgentTokenId == nil {
+	if o == nil || isNil(o.AgentTokenId) {
 		return nil, false
 	}
 	return o.AgentTokenId, true
@@ -203,7 +206,7 @@ func (o *V1AuthAgentToken) GetAgentTokenIdOk() (*int32, bool) {
 
 // HasAgentTokenId returns a boolean if a field has been set.
 func (o *V1AuthAgentToken) HasAgentTokenId() bool {
-	if o != nil && o.AgentTokenId != nil {
+	if o != nil && !isNil(o.AgentTokenId) {
 		return true
 	}
 
@@ -217,7 +220,7 @@ func (o *V1AuthAgentToken) SetAgentTokenId(v int32) {
 
 // GetAgentTokenCreatedAt returns the AgentTokenCreatedAt field value if set, zero value otherwise.
 func (o *V1AuthAgentToken) GetAgentTokenCreatedAt() time.Time {
-	if o == nil || o.AgentTokenCreatedAt == nil {
+	if o == nil || isNil(o.AgentTokenCreatedAt) {
 		var ret time.Time
 		return ret
 	}
@@ -227,7 +230,7 @@ func (o *V1AuthAgentToken) GetAgentTokenCreatedAt() time.Time {
 // GetAgentTokenCreatedAtOk returns a tuple with the AgentTokenCreatedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *V1AuthAgentToken) GetAgentTokenCreatedAtOk() (*time.Time, bool) {
-	if o == nil || o.AgentTokenCreatedAt == nil {
+	if o == nil || isNil(o.AgentTokenCreatedAt) {
 		return nil, false
 	}
 	return o.AgentTokenCreatedAt, true
@@ -235,7 +238,7 @@ func (o *V1AuthAgentToken) GetAgentTokenCreatedAtOk() (*time.Time, bool) {
 
 // HasAgentTokenCreatedAt returns a boolean if a field has been set.
 func (o *V1AuthAgentToken) HasAgentTokenCreatedAt() bool {
-	if o != nil && o.AgentTokenCreatedAt != nil {
+	if o != nil && !isNil(o.AgentTokenCreatedAt) {
 		return true
 	}
 
@@ -249,7 +252,7 @@ func (o *V1AuthAgentToken) SetAgentTokenCreatedAt(v time.Time) {
 
 // GetAgentTokenUpdatedAt returns the AgentTokenUpdatedAt field value if set, zero value otherwise.
 func (o *V1AuthAgentToken) GetAgentTokenUpdatedAt() time.Time {
-	if o == nil || o.AgentTokenUpdatedAt == nil {
+	if o == nil || isNil(o.AgentTokenUpdatedAt) {
 		var ret time.Time
 		return ret
 	}
@@ -259,7 +262,7 @@ func (o *V1AuthAgentToken) GetAgentTokenUpdatedAt() time.Time {
 // GetAgentTokenUpdatedAtOk returns a tuple with the AgentTokenUpdatedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *V1AuthAgentToken) GetAgentTokenUpdatedAtOk() (*time.Time, bool) {
-	if o == nil || o.AgentTokenUpdatedAt == nil {
+	if o == nil || isNil(o.AgentTokenUpdatedAt) {
 		return nil, false
 	}
 	return o.AgentTokenUpdatedAt, true
@@ -267,7 +270,7 @@ func (o *V1AuthAgentToken) GetAgentTokenUpdatedAtOk() (*time.Time, bool) {
 
 // HasAgentTokenUpdatedAt returns a boolean if a field has been set.
 func (o *V1AuthAgentToken) HasAgentTokenUpdatedAt() bool {
-	if o != nil && o.AgentTokenUpdatedAt != nil {
+	if o != nil && !isNil(o.AgentTokenUpdatedAt) {
 		return true
 	}
 
@@ -280,29 +283,37 @@ func (o *V1AuthAgentToken) SetAgentTokenUpdatedAt(v time.Time) {
 }
 
 func (o V1AuthAgentToken) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o V1AuthAgentToken) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if o.AgentTokenName != nil {
+	if !isNil(o.AgentTokenName) {
 		toSerialize["agent_token_name"] = o.AgentTokenName
 	}
 	if o.AgentTokenDescription.IsSet() {
 		toSerialize["agent_token_description"] = o.AgentTokenDescription.Get()
 	}
-	if o.AgentTokenValidUntil != nil {
+	if !isNil(o.AgentTokenValidUntil) {
 		toSerialize["agent_token_valid_until"] = o.AgentTokenValidUntil
 	}
-	if o.AgentTokenStatus != nil {
+	if !isNil(o.AgentTokenStatus) {
 		toSerialize["agent_token_status"] = o.AgentTokenStatus
 	}
-	if o.AgentTokenId != nil {
+	if !isNil(o.AgentTokenId) {
 		toSerialize["agent_token_id"] = o.AgentTokenId
 	}
-	if o.AgentTokenCreatedAt != nil {
+	if !isNil(o.AgentTokenCreatedAt) {
 		toSerialize["agent_token_created_at"] = o.AgentTokenCreatedAt
 	}
-	if o.AgentTokenUpdatedAt != nil {
+	if !isNil(o.AgentTokenUpdatedAt) {
 		toSerialize["agent_token_updated_at"] = o.AgentTokenUpdatedAt
 	}
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
 type NullableV1AuthAgentToken struct {

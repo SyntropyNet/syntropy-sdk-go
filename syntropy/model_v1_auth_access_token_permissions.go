@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the V1AuthAccessTokenPermissions type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &V1AuthAccessTokenPermissions{}
+
 // V1AuthAccessTokenPermissions struct for V1AuthAccessTokenPermissions
 type V1AuthAccessTokenPermissions struct {
 	PermissionId          int32  `json:"permission_id"`
@@ -115,17 +118,19 @@ func (o *V1AuthAccessTokenPermissions) SetPermissionDescription(v string) {
 }
 
 func (o V1AuthAccessTokenPermissions) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["permission_id"] = o.PermissionId
-	}
-	if true {
-		toSerialize["permission_name"] = o.PermissionName
-	}
-	if true {
-		toSerialize["permission_description"] = o.PermissionDescription
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o V1AuthAccessTokenPermissions) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["permission_id"] = o.PermissionId
+	toSerialize["permission_name"] = o.PermissionName
+	toSerialize["permission_description"] = o.PermissionDescription
+	return toSerialize, nil
 }
 
 type NullableV1AuthAccessTokenPermissions struct {

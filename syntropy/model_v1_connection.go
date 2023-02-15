@@ -16,6 +16,9 @@ import (
 	"time"
 )
 
+// checks if the V1Connection type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &V1Connection{}
+
 // V1Connection struct for V1Connection
 type V1Connection struct {
 	AgentConnectionSubnetsEnabledCount int32                 `json:"agent_connection_subnets_enabled_count"`
@@ -104,7 +107,7 @@ func (o *V1Connection) SetAgentConnectionGroupUpdatedAt(v time.Time) {
 
 // GetAgentConnectionGroupStatusReason returns the AgentConnectionGroupStatusReason field value if set, zero value otherwise.
 func (o *V1Connection) GetAgentConnectionGroupStatusReason() string {
-	if o == nil || o.AgentConnectionGroupStatusReason == nil {
+	if o == nil || isNil(o.AgentConnectionGroupStatusReason) {
 		var ret string
 		return ret
 	}
@@ -114,7 +117,7 @@ func (o *V1Connection) GetAgentConnectionGroupStatusReason() string {
 // GetAgentConnectionGroupStatusReasonOk returns a tuple with the AgentConnectionGroupStatusReason field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *V1Connection) GetAgentConnectionGroupStatusReasonOk() (*string, bool) {
-	if o == nil || o.AgentConnectionGroupStatusReason == nil {
+	if o == nil || isNil(o.AgentConnectionGroupStatusReason) {
 		return nil, false
 	}
 	return o.AgentConnectionGroupStatusReason, true
@@ -122,7 +125,7 @@ func (o *V1Connection) GetAgentConnectionGroupStatusReasonOk() (*string, bool) {
 
 // HasAgentConnectionGroupStatusReason returns a boolean if a field has been set.
 func (o *V1Connection) HasAgentConnectionGroupStatusReason() bool {
-	if o != nil && o.AgentConnectionGroupStatusReason != nil {
+	if o != nil && !isNil(o.AgentConnectionGroupStatusReason) {
 		return true
 	}
 
@@ -279,35 +282,27 @@ func (o *V1Connection) SetAgent1(v V1ConnectionAgent) {
 }
 
 func (o V1Connection) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["agent_connection_subnets_enabled_count"] = o.AgentConnectionSubnetsEnabledCount
-	}
-	if true {
-		toSerialize["agent_connection_group_updated_at"] = o.AgentConnectionGroupUpdatedAt
-	}
-	if o.AgentConnectionGroupStatusReason != nil {
-		toSerialize["agent_connection_group_status_reason"] = o.AgentConnectionGroupStatusReason
-	}
-	if true {
-		toSerialize["agent_connection_group_status"] = o.AgentConnectionGroupStatus
-	}
-	if true {
-		toSerialize["agent_connection_group_sdn_enabled"] = o.AgentConnectionGroupSdnEnabled
-	}
-	if true {
-		toSerialize["agent_connection_group_id"] = o.AgentConnectionGroupId
-	}
-	if true {
-		toSerialize["agent_connection_group_created_by"] = o.AgentConnectionGroupCreatedBy
-	}
-	if true {
-		toSerialize["agent_2"] = o.Agent2
-	}
-	if true {
-		toSerialize["agent_1"] = o.Agent1
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o V1Connection) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["agent_connection_subnets_enabled_count"] = o.AgentConnectionSubnetsEnabledCount
+	toSerialize["agent_connection_group_updated_at"] = o.AgentConnectionGroupUpdatedAt
+	if !isNil(o.AgentConnectionGroupStatusReason) {
+		toSerialize["agent_connection_group_status_reason"] = o.AgentConnectionGroupStatusReason
+	}
+	toSerialize["agent_connection_group_status"] = o.AgentConnectionGroupStatus
+	toSerialize["agent_connection_group_sdn_enabled"] = o.AgentConnectionGroupSdnEnabled
+	toSerialize["agent_connection_group_id"] = o.AgentConnectionGroupId
+	toSerialize["agent_connection_group_created_by"] = o.AgentConnectionGroupCreatedBy
+	toSerialize["agent_2"] = o.Agent2
+	toSerialize["agent_1"] = o.Agent1
+	return toSerialize, nil
 }
 
 type NullableV1Connection struct {

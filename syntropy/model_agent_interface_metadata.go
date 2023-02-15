@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the AgentInterfaceMetadata type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &AgentInterfaceMetadata{}
+
 // AgentInterfaceMetadata struct for AgentInterfaceMetadata
 type AgentInterfaceMetadata struct {
 	AgentInterfacePublicKey *string `json:"agent_interface_public_key,omitempty"`
@@ -39,7 +42,7 @@ func NewAgentInterfaceMetadataWithDefaults() *AgentInterfaceMetadata {
 
 // GetAgentInterfacePublicKey returns the AgentInterfacePublicKey field value if set, zero value otherwise.
 func (o *AgentInterfaceMetadata) GetAgentInterfacePublicKey() string {
-	if o == nil || o.AgentInterfacePublicKey == nil {
+	if o == nil || isNil(o.AgentInterfacePublicKey) {
 		var ret string
 		return ret
 	}
@@ -49,7 +52,7 @@ func (o *AgentInterfaceMetadata) GetAgentInterfacePublicKey() string {
 // GetAgentInterfacePublicKeyOk returns a tuple with the AgentInterfacePublicKey field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AgentInterfaceMetadata) GetAgentInterfacePublicKeyOk() (*string, bool) {
-	if o == nil || o.AgentInterfacePublicKey == nil {
+	if o == nil || isNil(o.AgentInterfacePublicKey) {
 		return nil, false
 	}
 	return o.AgentInterfacePublicKey, true
@@ -57,7 +60,7 @@ func (o *AgentInterfaceMetadata) GetAgentInterfacePublicKeyOk() (*string, bool) 
 
 // HasAgentInterfacePublicKey returns a boolean if a field has been set.
 func (o *AgentInterfaceMetadata) HasAgentInterfacePublicKey() bool {
-	if o != nil && o.AgentInterfacePublicKey != nil {
+	if o != nil && !isNil(o.AgentInterfacePublicKey) {
 		return true
 	}
 
@@ -70,11 +73,19 @@ func (o *AgentInterfaceMetadata) SetAgentInterfacePublicKey(v string) {
 }
 
 func (o AgentInterfaceMetadata) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if o.AgentInterfacePublicKey != nil {
-		toSerialize["agent_interface_public_key"] = o.AgentInterfacePublicKey
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o AgentInterfaceMetadata) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !isNil(o.AgentInterfacePublicKey) {
+		toSerialize["agent_interface_public_key"] = o.AgentInterfacePublicKey
+	}
+	return toSerialize, nil
 }
 
 type NullableAgentInterfaceMetadata struct {

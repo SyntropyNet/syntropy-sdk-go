@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the V1NetworkConnectionsUpdateRequest type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &V1NetworkConnectionsUpdateRequest{}
+
 // V1NetworkConnectionsUpdateRequest struct for V1NetworkConnectionsUpdateRequest
 type V1NetworkConnectionsUpdateRequest struct {
 	Changes []V1ConnectionUpdateChange `json:"changes"`
@@ -63,11 +66,17 @@ func (o *V1NetworkConnectionsUpdateRequest) SetChanges(v []V1ConnectionUpdateCha
 }
 
 func (o V1NetworkConnectionsUpdateRequest) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["changes"] = o.Changes
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o V1NetworkConnectionsUpdateRequest) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["changes"] = o.Changes
+	return toSerialize, nil
 }
 
 type NullableV1NetworkConnectionsUpdateRequest struct {

@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the V1NetworkAgentsUpdateRequest type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &V1NetworkAgentsUpdateRequest{}
+
 // V1NetworkAgentsUpdateRequest struct for V1NetworkAgentsUpdateRequest
 type V1NetworkAgentsUpdateRequest struct {
 	AgentTags       []string                 `json:"agent_tags,omitempty"`
@@ -42,7 +45,7 @@ func NewV1NetworkAgentsUpdateRequestWithDefaults() *V1NetworkAgentsUpdateRequest
 
 // GetAgentTags returns the AgentTags field value if set, zero value otherwise.
 func (o *V1NetworkAgentsUpdateRequest) GetAgentTags() []string {
-	if o == nil || o.AgentTags == nil {
+	if o == nil || isNil(o.AgentTags) {
 		var ret []string
 		return ret
 	}
@@ -52,7 +55,7 @@ func (o *V1NetworkAgentsUpdateRequest) GetAgentTags() []string {
 // GetAgentTagsOk returns a tuple with the AgentTags field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *V1NetworkAgentsUpdateRequest) GetAgentTagsOk() ([]string, bool) {
-	if o == nil || o.AgentTags == nil {
+	if o == nil || isNil(o.AgentTags) {
 		return nil, false
 	}
 	return o.AgentTags, true
@@ -60,7 +63,7 @@ func (o *V1NetworkAgentsUpdateRequest) GetAgentTagsOk() ([]string, bool) {
 
 // HasAgentTags returns a boolean if a field has been set.
 func (o *V1NetworkAgentsUpdateRequest) HasAgentTags() bool {
-	if o != nil && o.AgentTags != nil {
+	if o != nil && !isNil(o.AgentTags) {
 		return true
 	}
 
@@ -74,7 +77,7 @@ func (o *V1NetworkAgentsUpdateRequest) SetAgentTags(v []string) {
 
 // GetAgentName returns the AgentName field value if set, zero value otherwise.
 func (o *V1NetworkAgentsUpdateRequest) GetAgentName() string {
-	if o == nil || o.AgentName == nil {
+	if o == nil || isNil(o.AgentName) {
 		var ret string
 		return ret
 	}
@@ -84,7 +87,7 @@ func (o *V1NetworkAgentsUpdateRequest) GetAgentName() string {
 // GetAgentNameOk returns a tuple with the AgentName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *V1NetworkAgentsUpdateRequest) GetAgentNameOk() (*string, bool) {
-	if o == nil || o.AgentName == nil {
+	if o == nil || isNil(o.AgentName) {
 		return nil, false
 	}
 	return o.AgentName, true
@@ -92,7 +95,7 @@ func (o *V1NetworkAgentsUpdateRequest) GetAgentNameOk() (*string, bool) {
 
 // HasAgentName returns a boolean if a field has been set.
 func (o *V1NetworkAgentsUpdateRequest) HasAgentName() bool {
-	if o != nil && o.AgentName != nil {
+	if o != nil && !isNil(o.AgentName) {
 		return true
 	}
 
@@ -106,7 +109,7 @@ func (o *V1NetworkAgentsUpdateRequest) SetAgentName(v string) {
 
 // GetAgentProviderId returns the AgentProviderId field value if set, zero value otherwise.
 func (o *V1NetworkAgentsUpdateRequest) GetAgentProviderId() int32 {
-	if o == nil || o.AgentProviderId == nil {
+	if o == nil || isNil(o.AgentProviderId) {
 		var ret int32
 		return ret
 	}
@@ -116,7 +119,7 @@ func (o *V1NetworkAgentsUpdateRequest) GetAgentProviderId() int32 {
 // GetAgentProviderIdOk returns a tuple with the AgentProviderId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *V1NetworkAgentsUpdateRequest) GetAgentProviderIdOk() (*int32, bool) {
-	if o == nil || o.AgentProviderId == nil {
+	if o == nil || isNil(o.AgentProviderId) {
 		return nil, false
 	}
 	return o.AgentProviderId, true
@@ -124,7 +127,7 @@ func (o *V1NetworkAgentsUpdateRequest) GetAgentProviderIdOk() (*int32, bool) {
 
 // HasAgentProviderId returns a boolean if a field has been set.
 func (o *V1NetworkAgentsUpdateRequest) HasAgentProviderId() bool {
-	if o != nil && o.AgentProviderId != nil {
+	if o != nil && !isNil(o.AgentProviderId) {
 		return true
 	}
 
@@ -138,7 +141,7 @@ func (o *V1NetworkAgentsUpdateRequest) SetAgentProviderId(v int32) {
 
 // GetNetwork returns the Network field value if set, zero value otherwise.
 func (o *V1NetworkAgentsUpdateRequest) GetNetwork() AgentInterfacesMetadata {
-	if o == nil || o.Network == nil {
+	if o == nil || isNil(o.Network) {
 		var ret AgentInterfacesMetadata
 		return ret
 	}
@@ -148,7 +151,7 @@ func (o *V1NetworkAgentsUpdateRequest) GetNetwork() AgentInterfacesMetadata {
 // GetNetworkOk returns a tuple with the Network field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *V1NetworkAgentsUpdateRequest) GetNetworkOk() (*AgentInterfacesMetadata, bool) {
-	if o == nil || o.Network == nil {
+	if o == nil || isNil(o.Network) {
 		return nil, false
 	}
 	return o.Network, true
@@ -156,7 +159,7 @@ func (o *V1NetworkAgentsUpdateRequest) GetNetworkOk() (*AgentInterfacesMetadata,
 
 // HasNetwork returns a boolean if a field has been set.
 func (o *V1NetworkAgentsUpdateRequest) HasNetwork() bool {
-	if o != nil && o.Network != nil {
+	if o != nil && !isNil(o.Network) {
 		return true
 	}
 
@@ -169,20 +172,28 @@ func (o *V1NetworkAgentsUpdateRequest) SetNetwork(v AgentInterfacesMetadata) {
 }
 
 func (o V1NetworkAgentsUpdateRequest) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if o.AgentTags != nil {
-		toSerialize["agent_tags"] = o.AgentTags
-	}
-	if o.AgentName != nil {
-		toSerialize["agent_name"] = o.AgentName
-	}
-	if o.AgentProviderId != nil {
-		toSerialize["agent_provider_id"] = o.AgentProviderId
-	}
-	if o.Network != nil {
-		toSerialize["network"] = o.Network
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o V1NetworkAgentsUpdateRequest) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !isNil(o.AgentTags) {
+		toSerialize["agent_tags"] = o.AgentTags
+	}
+	if !isNil(o.AgentName) {
+		toSerialize["agent_name"] = o.AgentName
+	}
+	if !isNil(o.AgentProviderId) {
+		toSerialize["agent_provider_id"] = o.AgentProviderId
+	}
+	if !isNil(o.Network) {
+		toSerialize["network"] = o.Network
+	}
+	return toSerialize, nil
 }
 
 type NullableV1NetworkAgentsUpdateRequest struct {

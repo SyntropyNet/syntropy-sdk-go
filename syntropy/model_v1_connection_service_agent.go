@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the V1ConnectionServiceAgent type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &V1ConnectionServiceAgent{}
+
 // V1ConnectionServiceAgent struct for V1ConnectionServiceAgent
 type V1ConnectionServiceAgent struct {
 	AgentServices []V1ConnectionServiceAgentService `json:"agent_services"`
@@ -115,17 +118,19 @@ func (o *V1ConnectionServiceAgent) SetAgentId(v int32) {
 }
 
 func (o V1ConnectionServiceAgent) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["agent_services"] = o.AgentServices
-	}
-	if true {
-		toSerialize["agent_type"] = o.AgentType
-	}
-	if true {
-		toSerialize["agent_id"] = o.AgentId
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o V1ConnectionServiceAgent) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["agent_services"] = o.AgentServices
+	toSerialize["agent_type"] = o.AgentType
+	toSerialize["agent_id"] = o.AgentId
+	return toSerialize, nil
 }
 
 type NullableV1ConnectionServiceAgent struct {

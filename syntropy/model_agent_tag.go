@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the AgentTag type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &AgentTag{}
+
 // AgentTag struct for AgentTag
 type AgentTag struct {
 	AgentTagName string `json:"agent_tag_name"`
@@ -89,14 +92,18 @@ func (o *AgentTag) SetAgentTagId(v int32) {
 }
 
 func (o AgentTag) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["agent_tag_name"] = o.AgentTagName
-	}
-	if true {
-		toSerialize["agent_tag_id"] = o.AgentTagId
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o AgentTag) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["agent_tag_name"] = o.AgentTagName
+	toSerialize["agent_tag_id"] = o.AgentTagId
+	return toSerialize, nil
 }
 
 type NullableAgentTag struct {

@@ -15,10 +15,13 @@ import (
 	"encoding/json"
 )
 
+// checks if the V1NetworkAgentsSearchRequest type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &V1NetworkAgentsSearchRequest{}
+
 // V1NetworkAgentsSearchRequest struct for V1NetworkAgentsSearchRequest
 type V1NetworkAgentsSearchRequest struct {
-	Filter *V1AgentFilter                        `json:"filter,omitempty"`
-	Order  []AnyOfobjectobjectobjectobjectobject `json:"order,omitempty"`
+	Filter *V1AgentFilter      `json:"filter,omitempty"`
+	Order  []V1AgentOrderInner `json:"order,omitempty"`
 	// Skip number of items.
 	Skip *int32 `json:"skip,omitempty"`
 	// Limit returned values count.
@@ -53,7 +56,7 @@ func NewV1NetworkAgentsSearchRequestWithDefaults() *V1NetworkAgentsSearchRequest
 
 // GetFilter returns the Filter field value if set, zero value otherwise.
 func (o *V1NetworkAgentsSearchRequest) GetFilter() V1AgentFilter {
-	if o == nil || o.Filter == nil {
+	if o == nil || isNil(o.Filter) {
 		var ret V1AgentFilter
 		return ret
 	}
@@ -63,7 +66,7 @@ func (o *V1NetworkAgentsSearchRequest) GetFilter() V1AgentFilter {
 // GetFilterOk returns a tuple with the Filter field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *V1NetworkAgentsSearchRequest) GetFilterOk() (*V1AgentFilter, bool) {
-	if o == nil || o.Filter == nil {
+	if o == nil || isNil(o.Filter) {
 		return nil, false
 	}
 	return o.Filter, true
@@ -71,7 +74,7 @@ func (o *V1NetworkAgentsSearchRequest) GetFilterOk() (*V1AgentFilter, bool) {
 
 // HasFilter returns a boolean if a field has been set.
 func (o *V1NetworkAgentsSearchRequest) HasFilter() bool {
-	if o != nil && o.Filter != nil {
+	if o != nil && !isNil(o.Filter) {
 		return true
 	}
 
@@ -84,9 +87,9 @@ func (o *V1NetworkAgentsSearchRequest) SetFilter(v V1AgentFilter) {
 }
 
 // GetOrder returns the Order field value if set, zero value otherwise.
-func (o *V1NetworkAgentsSearchRequest) GetOrder() []AnyOfobjectobjectobjectobjectobject {
-	if o == nil || o.Order == nil {
-		var ret []AnyOfobjectobjectobjectobjectobject
+func (o *V1NetworkAgentsSearchRequest) GetOrder() []V1AgentOrderInner {
+	if o == nil || isNil(o.Order) {
+		var ret []V1AgentOrderInner
 		return ret
 	}
 	return o.Order
@@ -94,8 +97,8 @@ func (o *V1NetworkAgentsSearchRequest) GetOrder() []AnyOfobjectobjectobjectobjec
 
 // GetOrderOk returns a tuple with the Order field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *V1NetworkAgentsSearchRequest) GetOrderOk() ([]AnyOfobjectobjectobjectobjectobject, bool) {
-	if o == nil || o.Order == nil {
+func (o *V1NetworkAgentsSearchRequest) GetOrderOk() ([]V1AgentOrderInner, bool) {
+	if o == nil || isNil(o.Order) {
 		return nil, false
 	}
 	return o.Order, true
@@ -103,21 +106,21 @@ func (o *V1NetworkAgentsSearchRequest) GetOrderOk() ([]AnyOfobjectobjectobjectob
 
 // HasOrder returns a boolean if a field has been set.
 func (o *V1NetworkAgentsSearchRequest) HasOrder() bool {
-	if o != nil && o.Order != nil {
+	if o != nil && !isNil(o.Order) {
 		return true
 	}
 
 	return false
 }
 
-// SetOrder gets a reference to the given []AnyOfobjectobjectobjectobjectobject and assigns it to the Order field.
-func (o *V1NetworkAgentsSearchRequest) SetOrder(v []AnyOfobjectobjectobjectobjectobject) {
+// SetOrder gets a reference to the given []V1AgentOrderInner and assigns it to the Order field.
+func (o *V1NetworkAgentsSearchRequest) SetOrder(v []V1AgentOrderInner) {
 	o.Order = v
 }
 
 // GetSkip returns the Skip field value if set, zero value otherwise.
 func (o *V1NetworkAgentsSearchRequest) GetSkip() int32 {
-	if o == nil || o.Skip == nil {
+	if o == nil || isNil(o.Skip) {
 		var ret int32
 		return ret
 	}
@@ -127,7 +130,7 @@ func (o *V1NetworkAgentsSearchRequest) GetSkip() int32 {
 // GetSkipOk returns a tuple with the Skip field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *V1NetworkAgentsSearchRequest) GetSkipOk() (*int32, bool) {
-	if o == nil || o.Skip == nil {
+	if o == nil || isNil(o.Skip) {
 		return nil, false
 	}
 	return o.Skip, true
@@ -135,7 +138,7 @@ func (o *V1NetworkAgentsSearchRequest) GetSkipOk() (*int32, bool) {
 
 // HasSkip returns a boolean if a field has been set.
 func (o *V1NetworkAgentsSearchRequest) HasSkip() bool {
-	if o != nil && o.Skip != nil {
+	if o != nil && !isNil(o.Skip) {
 		return true
 	}
 
@@ -149,7 +152,7 @@ func (o *V1NetworkAgentsSearchRequest) SetSkip(v int32) {
 
 // GetTake returns the Take field value if set, zero value otherwise.
 func (o *V1NetworkAgentsSearchRequest) GetTake() int32 {
-	if o == nil || o.Take == nil {
+	if o == nil || isNil(o.Take) {
 		var ret int32
 		return ret
 	}
@@ -159,7 +162,7 @@ func (o *V1NetworkAgentsSearchRequest) GetTake() int32 {
 // GetTakeOk returns a tuple with the Take field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *V1NetworkAgentsSearchRequest) GetTakeOk() (*int32, bool) {
-	if o == nil || o.Take == nil {
+	if o == nil || isNil(o.Take) {
 		return nil, false
 	}
 	return o.Take, true
@@ -167,7 +170,7 @@ func (o *V1NetworkAgentsSearchRequest) GetTakeOk() (*int32, bool) {
 
 // HasTake returns a boolean if a field has been set.
 func (o *V1NetworkAgentsSearchRequest) HasTake() bool {
-	if o != nil && o.Take != nil {
+	if o != nil && !isNil(o.Take) {
 		return true
 	}
 
@@ -181,7 +184,7 @@ func (o *V1NetworkAgentsSearchRequest) SetTake(v int32) {
 
 // GetSearch returns the Search field value if set, zero value otherwise.
 func (o *V1NetworkAgentsSearchRequest) GetSearch() string {
-	if o == nil || o.Search == nil {
+	if o == nil || isNil(o.Search) {
 		var ret string
 		return ret
 	}
@@ -191,7 +194,7 @@ func (o *V1NetworkAgentsSearchRequest) GetSearch() string {
 // GetSearchOk returns a tuple with the Search field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *V1NetworkAgentsSearchRequest) GetSearchOk() (*string, bool) {
-	if o == nil || o.Search == nil {
+	if o == nil || isNil(o.Search) {
 		return nil, false
 	}
 	return o.Search, true
@@ -199,7 +202,7 @@ func (o *V1NetworkAgentsSearchRequest) GetSearchOk() (*string, bool) {
 
 // HasSearch returns a boolean if a field has been set.
 func (o *V1NetworkAgentsSearchRequest) HasSearch() bool {
-	if o != nil && o.Search != nil {
+	if o != nil && !isNil(o.Search) {
 		return true
 	}
 
@@ -212,23 +215,31 @@ func (o *V1NetworkAgentsSearchRequest) SetSearch(v string) {
 }
 
 func (o V1NetworkAgentsSearchRequest) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if o.Filter != nil {
-		toSerialize["filter"] = o.Filter
-	}
-	if o.Order != nil {
-		toSerialize["order"] = o.Order
-	}
-	if o.Skip != nil {
-		toSerialize["skip"] = o.Skip
-	}
-	if o.Take != nil {
-		toSerialize["take"] = o.Take
-	}
-	if o.Search != nil {
-		toSerialize["search"] = o.Search
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o V1NetworkAgentsSearchRequest) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !isNil(o.Filter) {
+		toSerialize["filter"] = o.Filter
+	}
+	if !isNil(o.Order) {
+		toSerialize["order"] = o.Order
+	}
+	if !isNil(o.Skip) {
+		toSerialize["skip"] = o.Skip
+	}
+	if !isNil(o.Take) {
+		toSerialize["take"] = o.Take
+	}
+	if !isNil(o.Search) {
+		toSerialize["search"] = o.Search
+	}
+	return toSerialize, nil
 }
 
 type NullableV1NetworkAgentsSearchRequest struct {
