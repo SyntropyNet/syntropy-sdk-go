@@ -16,6 +16,11 @@ import (
 	"fmt"
 )
 
+// custom AgentStatus struct for AgentStatus
+type AgentStatusCustom struct {
+	AgentStatus string `json:"status"`
+}
+
 // AgentStatus the model 'AgentStatus'
 type AgentStatus string
 
@@ -79,15 +84,15 @@ func (v AgentStatus) Ptr() *AgentStatus {
 }
 
 type NullableAgentStatus struct {
-	value *AgentStatus
+	value *AgentStatusCustom
 	isSet bool
 }
 
-func (v NullableAgentStatus) Get() *AgentStatus {
+func (v NullableAgentStatus) Get() *AgentStatusCustom {
 	return v.value
 }
 
-func (v *NullableAgentStatus) Set(val *AgentStatus) {
+func (v *NullableAgentStatus) Set(val *AgentStatusCustom) {
 	v.value = val
 	v.isSet = true
 }
@@ -101,7 +106,7 @@ func (v *NullableAgentStatus) Unset() {
 	v.isSet = false
 }
 
-func NewNullableAgentStatus(val *AgentStatus) *NullableAgentStatus {
+func NewNullableAgentStatus(val *AgentStatusCustom) *NullableAgentStatus {
 	return &NullableAgentStatus{value: val, isSet: true}
 }
 

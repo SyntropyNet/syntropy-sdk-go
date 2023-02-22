@@ -198,9 +198,9 @@ func (o *V1Agent) SetAgentName(v string) {
 
 // GetAgentStatus returns the AgentStatus field value
 // If the value is explicit nil, the zero value for AgentStatus will be returned
-func (o *V1Agent) GetAgentStatus() AgentStatus {
+func (o *V1Agent) GetAgentStatus() AgentStatusCustom {
 	if o == nil || o.AgentStatus.Get() == nil {
-		var ret AgentStatus
+		var ret AgentStatusCustom
 		return ret
 	}
 
@@ -210,7 +210,7 @@ func (o *V1Agent) GetAgentStatus() AgentStatus {
 // GetAgentStatusOk returns a tuple with the AgentStatus field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *V1Agent) GetAgentStatusOk() (*AgentStatus, bool) {
+func (o *V1Agent) GetAgentStatusOk() (*AgentStatusCustom, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -218,7 +218,7 @@ func (o *V1Agent) GetAgentStatusOk() (*AgentStatus, bool) {
 }
 
 // SetAgentStatus sets field value
-func (o *V1Agent) SetAgentStatus(v AgentStatus) {
+func (o *V1Agent) SetAgentStatus(v AgentStatusCustom) {
 	o.AgentStatus.Set(&v)
 }
 
